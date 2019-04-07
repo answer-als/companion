@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Companion.SpeechTask"
+             BackgroundColor="White"
+             Title="Speech Task">
+    <Grid Margin="10,10,10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75*" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.ColumnSpan="3" Margin="20,0,20,0"
+               VerticalOptions="CenterAndExpand"
+               TextColor="Black"
+               Text="Add speech phrase here. Add pop-up, swipe-through optional instructions (Tips to make a good recording, reduce ambient noise, press to start/stop). Then display the recording interface, with 'Press Record to Begin' text. When button is pressed, display phrase and recording timer."/>
+        <Button x:Name="RecordButton"
+                Grid.Row="1" Grid.Column="1"
+                Clicked="OnToggleRecordButton"
+                BackgroundColor="Red"
+                CornerRadius="30" BorderWidth="5"
+                HeightRequest="20" WidthRequest="20"
+                BorderColor="LightGray" />
+                
+    </Grid>
+</ContentPage>

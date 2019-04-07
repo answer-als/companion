@@ -15,39 +15,86 @@ namespace Companion
             InitializeComponent();
         }
 
-        void OnEntryStart(object sender, EventArgs e)
+        protected override void OnAppearing() 
         {
-            incorrect.Text = "";
+            base.OnAppearing();
+
+            // Refresh login instructions
+            RefreshLoginFont();
         }
 
-        async void NavigateToID(object sender, EventArgs e)
+        void RefreshLoginFont()
+        {
+            LoginErrorLabel.TextColor = Color.Black;
+            LoginErrorLabel.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
+            LoginErrorLabel.Text = "Login";
+        }
+
+        void LoginErrorFontChange()
+        {
+            LoginErrorLabel.TextColor = Color.Red;
+            LoginErrorLabel.FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label));
+        }
+
+        async void NavigateToTasks(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new TaskPage());
         }
 
-        void OnEnterClicked(object sender, EventArgs e)
+        void OnFinishUserID(object sender, EventArgs e)
         {
-
-            // User ID check
-            // TODO: Actually implement some checks for proper UserID (ie not empty)
-            if (!string.IsNullOrEmpty(userIDEntry.Text) && userIDEntry.Text.Equals("corten"))
+            // Switch focus to the password Entry item
+            if (ValidUserID(userIDEntry.Text))
             {
-                App.UserID = userIDEntry.Text;
+                RefreshLoginFont();
+                passwordEntry.Focus();
+            }
+        }
 
-                // Password Verification
-                if (passwordEntry.Text.Equals(App.Password))
-                {
-                    NavigateToID(sender, e);
-                }
-                else
-                {
-                    incorrect.Text = "Password Incorrect! Please try again.";
-                }
+        private bool ValidUserID(string userID)
+        {
+            if (string.IsNullOrEmpty(userID))
+            {
+                LoginErrorFontChange();
+                LoginErrorLabel.Text = "Please enter your User ID.";
+                return false;
+            }
+
+            // TODO: Actually implement checks (proper length, format, etc?)
+            if (userID.Equals("AALS"))
+            {
+                return true;
+            }
+
+            LoginErrorFontChange();
+            LoginErrorLabel.Text = "User ID incorrect! Please try again.";
+            return false;
+        }
+
+        void OnSubmit(object sender, EventArgs e)
+        {
+        // User ID check
+        if (ValidUserID(userIDEntry.Text))
+        {
+            App.UserID = userIDEntry.Text;
+
+            // Password Verification
+            if (passwordEntry.Text.Equals(App.Password))
+            {
+                RefreshLoginFont();
+                NavigateToTasks(sender, e);
             }
             else
             {
-                incorrect.Text = "User ID Incorrect! Please try again.";
+                LoginErrorFontChange();
+                LoginErrorLabel.Text = "Password Incorrect! Please try again.";
             }
         }
+        else
+        {
+            LoginErrorFontChange();
+            LoginErrorLabel.Text = "User ID Incorrect! Please try again.";
+        }
+    }
     }
 }

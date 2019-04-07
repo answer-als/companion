@@ -13,12 +13,12 @@ namespace Companion
 
         void OnSpeechClicked(object sender, EventArgs e)
         {
-            // TODO: Navigate to a RecordingPage
+            Navigation.PushAsync(new SpeechTask());
         }
 
         async void OnNextClicked(object sender, EventArgs e)
         {
-            // This is just a placeholder for the next task button we add
+            // Placeholder function for debugging
             await Navigation.PopAsync();
         }
     }
