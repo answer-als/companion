@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Companion"
              x:Class="Companion.SpeechTask"
-             BackgroundColor="White"
+             BackgroundColor="#006080"
              Title="Speech Task">
-    <Grid Margin="10,10,10,10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="75*" />
-            <RowDefinition Height="60" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="60" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Label Grid.ColumnSpan="3" Margin="20,0,20,0"
-               VerticalOptions="CenterAndExpand"
-               TextColor="Black"
-               Text="Add speech phrase here. Add pop-up, swipe-through optional instructions (Tips to make a good recording, reduce ambient noise, press to start/stop). Then display the recording interface, with 'Press Record to Begin' text. When button is pressed, display phrase and recording timer."/>
-        <Button x:Name="RecordButton"
-                Grid.Row="1" Grid.Column="1"
-                Clicked="OnToggleRecordButton"
-                BackgroundColor="Red"
-                CornerRadius="30" BorderWidth="5"
-                HeightRequest="20" WidthRequest="20"
-                BorderColor="LightGray" />
-                
-    </Grid>
+    <StackLayout Margin="0,0,0,0" VerticalOptions="FillAndExpand">
+        <Grid Margin="0,0,0,5" 
+              BackgroundColor="#006080">
+            <Grid.Padding>
+                <OnPlatform iOS="5,25,5,10" Android="5,5,5,10" />
+            </Grid.Padding>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+            <ImageButton x:Name="HomeButton" Grid.Column="0"
+                    BackgroundColor="#006080"
+                    Clicked="HomeButton_Clicked"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HeightRequest="20" WidthRequest="20"/>
+            <Label x:Name="PageTitle" Grid.Column="1"
+                   BackgroundColor="#006080"
+                   Text="Speech" TextColor="White"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="Center" />
+        </Grid>
+        
+        <local:SpeechPhrase1 Padding="10,10,10,10"
+                             VerticalOptions="EndAndExpand" />
+        
+        <Image x:Name="PositionDots"
+               VerticalOptions="End"
+               HorizontalOptions="Center"
+               Margin="0,0,0,15" />
+    </StackLayout>
 </ContentPage>

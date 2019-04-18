@@ -1,31 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
+using Plugin.AudioRecorder;
 using Xamarin.Forms;
 
 namespace Companion
 {
     public partial class SpeechTask : ContentPage
     {
-        private bool Recording = true;
-
         public SpeechTask()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+            HomeButton.Source = ImageSource.FromResource("Companion.home_icon.png");
+            PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.view_1.png");
         }
 
-        void OnToggleRecordButton(object sender, EventArgs e)
+        async void HomeButton_Clicked(object sender, EventArgs e)
         {
-            if (Recording)
-            {
-                Recording = false;
-                RecordButton.CornerRadius = 10;
-            }
-            else
-            {
-                Recording = true;
-                RecordButton.CornerRadius = 30;
-            }
+            NavigationPage page = new NavigationPage(new TaskPage());
+            Application.Current.MainPage = page;
+            await Navigation.PopToRootAsync();
         }
     }
 }

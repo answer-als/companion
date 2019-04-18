@@ -2,22 +2,82 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Companion.TaskPage"
-             BackgroundColor="White"
+             BackgroundColor="#e6e6e6"
              Title="AALS Companion">
-    <StackLayout Margin="10,30,10,10">
-        <Button Margin="0,0,0,0" x:Name="speech"
+    <StackLayout Margin="0,0,0,0">
+        <Grid Margin="0,0,0,10" 
+              BackgroundColor="#006080">
+            <Grid.Padding>
+                <OnPlatform iOS="5,25,5,10" Android="5,5,5,10" />
+            </Grid.Padding>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+            <Label x:Name="PageTitle" Grid.Column="1"
+                   BackgroundColor="#006080"
+                   Text="AALS Companion" TextColor="White"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="Center" />
+            <ImageButton x:Name="MenuButton" Grid.Column="2"
+                    BackgroundColor="#006080"
+                    Clicked="MenuButton_Clicked"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HeightRequest="20" WidthRequest="20" />
+        </Grid>
+        <StackLayout Orientation="Horizontal">
+            <Image x:Name="UserIcon" Margin="20,0,0,10"
+                   WidthRequest="25" HeightRequest="25" />
+            <Label x:Name="Welcome" Margin="5,0,0,13" 
+                   HorizontalOptions="Start"
+                   VerticalOptions="End"
+                   Text=" " TextColor="Black"
+                   FontSize="Small" FontAttributes="Bold" />
+            <Label x:Name="NotYou" Margin="0,0,0,13"
+                   HorizontalOptions="Start"
+                   VerticalOptions="End"
+                   Text="(Not you?)" TextColor="Red"
+                   FontSize="Micro" FontAttributes="Bold">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="NotYou_Clicked"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+        <Label x:Name="TaskTitle" HorizontalOptions="Center"
+               Text="Tasks" TextColor="Black"
+               FontSize="Small" FontAttributes="Bold" />
+        <Button x:Name="speech"
+                Margin="20,0,20,0"
                 HorizontalOptions="CenterAndExpand"
                 TextColor="White"
-                BackgroundColor="#007AFF"
+                BackgroundColor="#006080"
                 WidthRequest="300"  
-                Text="Speech Task"
-                Clicked="OnSpeechClicked"/>
+                Text="Speech"
+                Clicked="Speech_Clicked"/>
         <Button x:Name="next"
+                Margin="20,0,20,50"
                 HorizontalOptions="CenterAndExpand"
                 TextColor="White"
-                BackgroundColor="#007AFF"
+                BackgroundColor="#006080"
                 WidthRequest="300"  
-                Text="Next Task"
-                Clicked="OnNextClicked"/>
+                Text="Other"
+                Clicked="Next_Clicked"/>
+        <!--<BoxView Margin="10" HeightRequest="1" 
+                 BackgroundColor="#006080" 
+                 HorizontalOptions="Center"
+                 WidthRequest="340" />-->
+        <Label x:Name="QuestionsTitle" HorizontalOptions="Center"
+               Text="Questionairre" TextColor="Black"
+               FontSize="Small" FontAttributes="Bold" />
+        <Button x:Name="questionnaire"
+                Margin="20,0,20,30"
+                HorizontalOptions="CenterAndExpand"
+                TextColor="White"
+                BackgroundColor="#006080"
+                WidthRequest="300"  
+                Text="Questionnaire"
+                Clicked="Questionnaire_Clicked"/>
     </StackLayout>
 </ContentPage>

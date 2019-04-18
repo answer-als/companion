@@ -10,6 +10,34 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
+    <PackageReference Include="Plugin.AudioRecorder" Version="1.1.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="AALS_logo.png" />
+    <None Remove="back_logo.png" />
+    <None Remove="home_logo.png" />
+    <None Remove="menu_logo.png" />
+    <None Remove="PositionDots\page_indicator_1.png" />
+    <None Remove="PositionDots\page_indicator_2.png" />
+    <None Remove="PositionDots\page_indicator_3.png" />
+    <None Remove="user_icon.png" />
+    <None Remove="PositionDots\view_1.png" />
+    <None Remove="PositionDots\view_2.png" />
+    <None Remove="PositionDots\view_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="aals_logo.png" />
+    <EmbeddedResource Include="back_icon.png" />
+    <EmbeddedResource Include="home_icon.png" />
+    <EmbeddedResource Include="menu_icon.png" />
+    <EmbeddedResource Include="user_icon.png" />
+    <EmbeddedResource Include="PositionDots\view_1.png" />
+    <EmbeddedResource Include="PositionDots\view_2.png" />
+    <EmbeddedResource Include="PositionDots\view_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PositionDots\" />
   </ItemGroup>
 </Project>
