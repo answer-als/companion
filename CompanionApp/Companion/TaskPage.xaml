@@ -8,8 +8,11 @@
         <Grid Margin="0,0,0,10" 
               BackgroundColor="#006080">
             <Grid.Padding>
-                <OnPlatform iOS="5,25,5,10" Android="5,5,5,10" />
+                <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
             </Grid.Padding>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
@@ -19,13 +22,17 @@
                    BackgroundColor="#006080"
                    Text="AALS Companion" TextColor="White"
                    VerticalTextAlignment="Center"
-                   HorizontalOptions="Center" />
-            <ImageButton x:Name="MenuButton" Grid.Column="2"
+                   HorizontalOptions="Center">
+                <Label.FontSize>
+                    <OnPlatform iOS="Medium" Android="Large"/>
+                </Label.FontSize>
+            </Label>
+            <ImageButton x:Name="MenuButton" Grid.Column="0"
                     BackgroundColor="#006080"
                     Clicked="MenuButton_Clicked"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    HeightRequest="20" WidthRequest="20" />
+                    HeightRequest="20" WidthRequest="25" />
         </Grid>
         <StackLayout Orientation="Horizontal">
             <Image x:Name="UserIcon" Margin="20,0,0,10"
@@ -35,34 +42,38 @@
                    VerticalOptions="End"
                    Text=" " TextColor="Black"
                    FontSize="Small" FontAttributes="Bold" />
-            <Label x:Name="NotYou" Margin="0,0,0,13"
-                   HorizontalOptions="Start"
-                   VerticalOptions="End"
-                   Text="(Not you?)" TextColor="Red"
-                   FontSize="Micro" FontAttributes="Bold">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="NotYou_Clicked"/>
-                </Label.GestureRecognizers>
-            </Label>
         </StackLayout>
         <Label x:Name="TaskTitle" HorizontalOptions="Center"
                Text="Tasks" TextColor="Black"
                FontSize="Small" FontAttributes="Bold" />
-        <Button x:Name="speech"
+        <Button x:Name="SpeechButton"
                 Margin="20,0,20,0"
                 HorizontalOptions="CenterAndExpand"
                 TextColor="White"
                 BackgroundColor="#006080"
-                WidthRequest="300"  
+                WidthRequest="300"
                 Text="Speech"
-                Clicked="Speech_Clicked"/>
-        <Button x:Name="next"
+                Clicked="Speech_Clicked"
+                HeightRequest="44">
+            <!--<Button.Image x:Name="SpeechButtonImage">
+                completed_icon
+            </Button.Image>-->
+        </Button>
+        <Label x:Name="Speech_LastCompletedDate"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="End"
+               Margin="20,0,20,10"
+               WidthRequest="300"
+               Text=" " TextColor="Black"
+               FontSize="Micro" FontAttributes="Bold" />
+        <Button x:Name="OtherButton"
                 Margin="20,0,20,50"
                 HorizontalOptions="CenterAndExpand"
                 TextColor="White"
                 BackgroundColor="#006080"
                 WidthRequest="300"  
                 Text="Other"
+                Image=""
                 Clicked="Next_Clicked"/>
         <!--<BoxView Margin="10" HeightRequest="1" 
                  BackgroundColor="#006080" 

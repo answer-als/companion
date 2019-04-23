@@ -27,7 +27,11 @@
                    FontSize="Small" FontAttributes="Bold"
                    TextColor="White"
                    HorizontalOptions="Center"
-                   VerticalOptions="Start"/>
+                   VerticalOptions="Start">
+                <Label.FontSize>
+                    <OnPlatform iOS="Small" Android="Medium"/>
+                </Label.FontSize>
+            </Label>
             <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
                    x:Name="LoginErrorLabel"
                    Text=" "
@@ -39,6 +43,8 @@
                        IsPassword="false"
                        BackgroundColor="White"
                        Placeholder="Enter user ID"
+                       Text=""
+                       TextChanged="LoginText_Changed"
                        Completed="OnFinishUserID"
                        PlaceholderColor="LightGray"
                        HeightRequest="44"
@@ -47,6 +53,7 @@
                        IsPassword="true"
                        BackgroundColor="White"
                        Placeholder="Enter password"
+                       Text=""
                        Completed="OnLoginClick"
                        PlaceholderColor="LightGray"
                        HeightRequest="44"

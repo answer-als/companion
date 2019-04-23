@@ -16,28 +16,81 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="AALS_logo.png" />
-    <None Remove="back_logo.png" />
     <None Remove="home_logo.png" />
     <None Remove="menu_logo.png" />
     <None Remove="PositionDots\page_indicator_1.png" />
     <None Remove="PositionDots\page_indicator_2.png" />
     <None Remove="PositionDots\page_indicator_3.png" />
     <None Remove="user_icon.png" />
-    <None Remove="PositionDots\view_1.png" />
-    <None Remove="PositionDots\view_2.png" />
-    <None Remove="PositionDots\view_3.png" />
+    <None Remove="PositionDots\SpeechTask\view_1.png" />
+    <None Remove="PositionDots\SpeechTask\view_2.png" />
+    <None Remove="PositionDots\SpeechTask\view_3.png" />
+    <None Remove="PositionDots\SpeechIntro\intro_1.png" />
+    <None Remove="PositionDots\SpeechIntro\intro_2.png" />
+    <None Remove="PositionDots\SpeechIntro\intro_3.png" />
+    <None Remove="SpeechIntroImages\memorize.png" />
+    <None Remove="SpeechIntroImages\place_device.png" />
+    <None Remove="SpeechIntroImages\no_noise.png" />
+    <None Remove="back_logo.png" />
+    <None Remove="Icons\back_icon.png" />
+    <None Remove="Icons\home_icon.png" />
+    <None Remove="Icons\menu_icon.png" />
+    <None Remove="Icons\user_icon.png" />
+    <None Remove="Icons\bigger_user_icon.png" />
+    <None Remove="Icons\completed_icon.png" />
+    <None Remove="play_icon.png" />
+    <None Remove="Icons\play_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="aals_logo.png" />
-    <EmbeddedResource Include="back_icon.png" />
-    <EmbeddedResource Include="home_icon.png" />
-    <EmbeddedResource Include="menu_icon.png" />
-    <EmbeddedResource Include="user_icon.png" />
-    <EmbeddedResource Include="PositionDots\view_1.png" />
-    <EmbeddedResource Include="PositionDots\view_2.png" />
-    <EmbeddedResource Include="PositionDots\view_3.png" />
+    <EmbeddedResource Include="PositionDots\SpeechTask\view_1.png" />
+    <EmbeddedResource Include="PositionDots\SpeechTask\view_2.png" />
+    <EmbeddedResource Include="PositionDots\SpeechTask\view_3.png" />
+    <EmbeddedResource Include="PositionDots\SpeechIntro\intro_1.png" />
+    <EmbeddedResource Include="PositionDots\SpeechIntro\intro_2.png" />
+    <EmbeddedResource Include="PositionDots\SpeechIntro\intro_3.png" />
+    <EmbeddedResource Include="SpeechIntroImages\memorize.png" />
+    <EmbeddedResource Include="SpeechIntroImages\place_device.png" />
+    <EmbeddedResource Include="SpeechIntroImages\no_noise.png" />
+    <EmbeddedResource Include="Icons\back_icon.png" />
+    <EmbeddedResource Include="Icons\home_icon.png" />
+    <EmbeddedResource Include="Icons\menu_icon.png" />
+    <EmbeddedResource Include="Icons\user_icon.png" />
+    <EmbeddedResource Include="Icons\bigger_user_icon.png" />
+    <EmbeddedResource Include="Icons\completed_icon.png" />
+    <EmbeddedResource Include="Icons\play_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PositionDots\" />
+    <Folder Include="PositionDots\SpeechTask\" />
+    <Folder Include="PositionDots\SpeechIntro\" />
+    <Folder Include="SpeechIntroImages\" />
+    <Folder Include="Icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="__SpeechIntro.xaml.cs">
+      <DependentUpon>__SpeechIntro.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="__SpeechTask.xaml.cs">
+      <DependentUpon>__SpeechTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SpeechInstruction1.xaml.cs">
+      <DependentUpon>SpeechInstruction1.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SpeechInstructionsPage.xaml.cs">
+      <DependentUpon>SpeechInstructionsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SpeechInstruction2.xaml.cs">
+      <DependentUpon>SpeechInstruction2.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SpeechInstruction3.xaml.cs">
+      <DependentUpon>SpeechInstruction3.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SpeechTaskPage.xaml.cs">
+      <DependentUpon>SpeechTaskPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SpeechPhraseView.xaml.cs">
+      <DependentUpon>SpeechPhraseView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

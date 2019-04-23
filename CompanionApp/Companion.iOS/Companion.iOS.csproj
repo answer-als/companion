@@ -169,4 +169,12 @@
       <Name>Companion</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\completed_icon.png" />
+    <BundleResource Include="Resources\completed_icon%402x.png" />
+    <BundleResource Include="Resources\completed_icon%403x.png" />
+    <BundleResource Include="Resources\inprogress_icon.png" />
+    <BundleResource Include="Resources\inprogress_icon%402x.png" />
+    <BundleResource Include="Resources\inprogress_icon%403x.png" />
+  </ItemGroup>
 </Project>

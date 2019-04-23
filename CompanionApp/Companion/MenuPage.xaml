@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Companion.MenuPage"
+             xmlns:local="clr-namespace:Companion"
+             BackgroundColor="#e6e6e6">
+    <StackLayout Margin="0,0,0,0">
+        <Grid Margin="0,0,0,10"
+              RowSpacing="0"
+              BackgroundColor="#006080">
+            <Grid.Padding>
+                <OnPlatform iOS="5,25,5,10" Android="5,15,5,15" />
+            </Grid.Padding>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="8" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <ImageButton x:Name="BackButton" Grid.Column="0"
+                    Margin="10,0,10,0" Grid.ColumnSpan="1"
+                    BackgroundColor="#006080"
+                    Clicked="BackButton_Clicked"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    HeightRequest="25" WidthRequest="38"/>
+            <Image x:Name="UserIcon" Grid.Column="1" Grid.Row="1"
+                    Grid.RowSpan="2"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            <Label Grid.Column="3" Grid.Row="2"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Start"
+                    Text="(Not you?)" FontSize="Micro"
+                    TextColor="Red" FontAttributes="Bold">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SignOut_Clicked"/>
+                </Label.GestureRecognizers>
+                <Label.Margin>
+                    <OnPlatform iOS="0,4,0,0" Android="0,8,0,0" />
+                </Label.Margin>
+            </Label>
+            <Label Grid.Column="2" Grid.Row="1"
+                   BackgroundColor="#006080"
+                   Text="User" TextColor="Silver"
+                   FontAttributes="Bold" FontSize="Small"
+                   VerticalTextAlignment="End"
+                   HorizontalOptions="Start">
+                <Label.FontSize>
+                    <OnPlatform iOS="Small" Android="Medium"/>
+                </Label.FontSize>
+            </Label>
+            <Label x:Name="User" Grid.Column="2" Grid.Row="2"
+                   BackgroundColor="#006080"
+                   Text="UserIDHere" TextColor="White"
+                   FontAttributes="None" FontSize="Small"
+                   VerticalTextAlignment="Start"
+                   HorizontalOptions="Start">
+                <Label.FontSize>
+                    <OnPlatform iOS="Medium" Android="Large"/>
+                </Label.FontSize>
+            </Label>
+        </Grid>
+        <StackLayout Orientation="Horizontal" Margin="20,10,20,30">
+            <Label x:Name="SpeechTaskIntro"
+                    Text="Display instructions before starting the Speech task"
+                    TextColor="#006080"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="Center">
+                <Label.FontSize>
+                    <OnPlatform iOS="Default" Android="Default"/>
+                </Label.FontSize>
+            </Label>
+            <Switch x:Name="SpeechIntroSwitch"
+                    VerticalOptions="Center"
+                    Toggled="SpeechIntro_Toggled"/>
+        </StackLayout>
+        <Button x:Name="SignOut" Margin="20,10,20,10"
+                BackgroundColor="LightGray"
+                Text="Sign Out"
+                TextColor="#006080"
+                HorizontalOptions="Fill"
+                WidthRequest="100"
+                Clicked="SignOut_Clicked"/>
+        <Button x:Name="Quit" Margin="20,10,20,10"
+                BackgroundColor="LightGray"
+                Text="Quit"
+                TextColor="#006080"
+                HorizontalOptions="Fill"
+                WidthRequest="100"
+                Clicked="Quit_Clicked"/>
+        <Label x:Name="Back" Margin="20,10,20,50"
+                Text="Back" FontAttributes="Bold"
+                TextColor="#006080"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                VerticalOptions="EndAndExpand"
+                WidthRequest="100">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="BackButton_Clicked"/>
+            </Label.GestureRecognizers>
+            <Label.FontSize>
+                    <OnPlatform iOS="Medium" Android="Large"/>
+            </Label.FontSize>
+        </Label>
+                        
+            
+    </StackLayout>
+</ContentPage>

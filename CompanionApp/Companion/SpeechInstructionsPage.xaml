@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Companion.SpeechInstructionsPage"
+             xmlns:local="clr-namespace:Companion" >
+    
+    <StackLayout VerticalOptions="Fill"
+                 Spacing="0">
+    <Grid Margin="0,0,0,10" VerticalOptions="StartAndExpand"
+          BackgroundColor="#006080">
+        <Grid.Padding>
+            <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
+        </Grid.Padding>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="50" />
+        </Grid.ColumnDefinitions>
+        <ImageButton x:Name="BackButton" Grid.Column="0"
+                     BackgroundColor="#006080"
+                     Clicked="BackButton_Clicked"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     HeightRequest="25" WidthRequest="38" />
+        <Label x:Name="PageTitle" Grid.Column="1"
+               BackgroundColor="#006080"
+               Text="Speech" TextColor="White"
+               VerticalTextAlignment="Center"
+               HorizontalOptions="Center">
+            <Label.FontSize>
+                <OnPlatform iOS="Medium" Android="Large"/>
+            </Label.FontSize>
+        </Label>
+    </Grid>
+    
+        <local:SpeechInstruction1 x:Name="Instruction1"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="true"/>
+        <local:SpeechInstruction2 x:Name="Instruction2"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+        <local:SpeechInstruction3 x:Name="Instruction3"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+    
+        <Button x:Name="Next" Margin="40,30,40,15"
+                BackgroundColor="#006080"
+                Text="Next" TextColor="White"
+                Clicked="Next_Clicked" FontSize="Medium"
+                HorizontalOptions="Center"
+                VerticalOptions="EndAndExpand"
+                WidthRequest="200"
+                HeightRequest="44"
+                IsVisible="true" />
+        <Button x:Name="LetsBegin" Margin="40,30,40,15"
+                BackgroundColor="#00955c"
+                Text="Let's Begin!" TextColor="White"
+                Clicked="Begin_Clicked" FontSize="Medium"
+                HorizontalOptions="Center"
+                VerticalOptions="EndAndExpand"
+                HeightRequest="44"
+                WidthRequest="200"
+                IsVisible="false" />
+        <Grid VerticalOptions="End"
+              HorizontalOptions="FillAndExpand"
+              Padding="0" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label x:Name="PreviousButton"
+                   Text="&lt; Back" Margin="15,0,0,15"
+                   TextColor="#006080" FontSize="Small"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="End"
+                   VerticalOptions="EndAndExpand"
+                   HorizontalOptions="Start"
+                   IsVisible="true">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Previous_Clicked"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Image x:Name="Indicator" Margin="0,0,0,15"
+                   Grid.Column="1"
+                   HorizontalOptions="Center"
+                   VerticalOptions="EndAndExpand"/>
+            
+        </Grid>
+    </StackLayout>
+    
+</ContentPage>

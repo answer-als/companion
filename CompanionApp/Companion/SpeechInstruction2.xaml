@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Companion.SpeechInstruction2">
+    
+    <StackLayout VerticalOptions="Fill" >
+        
+    <Image x:Name="MainImage" Margin="60,40,60,10"
+           HorizontalOptions="Center" 
+           VerticalOptions="Start"/>
+        
+    <Label Margin="40,0,40,0" TextColor="Black"
+           HorizontalTextAlignment="Center"
+           HorizontalOptions="Center"
+           VerticalOptions="EndAndExpand"
+           HeightRequest="80">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Rehearse " FontAttributes="Bold" TextColor="#006080" FontSize="Small"/>
+                <Span Text="the sentence shown on the screen." FontAttributes="None" FontSize="Small"/>  
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+        
+    </StackLayout>
+    
+        
+</ContentView>

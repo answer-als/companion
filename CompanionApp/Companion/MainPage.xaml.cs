@@ -10,6 +10,8 @@ namespace Companion
 {
     public partial class MainPage : ContentPage
     {
+        private int textChanges = 0;
+
         public MainPage()
         {
             InitializeComponent();
@@ -20,9 +22,21 @@ namespace Companion
         protected override void OnAppearing() 
         {
             base.OnAppearing();
-
+            App.LoginVisits += 1;
             // Refresh login instructions
-            LoginErrorLabel.Text = " ";
+            string previousUser = Preferences.Get("UserID", "Sign Out");
+            if (previousUser.Equals("Sign Out") || previousUser.Equals("Error"))
+            {
+                userIDEntry.Text = "";
+                userIDEntry.Placeholder = "Enter user ID";
+                passwordEntry.Text = "";
+                passwordEntry.Placeholder = "Enter password";
+            }
+            else
+            {
+                userIDEntry.Text = previousUser;
+                passwordEntry.Text = App.Password;
+            }
         }
 
         async void NavigateToTasks(object sender, EventArgs e)
@@ -48,40 +62,42 @@ namespace Companion
                 LoginErrorLabel.Text = "Please enter your User ID.";
                 return false;
             }
-
-            // TODO: Actually implement checks (proper length, format, etc?)
-            // What should a well-formed UserID look like?
-            if (userID.Length < 15 || userID.Length > 4)
+            if (userID.Equals("Error") || userID.Equals("Sign Out"))
             {
-                return true;
+                LoginErrorLabel.Text = "Please enter a valid User ID.";
+                return false;
+            }
+            return true;
+        }
+
+        void LoginText_Changed(object sender, EventArgs e)
+        {
+            if ((textChanges == 1) && (App.LoginVisits == 1))
+            {
+                passwordEntry.Text = "";
+                passwordEntry.Placeholder = "Enter password";
             }
 
-            LoginErrorLabel.Text = "Improper User ID! Please try again.";
-            return false;
+            textChanges += 1;
         }
 
         void OnLoginClick(object sender, EventArgs e)
         {
-        // User ID check
-        if (ValidUserID(userIDEntry.Text))
-        {
-            App.UserID = userIDEntry.Text;
-
-            // Password Verification
-            if (passwordEntry.Text.Equals(App.Password))
+            // User ID check
+            if (ValidUserID(userIDEntry.Text))
             {
-                LoginErrorLabel.Text = " ";
-                NavigateToTasks(sender, e);
-            }
-            else
-            {
-                LoginErrorLabel.Text = "Password Incorrect! Please try again.";
+                // Password Verification
+                if (passwordEntry.Text.Equals(App.Password))
+                {
+                    LoginErrorLabel.Text = " ";
+                    Preferences.Set("UserID", userIDEntry.Text);
+                    NavigateToTasks(sender, e);
+                }
+                else
+                {
+                    LoginErrorLabel.Text = "Password Incorrect! Please try again.";
+                }
             }
         }
-        else
-        {
-            LoginErrorLabel.Text = "Improper User ID! Please try again.";
-        }
-    }
     }
 }

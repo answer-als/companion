@@ -2,17 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Companion"
-             x:Class="Companion.SpeechTask"
+             x:Class="Companion.SpeechTaskPage"
              BackgroundColor="#006080"
              Title="Speech Task">
     <StackLayout Margin="0,0,0,0" VerticalOptions="FillAndExpand">
         <Grid Margin="0,0,0,5" 
               BackgroundColor="#006080">
             <Grid.Padding>
-                <OnPlatform iOS="5,25,5,10" Android="5,5,5,10" />
+                <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
             </Grid.Padding>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
@@ -20,24 +20,25 @@
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
             <ImageButton x:Name="HomeButton" Grid.Column="0"
-                    BackgroundColor="#006080"
-                    Clicked="HomeButton_Clicked"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    HeightRequest="20" WidthRequest="20"/>
+                         Margin="5,0,0,0"
+                         BackgroundColor="#006080"
+                         Clicked="HomeButton_Clicked"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         HeightRequest="25" WidthRequest="25"/>
             <Label x:Name="PageTitle" Grid.Column="1"
                    BackgroundColor="#006080"
                    Text="Speech" TextColor="White"
                    VerticalTextAlignment="Center"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center">
+                <Label.FontSize>
+                    <OnPlatform iOS="Medium" Android="Large"/>
+                </Label.FontSize>
+            </Label>
         </Grid>
         
-        <local:SpeechPhrase1 Padding="10,10,10,10"
-                             VerticalOptions="EndAndExpand" />
-        
-        <Image x:Name="PositionDots"
-               VerticalOptions="End"
-               HorizontalOptions="Center"
-               Margin="0,0,0,15" />
+        <local:SpeechPhraseView x:Name="MainPhraseView"
+                                Padding="15,10,15,0"
+                                VerticalOptions="FillAndExpand"/>
     </StackLayout>
 </ContentPage>
