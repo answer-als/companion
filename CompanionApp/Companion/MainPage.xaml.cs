@@ -28,7 +28,7 @@ namespace Companion
             if (previousUser.Equals("Sign Out") || previousUser.Equals("Error"))
             {
                 userIDEntry.Text = "";
-                userIDEntry.Placeholder = "Enter user ID";
+                userIDEntry.Placeholder = "Enter participant ID";
                 passwordEntry.Text = "";
                 passwordEntry.Placeholder = "Enter password";
             }
@@ -41,7 +41,14 @@ namespace Companion
 
         async void NavigateToTasks(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new TaskPage());
+            if (App.QuestionnaireCompleted)
+            {
+                await Navigation.PushAsync(new TaskPage());
+            }
+            else
+            {
+                await Navigation.PushAsync(new QuestionnairePage());
+            }
         }
 
         void OnFinishUserID(object sender, EventArgs e)

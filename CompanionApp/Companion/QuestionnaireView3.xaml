@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:Companion"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             x:Class="Companion.QuestionnaireView3">
+    <ScrollView>
+        
+        <StackLayout x:Name="Backdrop" Padding="15,15,15,10" 
+              VerticalOptions="Fill" 
+              BackgroundColor="#e6e6e6">
+        
+            <Label Text="The following questions are optional."
+                   TextColor="Black" FontSize="Micro"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,40"/>
+        
+            <Label Text="What languages do you speak now?"
+                   TextColor="#006080" FontSize="Small"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,5"/>
+            <Entry x:Name="SpokenLanguages"
+                   Text="" Placeholder="Enter languages"
+                   Margin="50,0"
+                   HeightRequest="44" WidthRequest="100"/>
+        
+            <BoxView Margin="0,10" HeightRequest="1" 
+                 BackgroundColor="Black" 
+                 HorizontalOptions="Fill"/>
+        
+            <Label Text="Please list all of the languages you were exposed to/learned to speak from birth:"
+                   TextColor="#006080" FontSize="Small"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,5"/>
+            <Entry x:Name="ExposedLanguages"
+                   Text="" Placeholder="Enter languages"
+                   Margin="50,0"
+                   HeightRequest="44" WidthRequest="100"/>
+
+        
+        </StackLayout>
+    </ScrollView>
+</ContentView>

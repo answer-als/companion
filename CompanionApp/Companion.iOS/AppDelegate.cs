@@ -24,6 +24,7 @@ namespace Companion.iOS
         {
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
+            Plugin.InputKit.Platforms.iOS.Config.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

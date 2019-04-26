@@ -64,7 +64,7 @@
                HorizontalTextAlignment="End"
                Margin="20,0,20,10"
                WidthRequest="300"
-               Text=" " TextColor="Black"
+               Text="Last Completed: Never" TextColor="Black"
                FontSize="Micro" FontAttributes="Bold" />
         <Button x:Name="OtherButton"
                 Margin="20,0,20,50"
@@ -83,12 +83,19 @@
                Text="Questionairre" TextColor="Black"
                FontSize="Small" FontAttributes="Bold" />
         <Button x:Name="questionnaire"
-                Margin="20,0,20,30"
+                Margin="20,0,20,0"
                 HorizontalOptions="CenterAndExpand"
                 TextColor="White"
                 BackgroundColor="#006080"
                 WidthRequest="300"  
                 Text="Questionnaire"
                 Clicked="Questionnaire_Clicked"/>
+        <Label x:Name="Questionnaire_LastCompletedDate"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="End"
+               Margin="20,0,20,10"
+               WidthRequest="300"
+               Text="Last Completed: Never" TextColor="Black"
+               FontSize="Micro" FontAttributes="Bold" />
     </StackLayout>
 </ContentPage>

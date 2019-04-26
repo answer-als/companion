@@ -38,7 +38,7 @@
         </Grid>
         
         <local:SpeechPhraseView x:Name="MainPhraseView"
-                                Padding="15,10,15,0"
+                                Padding="20,10,20,20"
                                 VerticalOptions="FillAndExpand"/>
     </StackLayout>
 </ContentPage>

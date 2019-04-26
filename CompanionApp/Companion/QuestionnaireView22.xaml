@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:Companion"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             x:Class="Companion.QuestionnaireView22">
+    
+    <ScrollView>
+        <StackLayout x:Name="Backdrop" Padding="15,15,15,10" 
+              VerticalOptions="Fill" 
+              BackgroundColor="#e6e6e6">
+            
+            <Label Text="Please select the onset site type that best describes your situation:"
+                   FontAttributes="Bold" 
+                   Margin="0,0,0,5"
+                   TextColor="#006080" FontSize="Small" />
+            <input:CheckBox Text="Bulbar" Margin="60,0"
+                            Type="Box" Color="#006080" 
+                            CheckChanged="RadioButton_Clicked"
+                            HorizontalOptions="Start"/>
+            <input:CheckBox Text="Spinal" Margin="60,0"
+                            Type="Box" Color="#006080" 
+                            CheckChanged="RadioButton_Clicked"
+                            HorizontalOptions="Start"/>
+            <input:CheckBox Margin="60,0" Text="Both" 
+                            Type="Box" Color="#006080"
+                            CheckChanged="RadioButton_Clicked"
+                            HorizontalOptions="Start"/>
+
+        
+        </StackLayout>
+    </ScrollView>
+</ContentView>

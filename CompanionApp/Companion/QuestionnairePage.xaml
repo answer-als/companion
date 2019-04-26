@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Companion"
+             x:Class="Companion.QuestionnairePage"
+             BackgroundColor="#006080"
+             Title="Speech Task">
+    <StackLayout x:Name="Backdrop" Margin="0,0,0,0" VerticalOptions="Fill">
+        <Grid Margin="0,0,0,5" 
+              BackgroundColor="#006080">
+            <Grid.Padding>
+                <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
+            </Grid.Padding>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+            <ImageButton x:Name="BackButton" Grid.Column="0"
+                         Margin="5,0,0,0"
+                         Clicked="BackButton_Clicked"
+                         BackgroundColor="#006080"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         HeightRequest="25" WidthRequest="38"
+                         IsVisible="true"/>
+            <Label x:Name="PageTitle" Grid.Column="1"
+                   BackgroundColor="#006080"
+                   Text="Questionnaire" TextColor="White"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="Center">
+                <Label.FontSize>
+                    <OnPlatform iOS="Medium" Android="Large"/>
+                </Label.FontSize>
+            </Label>
+        </Grid>
+        
+        <local:QuestionnaireView1 x:Name="QuestionView1"
+                                  Padding="20,10,20,20"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="true"/>
+        
+        <local:QuestionnaireView22 x:Name="QuestionView22"
+                                  Padding="20,10,20,20"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+        
+        <local:QuestionnaireView2 x:Name="QuestionView2"
+                                  Padding="20,10,20,20"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+        
+        <local:QuestionnaireView3 x:Name="QuestionView3"
+                                  Padding="20,10,20,20"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+        
+        <Button x:Name="Next" Margin="40,15,40,15"
+                BackgroundColor="#00bfff"
+                Text="Next" TextColor="White"
+                Clicked="Next_Clicked" FontSize="Medium"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                WidthRequest="200"
+                HeightRequest="44"
+                IsVisible="true" />
+        <Button x:Name="Submit" Margin="40,15,40,15"
+                BackgroundColor="#00955c"
+                Text="Submit" TextColor="White"
+                Clicked="Submit_Clicked" FontSize="Medium"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                HeightRequest="44"
+                WidthRequest="200"
+                IsVisible="false" />
+        
+        <Grid VerticalOptions="End"
+              HorizontalOptions="FillAndExpand"
+              Padding="0" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label x:Name="PreviousButton"
+                   Text="&lt; Back" Margin="15,0,0,15"
+                   TextColor="#e6e6e6" FontSize="Small"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="End"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   IsVisible="true">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Previous_Clicked"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Image x:Name="PositionDots" Margin="0,0,0,15"
+                   Grid.Column="1"
+                   HorizontalOptions="Center"
+                   VerticalOptions="EndAndExpand"/>
+            
+        </Grid>
+    </StackLayout>
+</ContentPage>

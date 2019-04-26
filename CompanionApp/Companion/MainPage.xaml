@@ -5,6 +5,9 @@
              x:Class="Companion.MainPage"
              BackgroundColor="#006080"
              Title="AALS Companion">
+    
+    <ScrollView>
+        
         <Grid Margin="10,10,10,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -42,7 +45,7 @@
                 <Entry x:Name="userIDEntry"
                        IsPassword="false"
                        BackgroundColor="White"
-                       Placeholder="Enter user ID"
+                       Placeholder="Enter participant ID"
                        Text=""
                        TextChanged="LoginText_Changed"
                        Completed="OnFinishUserID"
@@ -66,4 +69,6 @@
                         WidthRequest="150"/>
             </StackLayout>
         </Grid>
+        
+    </ScrollView>
 </ContentPage>

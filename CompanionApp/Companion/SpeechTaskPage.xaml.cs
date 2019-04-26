@@ -52,17 +52,6 @@ namespace Companion
                     await Navigation.PopToRootAsync();
                 }
             }
-            else if (App.SpeechTaskState.Equals("Phrase1Done") || App.SpeechTaskState.Equals("Phrase2Done"))
-            {
-                bool result = await DisplayAlert("Task Not Finished!", "Are you sure you want to leave the current task without finishing?", "Yes", "No");
-
-                if (result)
-                {
-                    NavigationPage page = new NavigationPage(new TaskPage());
-                    Application.Current.MainPage = page;
-                    await Navigation.PopToRootAsync();
-                }
-            }
             else
             {
                 MainPhraseView.player.Pause();

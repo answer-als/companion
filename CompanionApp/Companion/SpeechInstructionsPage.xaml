@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Companion.SpeechInstructionsPage"
-             xmlns:local="clr-namespace:Companion" >
+             xmlns:local="clr-namespace:Companion">
     
     <StackLayout VerticalOptions="Fill"
-                 Spacing="0">
+                 Spacing="0" BackgroundColor="#e6e6e6">
     <Grid Margin="0,0,0,10" VerticalOptions="StartAndExpand"
           BackgroundColor="#006080">
         <Grid.Padding>
@@ -68,7 +68,7 @@
               HorizontalOptions="FillAndExpand"
               Padding="0" Margin="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="25*"/>
@@ -78,10 +78,10 @@
             
             <Label x:Name="PreviousButton"
                    Text="&lt; Back" Margin="15,0,0,15"
-                   TextColor="#006080" FontSize="Small"
+                   TextColor="#e6e6e6" FontSize="Small"
                    FontAttributes="Bold"
                    VerticalTextAlignment="End"
-                   VerticalOptions="EndAndExpand"
+                   VerticalOptions="Center"
                    HorizontalOptions="Start"
                    IsVisible="true">
                 <Label.GestureRecognizers>

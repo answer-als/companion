@@ -2,39 +2,113 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Companion
 {
     public partial class TaskPage : ContentPage
     {
-        string last;
+        string sentence, hash;
+        HttpClient _client;
 
-        // TODO: Determine when to ask for the HTTPGET for which 3 phrases to use
         public TaskPage()
         {
+            _client = new HttpClient();
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             MenuButton.Source = ImageSource.FromResource("Companion.Icons.menu_icon.png");
             UserIcon.Source = ImageSource.FromResource("Companion.Icons.user_icon.png");
 
-            // TODO: Figure out where to display this
-            if (App.SpeechTaskState.Equals("Phrase1Done") || App.SpeechTaskState.Equals("Phrase2Done"))
+            // Update Speech Task Last Completed Display
+            UpdateCompletedDate_Speech();
+
+            // Update Questionnaire Last Completed Display
+            UpdateCompletedDate_Questionnaire();
+
+            // Welcome message
+            WelcomeUser();
+
+            // Handle HTTP GET request for next Speech Task
+            LoadSpeechTaskFromServer();
+
+            App.FirstTimeLoading = false;
+        }
+
+        async private void LoadSpeechTaskFromServer()
+        {
+            //Todo Remove || tru
+            if (App.FirstTimeLoading || true)
             {
-                Speech_LastCompletedDate.Text = "In Progress";
+                await GetSentenceFromServer();
+                App.SpeechTaskDataReceived = true;
+                return;
             }
-            else
+
+            if (App.SpeechTaskType.Equals("Sentence"))
             {
-                last = App.SpeechTaskLastCompleted.ToString().Split(' ')[0];
-                if (last.Contains("2000"))
+                if (!App.SpeechTaskDataReceived)
                 {
-                    Speech_LastCompletedDate.Text = " ";
+                    await GetSentenceFromServer();
+                    App.SpeechTaskDataReceived = true;
+                    return;
+                }
+            }
+            else if (App.SpeechTaskType.Equals("Image"))
+            {
+                if (!App.SpeechTaskDataReceived)
+                {
+                    // TODO: HTTP GET Image
+
+
+                    App.SpeechTaskDataReceived = true;
+                    return;
+                }
+            }
+            else if (App.SpeechTaskType.Equals("Breath"))
+            {
+                // No need to talk to server
+                // Is there a need for this?
+            }
+
+        }
+
+        public async Task GetSentenceFromServer()
+        {
+            var uri = new Uri(string.Format(CompanionServer.sentence_url, string.Empty));
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var headerValues = response.Headers.ToString().Split('\n');
+                    foreach (string val in headerValues)
+                    { 
+                        if (val.Contains("hash"))
+                        {
+                            hash = val.Split(' ')[1];
+                            App.CurrentSentenceHash = hash;
+                        }
+                    }
+                    sentence = await response.Content.ReadAsStringAsync();
+                    App.CurrentSentence = sentence;
                 }
                 else
                 {
-                    Speech_LastCompletedDate.Text = "✓ " + last;
+                    Device.BeginInvokeOnMainThread(() => { PageTitle.Text = "Bad GET Resp"; });
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
 
+        private void WelcomeUser()
+        {
             string welcomeMessage = Preferences.Get("UserID", "Error");
             if (welcomeMessage.Equals("Error") || welcomeMessage.Equals("Sign Out"))
             {
@@ -46,6 +120,39 @@ namespace Companion
                 welcomeMessage = welcomeMessage + ", welcome!";
             }
             Welcome.Text = welcomeMessage;
+        }
+
+        private void UpdateCompletedDate_Speech()
+        {
+            string last = App.SpeechTaskLastCompleted.ToString().Split(' ')[0];
+            if (last.Contains("0001"))
+            {
+                Speech_LastCompletedDate.Text = " ";
+            }
+            else
+            {
+                Speech_LastCompletedDate.Text = "✓ " + last;
+            }
+        }
+
+        private void UpdateCompletedDate_Questionnaire()
+        {
+            if (App.CurrentQuestion != 1)
+            {
+                Questionnaire_LastCompletedDate.Text = "In Progress";
+            }
+            else
+            {
+                string last = App.QuestionnaireLastCompleted.ToString().Split(' ')[0];
+                if (last.Contains("0001"))
+                {
+                    Questionnaire_LastCompletedDate.Text = " ";
+                }
+                else
+                {
+                    Questionnaire_LastCompletedDate.Text = "✓ " + last;
+                }
+            }
         }
 
         async void Speech_Clicked(object sender, EventArgs e)
@@ -70,13 +177,14 @@ namespace Companion
         async void Next_Clicked(object sender, EventArgs e)
         {
             // Placeholder function for debugging
-            await DisplayAlert("Success", "Recorded audio looks good. Would you like to Retry or Proceed", "Retry", "Proceed");
+            await DisplayAlert("Test", "This is a test!", "OK", "Retry");
         }
 
         async void Questionnaire_Clicked(object sender, EventArgs e)
         {
             // Placeholder function for debugging
-            await Navigation.PushAsync(new SpeechInstructionsPage());
+            // TODO: Should we allow users to retake questionnaire?
+            await Navigation.PushAsync(new QuestionnairePage());
         }
     }
 }

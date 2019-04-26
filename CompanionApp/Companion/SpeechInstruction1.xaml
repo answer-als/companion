@@ -5,9 +5,13 @@
     
     <StackLayout VerticalOptions="Fill" >
         
-    <Image x:Name="MainImage" Margin="60,40,60,10"
+    <Image x:Name="MainImage"
            HorizontalOptions="Center" 
-           VerticalOptions="Start"/>
+           VerticalOptions="Start">
+        <Image.Margin>
+            <OnPlatform iOS="60,40,60,10" Android="60,20,60,0" />
+        </Image.Margin>
+    </Image>
         
     <Label Margin="40,0,40,0" TextColor="Black"
            HorizontalTextAlignment="Center"

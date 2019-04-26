@@ -42,6 +42,8 @@ namespace Companion
             //Preferences.Remove("SpeechLastCompleted");
             //Preferences.Remove("SpeechCompleted");
             //Preferences.Remove("SpeechTaskState");
+            //Preferences.Remove("QuestionnaireCompleted");
+            //Preferences.Remove("QuestionnaireLastCompleted");
 
             // Terminate AALS Companion App session
             System.Diagnostics.Process.GetCurrentProcess().Kill();

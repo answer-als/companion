@@ -18,7 +18,7 @@ namespace Companion
 
         void OnArrivalUI()
         {
-            PreviousButton.Text = " ";
+            //PreviousButton.Text = " ";
             Instruction1.IsVisible = true;
             Instruction2.IsVisible = false;
             Instruction3.IsVisible = false;
@@ -48,9 +48,11 @@ namespace Companion
                 CurrentInstruction = 2;
                 Instruction2.IsVisible = true;
                 Instruction1.IsVisible = false;
-                PreviousButton.Text = "< Back";
+                //PreviousButton.Text = "< Back";
+                PreviousButton.TextColor = Color.FromHex("#006080");
                 Indicator.Source = ImageSource.FromResource("Companion.PositionDots.SpeechIntro.intro_2.png");
-            } else if (CurrentInstruction == 2)
+            } 
+            else if (CurrentInstruction == 2)
             {
                 CurrentInstruction = 3;
                 Instruction3.IsVisible = true;
@@ -71,12 +73,14 @@ namespace Companion
                 Indicator.Source = ImageSource.FromResource("Companion.PositionDots.SpeechIntro.intro_2.png");
                 Next.IsVisible = true;
                 LetsBegin.IsVisible = false;
-            } else if (CurrentInstruction == 2)
+            }
+            else if (CurrentInstruction == 2)
             {
                 CurrentInstruction = 1;
                 Instruction1.IsVisible = true;
                 Instruction2.IsVisible = false;
-                PreviousButton.Text = " ";
+                //PreviousButton.Text = " ";
+                PreviousButton.TextColor = Color.FromHex("#e6e6e6");
                 Indicator.Source = ImageSource.FromResource("Companion.PositionDots.SpeechIntro.intro_1.png");
             }
         }
