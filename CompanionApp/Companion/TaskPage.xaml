@@ -55,16 +55,13 @@
                 Text="Speech"
                 Clicked="Speech_Clicked"
                 HeightRequest="44">
-            <!--<Button.Image x:Name="SpeechButtonImage">
-                completed_icon
-            </Button.Image>-->
         </Button>
         <Label x:Name="Speech_LastCompletedDate"
                HorizontalOptions="Center"
                HorizontalTextAlignment="End"
                Margin="20,0,20,10"
                WidthRequest="300"
-               Text="Last Completed: Never" TextColor="Black"
+               Text=" " TextColor="Black"
                FontSize="Micro" FontAttributes="Bold" />
         <Button x:Name="OtherButton"
                 Margin="20,0,20,50"
@@ -79,8 +76,9 @@
                  BackgroundColor="#006080" 
                  HorizontalOptions="Center"
                  WidthRequest="340" />-->
-        <Label x:Name="QuestionsTitle" HorizontalOptions="Center"
-               Text="Questionairre" TextColor="Black"
+        
+        <!--<Label x:Name="QuestionsTitle" HorizontalOptions="Center"
+               Text="Questionnaire" TextColor="Black"
                FontSize="Small" FontAttributes="Bold" />
         <Button x:Name="questionnaire"
                 Margin="20,0,20,0"
@@ -96,6 +94,7 @@
                Margin="20,0,20,10"
                WidthRequest="300"
                Text="Last Completed: Never" TextColor="Black"
-               FontSize="Micro" FontAttributes="Bold" />
+               FontSize="Micro" FontAttributes="Bold" />-->
+        
     </StackLayout>
 </ContentPage>

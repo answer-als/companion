@@ -2,7 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Companion"
-             x:Class="Companion.SpeechPhraseView">
+             x:Class="Companion.SpeechImageView">
     <ContentView.Content>
         <Grid Padding="0,10,0,10" 
               VerticalOptions="FillAndExpand" 
@@ -27,14 +27,12 @@
                    TextColor="Black" FontSize="Micro"
                    FontAttributes=""
                    HorizontalTextAlignment="Center"
-                   Text="Record yourself reading this sentence out loud." />
+                   Text="Record yourself describing this image out loud for at least 30 seconds." />
             
-
-            <local:Sentence x:Name="PhraseView" Padding="15,0,15,10"
-                           Grid.Row="1" Grid.ColumnSpan="5"
-                           VerticalOptions="CenterAndExpand"
-                           HorizontalOptions="FillAndExpand" 
-                           IsVisible="true"/>
+            <Image x:Name="TaskImage" Grid.Row="1" 
+                   Grid.ColumnSpan="5"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"/>
             
             <local:UploadingAudioView x:Name="LoadingScreen" Padding="15"
                                       Margin="15, 60" Grid.ColumnSpan="5"

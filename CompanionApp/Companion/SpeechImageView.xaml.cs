@@ -10,24 +10,23 @@ using Newtonsoft.Json;
 
 namespace Companion
 {
-    public partial class SpeechPhraseView : ContentView
+    public partial class SpeechImageView : ContentView
     {
         public AudioRecorderService recorder;
         public AudioPlayer player;
         bool playing = false;
         bool homeClicked = false;
         ushort seconds = 0;
-        // TODO: Create a SpeechImageView and implement a minRecording of 30sec to describe picture
-        //          - See underMin/overMin code below (commented out in Recorder_AudioInputReceived)
-        //int minRecording = 30;
 
         HttpClient _client;
-        string sentence, hash;
+        string hash;
+        byte[] image;
 
-        public SpeechPhraseView()
+        public SpeechImageView()
         {
             InitializeComponent();
             PlayButton.Source = ImageSource.FromResource("Companion.Icons.play_icon.png");
+            TaskImage.Source = ImageSource.FromStream(() => new MemoryStream(App.CurrentImage));
             _client = new HttpClient();
 
             recorder = new AudioRecorderService
@@ -43,6 +42,7 @@ namespace Companion
             recorder.AudioInputReceived += Recorder_AudioInputReceived;
 
             App.IsRecording = false;
+            TaskImage.Source = ImageSource.FromStream(() => new MemoryStream(App.CurrentImage));
             DoneButton.IsVisible = false;
             RetryButton.IsVisible = false;
             PlayButton.IsVisible = false;
@@ -74,8 +74,6 @@ namespace Companion
                 status.Text = "Record";
 
                 var under2 = seconds < 2;
-                //var underMin = seconds < minRecording;
-                //var overMin = seconds > minRecording;
 
                 if (silence)
                 {
@@ -91,16 +89,6 @@ namespace Companion
                     // Do nothing
                     Timer.Text = "00:00";
                 }
-                //else if (underMin)
-                //{
-                //    if (!homeClicked)
-                //    {
-                //        Application.Current.MainPage.DisplayAlert("Recording Issue", "Recording is too short! Each recording has to be at least " + minRecording.ToString() + "s long.", "Try Again");
-                //    }
-                //    homeClicked = false;
-                //    Timer.Text = "00:00";
-                //}
-                //else if (overMin)
                 else
                 {
                     App.RecordedButNotSaved = true;
@@ -166,7 +154,7 @@ namespace Companion
                     //{
                     //    App.SpeechTaskState = "Phrase";
                     //}
-                    App.SpeechTaskType = "Image";
+                    App.SpeechTaskType = "Breath";
                     App.SpeechTaskDataReceived = false;
 
                     await HTTPPutSuccess();
@@ -185,7 +173,7 @@ namespace Companion
 
         void DisplayLoadingScreen()
         {
-            PhraseView.IsVisible = false;
+            TaskImage.IsVisible = false;
             Instructions.IsVisible = false;
             Timer.IsVisible = false;
             PlayButton.IsVisible = false;
@@ -218,7 +206,7 @@ namespace Companion
         {
             LoadingScreen.IsVisible = false;
 
-            PhraseView.IsVisible = true;
+            TaskImage.IsVisible = true;
             Instructions.IsVisible = true;
             Timer.IsVisible = true;
             PlayButton.IsVisible = true;
@@ -287,13 +275,13 @@ namespace Companion
             // Refresh Sentence
             // TODO: Test on physical device...if GET request takes a long time, add a loading screen!
             // TODO: Make sure to check for HTTP response. If Success, do nothing. Else, alert "Make sure youre connected + try again"
-            await GetSentenceFromServer();
+            await GetImageFromServer();
             App.SpeechTaskDataReceived = true;
-            PhraseView.sent.Text = App.CurrentSentence;
+            TaskImage.Source = ImageSource.FromStream(() => new MemoryStream(App.CurrentImage));
 
             PlayButton.IsVisible = false;
             RecordButton.IsVisible = true;
-            PhraseView.IsVisible = true;
+            TaskImage.IsVisible = true;
             LoadingScreen.IsVisible = false;
 
             RecordButton.Opacity = 1;
@@ -310,9 +298,9 @@ namespace Companion
             App.RecordedButNotSaved = false;
         }
 
-        public async Task GetSentenceFromServer()
+        public async Task GetImageFromServer()
         {
-            var uri = new Uri(string.Format(CompanionServer.sentence_url + App.UserID, string.Empty));
+            var uri = new Uri(string.Format(CompanionServer.image_url + App.UserID, string.Empty));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -327,8 +315,8 @@ namespace Companion
                             App.CurrentSentenceHash = hash;
                         }
                     }
-                    sentence = await response.Content.ReadAsStringAsync();
-                    App.CurrentSentence = sentence;
+                    image = await response.Content.ReadAsByteArrayAsync();
+                    App.CurrentImage = image;
                 }
                 else
                 {
@@ -353,7 +341,7 @@ namespace Companion
                     //FinishButton.IsEnabled = true;
                     DoneButton.IsEnabled = true;
                     RetryButton.IsEnabled = true;
-                } 
+                }
                 else
                 {
                     var filePath = recorder.GetAudioFilePath();

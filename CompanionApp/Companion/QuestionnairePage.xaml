@@ -39,25 +39,32 @@
         </Grid>
         
         <local:QuestionnaireView1 x:Name="QuestionView1"
-                                  Padding="20,10,20,20"
+                                  Padding="20,10,20,10"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="true"/>
         
         <local:QuestionnaireView22 x:Name="QuestionView22"
-                                  Padding="20,10,20,20"
+                                  Padding="20,10,20,10"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="false"/>
         
         <local:QuestionnaireView2 x:Name="QuestionView2"
-                                  Padding="20,10,20,20"
+                                  Padding="20,10,20,10"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="false"/>
         
         <local:QuestionnaireView3 x:Name="QuestionView3"
-                                  Padding="20,10,20,20"
+                                  Padding="20,10,20,10"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="false"/>
         
+        <Label x:Name="IncompleteWarning"
+               x:FieldModifier="Public"
+               TextColor="Red" FontSize="Micro"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0"
+               Text=" "/>
         <Button x:Name="Next" Margin="40,15,40,15"
                 BackgroundColor="#00bfff"
                 Text="Next" TextColor="White"

@@ -1,12 +1,19 @@
 ﻿using System;
+using System.IO;
+using System.Net.Http;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Companion
 {
     public partial class QuestionnairePage : ContentPage
     {
+        HttpClient _client;
+
         public QuestionnairePage()
         {
             InitializeComponent();
@@ -23,111 +30,234 @@ namespace Companion
                 Device.BeginInvokeOnMainThread(() => WelcomePopUp());
             }
 
-            // TODO: Rename as 1, 2, 3, 4 and create a new position dots image series to handle 4 questions
-            if (App.CurrentQuestion == 1)
+            _client = new HttpClient();
+            QuestionView1.Parent = this;
+            QuestionView22.Parent = this;
+            QuestionView2.Parent = this;
+            QuestionView3.Parent = this;
+            StartCorrectly();
+        }
+
+        // Make sure to launch the questionnaire on the page that the user last left off on
+        void StartCorrectly()
+        {
+            switch (App.CurrentQuestion)
             {
-                QuestionView1.IsVisible = true;
-                QuestionView2.IsVisible = false;
-                QuestionView3.IsVisible = false;
-                PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question1.png");
-                PreviousButton.Text = " ";
-            }
-            else if (App.CurrentQuestion == 22)
-            {
-                QuestionView1.IsVisible = false;
-                QuestionView2.IsVisible = false;
-                QuestionView3.IsVisible = false;
-                QuestionView22.IsVisible = true;
-                PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
-                PreviousButton.Text = "< Back";
-            }
-            else if (App.CurrentQuestion == 2)
-            {
-                QuestionView1.IsVisible = false;
-                QuestionView2.IsVisible = true;
-                QuestionView3.IsVisible = false;
-                PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
-                PreviousButton.Text = "< Back";
-            }
-            else if (App.CurrentQuestion == 3)
-            {
-                QuestionView1.IsVisible = false;
-                QuestionView2.IsVisible = false;
-                QuestionView3.IsVisible = true;
-                PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
-                PreviousButton.Text = "< Back";
-                Next.IsVisible = false;
-                Submit.IsVisible = true;
+                case 1:
+                    QuestionView1.IsVisible = true;
+                    QuestionView2.IsVisible = false;
+                    QuestionView3.IsVisible = false;
+                    PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question1.png");
+                    PreviousButton.Text = " ";
+                    break;
+                case 2:
+                    QuestionView1.IsVisible = false;
+                    QuestionView2.IsVisible = false;
+                    QuestionView3.IsVisible = false;
+                    QuestionView22.IsVisible = true;
+                    PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
+                    PreviousButton.Text = "< Back";
+                    break;
+                case 3:
+                    QuestionView1.IsVisible = false;
+                    QuestionView2.IsVisible = true;
+                    QuestionView3.IsVisible = false;
+                    PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
+                    PreviousButton.Text = "< Back";
+                    break;
+                case 4:
+                    QuestionView1.IsVisible = false;
+                    QuestionView2.IsVisible = false;
+                    QuestionView3.IsVisible = true;
+                    PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
+                    PreviousButton.Text = "< Back";
+                    Next.IsVisible = false;
+                    Submit.IsVisible = true;
+                    break;
             }
         }
 
         async void WelcomePopUp() 
         {
-            await DisplayAlert("Welcome", "Before we begin, we're going to ask you a few questions so that we can improve our evaluation of your data. It is required that you completed this questionnaire before proceeding to the main application.", "Continue");
+            await DisplayAlert("Welcome", "Before we begin, we're going to ask you a few questions so that we can improve our evaluation of your data. It is required that you complete this questionnaire before proceeding to the main application.", "Continue");
         }
 
         async void Submit_Clicked(object sender, EventArgs e)
         {
-            App.CurrentQuestion = 1;
-            App.QuestionnaireCompleted = true;
-            App.QuestionnaireLastCompleted = DateTime.Now;
-            await DisplayAlert("Success", "Thank you for filling out the survey! Your answers have been saved.", "Continue");
-            await Navigation.PushAsync(new TaskPage());
+            SaveProfile();
+            Submit.IsEnabled = false;
+            await PUTProfileToServer();
+            //App.QuestionnaireLastCompleted = DateTime.Now;
+            if (App.SuccessfulPUT)
+            {
+                await DisplayAlert("Success", "Thank you for filling out the survey! Your answers have been saved and uploaded.", "Continue");
+                App.CurrentQuestion = 1;
+                App.QuestionnaireCompleted = true;
+                await Navigation.PushAsync(new TaskPage());
+            }
+            else
+            {
+                await DisplayAlert("Error", "Your answers were saved, but could not be uploaded. Please make sure you are connected to the network, and try again.", "OK");
+                App.CurrentQuestion = 4;
+                App.QuestionnaireCompleted = false;
+                Submit.IsEnabled = true;
+            }
+        }
+
+        public StringContent MakeProfileContent()
+        {
+            //var profile = new Dictionary<string, string>()
+            //{
+            //    {"EducationLevel", App.EducationLevel},
+            //    {"BirthYear", App.BirthYear},
+            //    {"Sex", App.Sex},
+            //    {"Onset", App.OnsetSite},
+            //    {"EnglishFirstLanguage?", App.English1Lang},
+            //    {"EnglishLearningAge", App.EnglishLearnerAge},
+            //    {"LanguagesSpoken", App.LangsSpoken},
+            //    {"LanguagesExposed", App.LangsExposed}
+            //};
+            var data = new
+            {
+                EducationLevel = App.EducationLevel,
+                BirthYear = App.BirthYear,
+                Sex = App.Sex,
+                Onset = App.OnsetSite,
+                EnglishFirstLanguage = App.English1Lang,
+                EnglishLearningAge = App.EnglishLearnerAge,
+                LanguagesSpoken = App.LangsSpoken,
+                LanguagesExposed = App.LangsExposed
+            };
+            var result = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+            return result;
+        }
+
+        public async Task PUTProfileToServer()
+        {
+            var uri = new Uri(string.Format(CompanionServer.profile_url + App.UserID, string.Empty));
+
+            try
+            {
+                // TODO: Test if JSON string dictionary gets PUT successfully
+                HttpContent content = MakeProfileContent();
+
+                var readable = await content.ReadAsStringAsync();
+
+                content.Headers.Remove("Content-Type");
+                content.Headers.Add("Content-Type", "application/json");
+                var request = new HttpRequestMessage(HttpMethod.Put, uri)
+                {
+                    Content = content
+                };
+
+                var response = await _client.SendAsync(request);
+                Console.WriteLine("HTTP PUT Response: " + response);
+                if (response.IsSuccessStatusCode)
+                {
+                    App.SuccessfulPUT = true;
+                }
+                else
+                {
+                    App.SuccessfulPUT = false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(@"ERROR {0}", ex.Message);
+            }
+        }
+
+        void SaveProfile()
+        {
+            QuestionView1.SaveResponses();
+            QuestionView22.SaveResponses();
+            QuestionView2.SaveResponses();
+            QuestionView3.SaveResponses();
         }
 
         void Next_Clicked(object sender, EventArgs e)
         {
-            if (App.CurrentQuestion == 1)
+            switch (App.CurrentQuestion)
             {
-                QuestionView1.IsVisible = false;
-                QuestionView22.IsVisible = true;
-                PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
-                PreviousButton.Text = "< Back";
-                App.CurrentQuestion = 22;
+                case 1:
+                    if (QuestionView1.Completed())
+                    {
+                        QuestionView1.SaveResponses();
+                        QuestionView1.IsVisible = false;
+                        QuestionView22.IsVisible = true;
+                        PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
+                        PreviousButton.Text = "< Back";
+                        App.CurrentQuestion = 2;
+                    }
+                    else
+                    {
+                        IncompleteWarning.Text = "Please answer each question.";
+                    }
+                    break;
+                case 2:
+                    if (QuestionView22.Completed())
+                    {
+                        QuestionView22.SaveResponses();
+                        QuestionView22.IsVisible = false;
+                        QuestionView2.IsVisible = true;
+                        PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
+                        App.CurrentQuestion = 3;
+                    }
+                    else
+                    {
+                        IncompleteWarning.Text = "Please answer each question.";
+                    }
+                    break;
+                case 3:
+                    if (QuestionView2.Completed())
+                    {
+                        QuestionView2.SaveResponses();
+                        QuestionView2.IsVisible = false;
+                        QuestionView3.IsVisible = true;
+                        PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
+                        Next.IsVisible = false;
+                        Submit.IsVisible = true;
+                        App.CurrentQuestion = 4;
+                    }
+                    else
+                    {
+                        IncompleteWarning.Text = "Please answer each question.";
+                    }
+                    break;
             }
-            else if (App.CurrentQuestion == 22)
-            {
-                QuestionView2.IsVisible = true;
-                QuestionView22.IsVisible = false;
-                PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
-                App.CurrentQuestion = 2;
-            }
-            else if (App.CurrentQuestion == 2)
-            {
-                QuestionView3.IsVisible = true;
-                QuestionView2.IsVisible = false;
-                PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
-                Next.IsVisible = false;
-                Submit.IsVisible = true;
-                App.CurrentQuestion = 3;
-            }
+        }
+
+        public void HideWarning()
+        {
+            IncompleteWarning.Text = " ";
         }
 
         void Previous_Clicked(object sender, EventArgs e)
         {
-            if (App.CurrentQuestion == 3)
+            switch (App.CurrentQuestion)
             {
-                QuestionView2.IsVisible = true;
-                QuestionView3.IsVisible = false;
-                PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
-                Next.IsVisible = true;
-                Submit.IsVisible = false;
-                App.CurrentQuestion = 2;
-            }
-            else if (App.CurrentQuestion == 2)
-            {
-                QuestionView22.IsVisible = true;
-                QuestionView2.IsVisible = false;
-                PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
-                App.CurrentQuestion = 22;
-            }
-            else if (App.CurrentQuestion == 22)
-            {
-                QuestionView1.IsVisible = true;
-                QuestionView22.IsVisible = false;
-                PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question1.png");
-                PreviousButton.Text = " ";
-                App.CurrentQuestion = 1;
+                case 4:
+                    QuestionView2.IsVisible = true;
+                    QuestionView3.IsVisible = false;
+                    PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
+                    Next.IsVisible = true;
+                    Submit.IsVisible = false;
+                    App.CurrentQuestion = 3;
+                    break;
+                case 3:
+                    QuestionView22.IsVisible = true;
+                    QuestionView2.IsVisible = false;
+                    PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
+                    App.CurrentQuestion = 2;
+                    break;
+                case 2:
+                    QuestionView1.IsVisible = true;
+                    QuestionView22.IsVisible = false;
+                    PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question1.png");
+                    PreviousButton.Text = " ";
+                    App.CurrentQuestion = 1;
+                    break;
             }
         }
 
