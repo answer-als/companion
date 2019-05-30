@@ -5,6 +5,7 @@ using Plugin.AudioRecorder;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using System.Net.Http;
+using Plugin.LocalNotifications;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -14,8 +15,8 @@ namespace Companion
     {
         public AudioRecorderService recorder;
         public AudioPlayer player;
-        bool playing = false;
         bool homeClicked = false;
+        bool alreadyTried = false;
         ushort seconds = 0;
 
         HttpClient _client;
@@ -26,26 +27,31 @@ namespace Companion
         {
             InitializeComponent();
             PlayButton.Source = ImageSource.FromResource("Companion.Icons.play_icon.png");
-            TaskImage.Source = ImageSource.FromStream(() => new MemoryStream(App.CurrentImage));
             _client = new HttpClient();
 
             recorder = new AudioRecorderService
             {
                 StopRecordingOnSilence = true, // default will stop recording after 2 seconds
                 StopRecordingAfterTimeout = true,  // stop recording after a max timeout (defined below)
-                TotalAudioTimeout = TimeSpan.FromSeconds(120), // audio will stop recording after 15 seconds
-                AudioSilenceTimeout = TimeSpan.FromSeconds(5), // audio will stop recording after 3 seconds of silence
+                TotalAudioTimeout = TimeSpan.FromSeconds(120), // audio will stop recording after 120 seconds
+                AudioSilenceTimeout = TimeSpan.FromSeconds(5), // audio will stop recording after 5 seconds of silence
                 SilenceThreshold = 0.15F // value between 0 and 1 that determines what makes a silent audio input
             };
+            App.GlobalRecorder = recorder;
+
             player = new AudioPlayer();
             player.FinishedPlaying += Player_FinishedPlaying;
             recorder.AudioInputReceived += Recorder_AudioInputReceived;
+            App.GlobalPlayer = player;
 
             App.IsRecording = false;
+            App.IsPlaying = false;
             TaskImage.Source = ImageSource.FromStream(() => new MemoryStream(App.CurrentImage));
             DoneButton.IsVisible = false;
             RetryButton.IsVisible = false;
             PlayButton.IsVisible = false;
+
+            //LayoutChanged += (sender, e) => { Device.BeginInvokeOnMainThread(() => { TaskImage.Source = ImageSource.FromStream(() => new MemoryStream(App.CurrentImage)); }); };
         }
 
         public async void EndRecording(object sender, EventArgs e)
@@ -78,11 +84,12 @@ namespace Companion
                 if (silence)
                 {
                     // Silence timeout stopped the recording and it will be empty!
+                    App.CurrentPage = "Alert";
                     Application.Current.MainPage.DisplayAlert("Recording Stopped!", "Your voice could not be heard. Please try again, and speak louder into your device.", "Try Again");
+                    App.CurrentPage = "Speech";
                     Timer.Text = "00:00";
                     return;
                 }
-
 
                 if (under2)
                 {
@@ -116,12 +123,7 @@ namespace Companion
             await Task.Delay(2000);
             // TODO: Write code to analyze audio (basic algorithm on Trello)
             //          > If audio passes tests/checks
-            //              - Remove this pop-up display
-            //              • Conversion to m4a and HTTP PUT of m4a audio stream to azure
-            //              • Display Alert with confetti/celebration saying "Nice Job! Speech task accomplished!"
-            //                  + This celebraion Alert should have button with text "Ok" that leads to TaskPage
-            //                      • Update Preferences with date/time completed
-            //                      • TaskPage should update date/time completed on Speech task button
+            //              • Conversion to m4a?
             //          > If audio fails tests/checks
             //              - Pop-up display should now show particular fail message instead of "Analyzing Audio"/animation
             //              - Pop-up display should have Retry button, which refreshes the current phrase view
@@ -136,29 +138,17 @@ namespace Companion
                     // Reset these global variables so the next task attempt has correct setup
                     App.SuccessfulPUT = false;
                     App.RecordedButNotSaved = false;
-                    if (!App.SpeechTaskCompleted)
-                    {
-                        App.SpeechTaskCompleted = true;
-                        App.ShowSpeechInstructions = false;
-                    }
                     App.SpeechTaskLastCompleted = DateTime.Now;
-                    // TODO: Change speech tasks for next week
-                    //if (App.SpeechTaskState.Equals("Phrase"))
-                    //{
-                    //    App.SpeechTaskState = "Image";
-                    //}
-                    //else if (App.SpeechTaskState.Equals("Image"))
-                    //{
-                    //    App.SpeechTaskState = "Breath";
-                    //} else if (App.SpeechTaskState.Equals("Breath"))
-                    //{
-                    //    App.SpeechTaskState = "Phrase";
-                    //}
                     App.SpeechTaskType = "Breath";
                     App.SpeechTaskDataReceived = false;
 
                     await HTTPPutSuccess();
-                    // TODO: Erase All other pages to avoid lingering?
+
+                    // Local Notifications For Next Task
+                    CrossLocalNotifications.Current.Show("Speech Task Available", "The next Speech Task is ready for you to complete!", 1, DateTime.Now.AddSeconds(15)); //DateTime.Now.AddDays(7));
+                    CrossLocalNotifications.Current.Show("Speech Task Available", "The next Speech Task is ready for you to complete!", 2, DateTime.Now.AddSeconds(120)); //DateTime.Now.AddDays(9));
+                    CrossLocalNotifications.Current.Show("Speech Task Is Due!", "The next Speech Task is due. Please login and complete it.", 3, DateTime.Now.AddDays(1)); //DateTime.Now.AddDays(11));
+
                     NavigationPage page = new NavigationPage(new TaskPage());
                     Application.Current.MainPage = page;
                     await Navigation.PopToRootAsync();
@@ -177,6 +167,7 @@ namespace Companion
             Instructions.IsVisible = false;
             Timer.IsVisible = false;
             PlayButton.IsVisible = false;
+            RecordButton.IsVisible = false;
             status.IsVisible = false;
             RetryButton.IsVisible = false;
             DoneButton.IsVisible = false;
@@ -193,7 +184,13 @@ namespace Companion
         void HTTPPutUploading()
         {
             DisplayLoadingScreen();
-            LoadingScreen.Uploading();
+            LoadingScreen.UploadingAudio();
+        }
+
+        public void LoadingImage()
+        {
+            DisplayLoadingScreen();
+            LoadingScreen.LoadingImage();
         }
 
         async Task HTTPPutSuccess()
@@ -204,6 +201,21 @@ namespace Companion
 
         void HTTPPutFail()
         {
+            HTTPDonePUT();
+
+            App.CurrentPage = "Alert";
+            Application.Current.MainPage.DisplayAlert("Audio Failed to Upload!", "Please check your connection to the internet and try again.", "OK");
+            App.CurrentPage = "Speech";
+        }
+
+        void HTTPGetFail()
+        {
+            DisplayLoadingScreen();
+            LoadingScreen.FailedToLoad();
+        }
+
+        public void HTTPDonePUT()
+        {
             LoadingScreen.IsVisible = false;
 
             TaskImage.IsVisible = true;
@@ -213,9 +225,17 @@ namespace Companion
             status.IsVisible = true;
             RetryButton.IsVisible = true;
             DoneButton.IsVisible = true;
+        }
 
-            Application.Current.MainPage.DisplayAlert("Audio Failed to Upload!", "Please check your connection to the internet and try again.", "OK");
-            // TODO: Refresh speech task interface with NEW sentence
+        public void HTTPDoneGET()
+        {
+            LoadingScreen.IsVisible = false;
+
+            TaskImage.IsVisible = true;
+            Instructions.IsVisible = true;
+            Timer.IsVisible = true;
+            RecordButton.IsVisible = true;
+            status.IsVisible = true;
         }
 
         public async Task PutRecordingToServer()
@@ -251,34 +271,9 @@ namespace Companion
             }
         }
 
-        //async void FinishButton_Clicked(object sender, EventArgs e)
-        //{
-        //        // After the very first time around, dont show the Speech Task instructions
-        //        // If this isnt the first time around, User has specified to keep instructions in Menu, so let it be
-        //        if (!App.SpeechTaskCompleted)
-        //        {
-        //            App.ShowSpeechInstructions = false;
-        //        }
-
-        //        App.SpeechTaskState = "Done";
-        //        App.RecordedButNotSaved = false;
-        //        App.SpeechTaskCompleted = true;
-        //        App.SpeechTaskLastCompleted = DateTime.Now;
-
-        //        NavigationPage page = new NavigationPage(new TaskPage());
-        //        Application.Current.MainPage = page;
-        //        await Navigation.PopToRootAsync();
-        //}
-
         async public void RetryButton_Clicked(object sender, EventArgs e)
         {
-            // Refresh Sentence
-            // TODO: Test on physical device...if GET request takes a long time, add a loading screen!
-            // TODO: Make sure to check for HTTP response. If Success, do nothing. Else, alert "Make sure youre connected + try again"
-            await GetImageFromServer();
-            App.SpeechTaskDataReceived = true;
-            TaskImage.Source = ImageSource.FromStream(() => new MemoryStream(App.CurrentImage));
-
+            // Refresh Image Interface
             PlayButton.IsVisible = false;
             RecordButton.IsVisible = true;
             TaskImage.IsVisible = true;
@@ -294,18 +289,27 @@ namespace Companion
             seconds = 0;
             DoneButton.IsVisible = false;
             RetryButton.IsVisible = false;
-            //FinishButton.IsVisible = false;
             App.RecordedButNotSaved = false;
+
+            // Reload a new image
+            await GetImageFromServer();
         }
 
         public async Task GetImageFromServer()
         {
+            LoadingImage();
+
             var uri = new Uri(string.Format(CompanionServer.image_url + App.UserID, string.Empty));
             try
             {
                 var response = await _client.GetAsync(uri);
+                Console.WriteLine("HTTP GET Image Response: " + response);
+
                 if (response.IsSuccessStatusCode)
                 {
+                    App.SuccessfulGET = true;
+                    App.SpeechTaskDataReceived = true;
+
                     var headerValues = response.Headers.ToString().Split('\n');
                     foreach (string val in headerValues)
                     {
@@ -315,30 +319,40 @@ namespace Companion
                             App.CurrentSentenceHash = hash;
                         }
                     }
+
                     image = await response.Content.ReadAsByteArrayAsync();
                     App.CurrentImage = image;
+                    HTTPDoneGET();
+                    TaskImage.Source = ImageSource.FromStream(() => new MemoryStream(image));
                 }
                 else
                 {
-                    Device.BeginInvokeOnMainThread(() => { Instructions.Text = "Bad GET Resp"; });
+                    HTTPGetFail();
+                    App.SuccessfulGET = false;
+                    App.SpeechTaskDataReceived = false;
+                    App.CurrentPage = "Alert";
+                    await Application.Current.MainPage.DisplayAlert("Failed to Load New Image!", "Please check your connection to the internet and try again.", "OK");
+                    App.CurrentPage = "Speech";
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(@"\tERROR {0}", ex.Message);
+                HTTPGetFail();
+                App.CurrentPage = "Alert";
+                await Application.Current.MainPage.DisplayAlert("Failed to Load New Image!", "Please check your connection to the internet and try again.", "OK");
+                App.CurrentPage = "Speech";
             }
         }
-
 
         void PlayButton_Clicked(object sender, EventArgs e)
         {
             try
             {
-                if (playing)
+                if (App.IsPlaying)
                 {
                     status.Text = "Play";
                     player.Pause();
-                    //FinishButton.IsEnabled = true;
                     DoneButton.IsEnabled = true;
                     RetryButton.IsEnabled = true;
                 }
@@ -348,7 +362,6 @@ namespace Companion
 
                     if (filePath != null)
                     {
-                        //FinishButton.IsEnabled = false;
                         DoneButton.IsEnabled = false;
                         RetryButton.IsEnabled = false;
 
@@ -357,7 +370,7 @@ namespace Companion
                     }
                 }
 
-                playing = !playing;
+                App.IsPlaying = !App.IsPlaying;
             }
             catch (Exception exc)
             {
@@ -372,7 +385,16 @@ namespace Companion
             {
                 try
                 {
-                    EndRecording(sender, e);
+                    if ((Convert.ToUInt16(Timer.Text.Split(':')[1]) > 29) || alreadyTried)
+                    {
+                        EndRecording(sender, e);
+                        alreadyTried = false;
+                    }
+                    else
+                    {
+                        status.Text = "Try to talk for 30sec! Tap again to STOP";
+                        alreadyTried = true;
+                    }
                 }
                 catch (Exception exc)
                 {

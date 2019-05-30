@@ -12,7 +12,7 @@
             <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
         </Grid.Padding>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />

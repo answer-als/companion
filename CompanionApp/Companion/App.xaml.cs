@@ -2,29 +2,31 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using Plugin.AudioRecorder;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Companion
 {
     public partial class App : Application
     {
-        //static Image NotAnImage;
-
+        public static AudioRecorderService GlobalRecorder { get; set; }
+        public static AudioPlayer GlobalPlayer { get; set;  }
         public static string Password { get; set; }
         public static int LoginVisits { get; set; }
         public static bool IsRecording { get; set; }
+        public static bool IsPlaying { get; set; }
         public static bool SuccessfulPUT { get; set; }
         public static bool SuccessfulGET { get; set; }
         public static bool RecordedButNotSaved { get; set; }
-        public static bool FirstTimeLoading
-        {
-            get => Preferences.Get("FirstTime", true);
-            set => Preferences.Set("FirstTime", value);
-        }
         public static string UserID
         {
             get => Preferences.Get("UserID", "Sign Out");
             set => Preferences.Set("UserID", value);
+        }
+        public static string CurrentPage
+        {
+            get => Preferences.Get("CurrentPage", "Login"); // Other pages include 'Questionnaire', 'Home', 'Menu', and 'Speech'
+            set => Preferences.Set("CurrentPage", value);
         }
         public static string SpeechTaskType
         {
@@ -142,12 +144,37 @@ namespace Companion
 
         protected override void OnSleep()
         {
-            // Handle when your app sleeps
+            try
+            {
+                if (IsPlaying)
+                {
+                    GlobalPlayer.Pause();
+                }
+                if (IsRecording)
+                {
+                    GlobalRecorder.StopRecording();
+                }
+            }
+            catch (Exception ex)
+            { 
+                Console.WriteLine(@"ERROR {0}", ex.Message);
+                Console.WriteLine("Something went wrong when controlling the Global AudioRecorder instance!");
+            }
         }
 
-        protected override void OnResume()
+        protected override async void OnResume()
         {
-            // Handle when your app resumes
+            // No matter what happens, when the app resumes, start at the Task Page (even if in the middle of a task previously)
+            // Unless the Questionnaire has yet to be completed! Or unless you are at LoginPage (Sign In/Out)
+            if (CurrentPage.Equals("Login") || CurrentPage.Equals("Questionnaire") || CurrentPage.Equals("Alert"))
+            {
+                // Anything useful that could go here??
+            }
+            else
+            {
+                MainPage = new NavigationPage(new TaskPage());
+                await MainPage.Navigation.PopToRootAsync();
+            }
         }
     }
 }

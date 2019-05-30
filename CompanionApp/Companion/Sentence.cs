@@ -22,5 +22,10 @@ namespace Companion
 
             Content = sent;
         }
+
+        public void LoadSentence()
+        {
+            sent.Text = App.CurrentSentence;
+        }
     }
 }

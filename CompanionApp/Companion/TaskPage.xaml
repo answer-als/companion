@@ -5,13 +5,13 @@
              BackgroundColor="#e6e6e6"
              Title="AALS Companion">
     <StackLayout Margin="0,0,0,0">
-        <Grid Margin="0,0,0,10" 
+        <Grid Margin="0,0,0,10"
               BackgroundColor="#006080">
             <Grid.Padding>
                 <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
             </Grid.Padding>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
@@ -46,16 +46,18 @@
         <Label x:Name="TaskTitle" HorizontalOptions="Center"
                Text="Tasks" TextColor="Black"
                FontSize="Small" FontAttributes="Bold" />
+        <Frame x:Name="SpeechFrame" HasShadow="true" Padding="0" Margin="20,0"
+               HorizontalOptions="Center">
         <Button x:Name="SpeechButton"
-                Margin="20,0,20,0"
                 HorizontalOptions="CenterAndExpand"
                 TextColor="White"
                 BackgroundColor="#006080"
                 WidthRequest="300"
                 Text="Speech"
                 Clicked="Speech_Clicked"
-                HeightRequest="44">
-        </Button>
+                HeightRequest="44"
+                />
+        </Frame>
         <Label x:Name="Speech_LastCompletedDate"
                HorizontalOptions="Center"
                HorizontalTextAlignment="End"
@@ -63,7 +65,7 @@
                WidthRequest="300"
                Text=" " TextColor="Black"
                FontSize="Micro" FontAttributes="Bold" />
-        <Button x:Name="OtherButton"
+        <!--<Button x:Name="OtherButton"
                 Margin="20,0,20,50"
                 HorizontalOptions="CenterAndExpand"
                 TextColor="White"
@@ -72,7 +74,7 @@
                 Text="Other"
                 Image=""
                 Clicked="Next_Clicked"/>
-        <!--<BoxView Margin="10" HeightRequest="1" 
+        <BoxView Margin="10" HeightRequest="1" 
                  BackgroundColor="#006080" 
                  HorizontalOptions="Center"
                  WidthRequest="340" />-->

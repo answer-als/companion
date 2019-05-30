@@ -1,177 +1,93 @@
 ﻿using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Essentials;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+using Plugin.Permissions;
 
 namespace Companion
 {
     public partial class TaskPage : ContentPage
     {
-        string sentence, hash;
-        byte[] image;
-        HttpClient _client;
-        //double DaysBetweenTasks = 6.8;
-        // TODO: This is for debugging only. Makes tasks enabled after only 30seconds
-        double DaysBetweenTasks = 0.000347;
-
         public TaskPage()
         {
-            _client = new HttpClient();
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             MenuButton.Source = ImageSource.FromResource("Companion.Icons.menu_icon.png");
             UserIcon.Source = ImageSource.FromResource("Companion.Icons.user_icon.png");
+            App.CurrentPage = "Home";
+
+            CheckPermissions();
+
+            App.RecordedButNotSaved = false;
+            App.IsRecording = false;
+            App.SuccessfulGET = false;
+            App.SuccessfulPUT = false;
 
             // Welcome message
             WelcomeUser();
+        }
 
-            // Handle HTTP GET request for next Speech Task
-            LoadSpeechTaskFromServer();
+        async void CheckPermissions()
+        {
+            try
+            {
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Microphone);
+                if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
+                {
+                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Plugin.Permissions.Abstractions.Permission.Microphone);
+                    //Best practice to always check that the key exists
+                    if (results.ContainsKey(Plugin.Permissions.Abstractions.Permission.Microphone))
+                        status = results[Plugin.Permissions.Abstractions.Permission.Microphone];
+                }
 
-            // Has it been a week or more since last task completion?
-            SpeechTaskAvailability();
+                if (status == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
+                {
+                    return;
+                }
 
-            // Update Speech Task Last Completed Display
-            UpdateCompletedDate_Speech();
-            // Update Questionnaire Last Completed Display
-            //UpdateCompletedDate_Questionnaire();
-
-            App.FirstTimeLoading = false;
+                if (status != Plugin.Permissions.Abstractions.PermissionStatus.Unknown)
+                {
+                    await DisplayAlert("Access to Microphone Denied", "Can not continue. Restart and try again.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Permission Check Exception Thrown! {0}", ex);
+            }
         }
 
         protected override void OnAppearing()
         {
-            // TODO: Do this for OnResume() as well
             // Has it been a week or more since last task completion?
             SpeechTaskAvailability();
 
             // Update Speech Task Last Completed Display
             UpdateCompletedDate_Speech();
+
             // Update Questionnaire Last Completed Display
             //UpdateCompletedDate_Questionnaire();
+
             base.OnAppearing();
         }
 
-        void SpeechTaskAvailability()
+        async void SpeechTaskAvailability()
         {
             if (App.SpeechTaskCompleted)
             {
+                // TODO: remove this interval and || OR statement in IF conditional
                 TimeSpan interval = DateTime.Now - App.SpeechTaskLastCompleted;
-                if (interval.TotalDays > DaysBetweenTasks)
+                int nextTask = App.SpeechTaskLastCompleted.AddDays(7).DayOfYear;
+                if (DateTime.Now.DayOfYear == nextTask || (interval.TotalSeconds > 15))
                 {
                     SpeechButton.IsEnabled = true;
+                    SpeechFrame.HasShadow = true;
                 }
                 else
                 {
                     SpeechButton.IsEnabled = false;
+                    SpeechFrame.HasShadow = false;
+                    int nextAvailable = nextTask - DateTime.Now.DayOfYear;
+                    await Application.Current.MainPage.DisplayAlert("No Tasks Available", "Please come back in " + nextAvailable + " days.", "OK");
                 }
-            }
-        }
-
-        async private void LoadSpeechTaskFromServer()
-        {
-            if (App.FirstTimeLoading)
-            {
-                // TODO: Check Server Response to make sure GET was a Success. If fail, update bool and Display "Server communication issues. Make sure youre connected"
-                await GetSentenceFromServer();
-                App.SpeechTaskDataReceived = true;
-                return;
-            }
-
-            if (App.SpeechTaskType.Equals("Sentence"))
-            {
-                if (!App.SpeechTaskDataReceived)
-                {
-                    await GetSentenceFromServer();
-                    App.SpeechTaskDataReceived = true;
-                    return;
-                }
-            }
-            else if (App.SpeechTaskType.Equals("Image"))
-            {
-                // TODO: Remove true
-                if (!App.SpeechTaskDataReceived || true)
-                {
-                    // TODO: Check Server Response to make sure GET was a Success. If fail, update bool and Display "Server connection issues. Make sure youre connected"
-                    await GetImageFromServer();
-                    App.SpeechTaskDataReceived = true;
-                    return;
-                }
-            }
-            else if (App.SpeechTaskType.Equals("Breath"))
-            {
-                // No need to talk to server
-                // Is there a need for this?
-            }
-
-        }
-
-        public async Task GetSentenceFromServer()
-        {
-            var uri = new Uri(string.Format(CompanionServer.sentence_url + App.UserID, string.Empty));
-            try
-            {
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var headerValues = response.Headers.ToString().Split('\n');
-                    foreach (string val in headerValues)
-                    {
-                        if (val.Contains("hash"))
-                        {
-                            hash = val.Split(' ')[1];
-                            App.CurrentSentenceHash = hash;
-                        }
-                    }
-                    sentence = await response.Content.ReadAsStringAsync();
-                    App.CurrentSentence = sentence;
-                }
-                else
-                {
-                    Device.BeginInvokeOnMainThread(() => { PageTitle.Text = "Bad GET Resp"; });
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-        }
-
-        public async Task GetImageFromServer()
-        {
-            var uri = new Uri(string.Format(CompanionServer.image_url + App.UserID, string.Empty));
-            try
-            {
-                var response = await _client.GetAsync(uri);
-                Console.WriteLine("Image GET Response: " + response);
-                if (response.IsSuccessStatusCode)
-                {
-                    var headerValues = response.Headers.ToString().Split('\n');
-                    foreach (string val in headerValues)
-                    {
-                        if (val.Contains("hash"))
-                        {
-                            hash = val.Split(' ')[1];
-                            App.CurrentImageHash = hash;
-                        }
-                    }
-                    image = await response.Content.ReadAsByteArrayAsync();
-                    Console.WriteLine(image);
-                    App.CurrentImage = image;
-                }
-                else
-                {
-                    Device.BeginInvokeOnMainThread(() => { PageTitle.Text = "Bad GET Resp"; });
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
         }
 
@@ -185,7 +101,7 @@ namespace Companion
             }
             else
             {
-                welcomeMessage = welcomeMessage + ", welcome!";
+                welcomeMessage += ", welcome!";
             }
             Welcome.Text = welcomeMessage;
         }
@@ -196,15 +112,17 @@ namespace Companion
             TimeSpan interval = DateTime.Now - App.SpeechTaskLastCompleted;
             if (last.Contains("0001"))
             {
+                // This occurs only on the very first run of the app. Default year on launch is 0001
                 Speech_LastCompletedDate.Text = " ";
             }
             else
             {
-                if (App.SpeechTaskLastCompleted.DayOfWeek == DateTime.Now.DayOfWeek)
+                // interval.Days < 3 just to ensure that its not the same day of the week from the week prior
+                if ((App.SpeechTaskLastCompleted.DayOfWeek == DateTime.Now.DayOfWeek) && (interval.Days < 3))
                 {
                     Speech_LastCompletedDate.Text = "✓  Today";
                 }
-                else if (App.SpeechTaskLastCompleted.DayOfWeek == DateTime.Now.AddDays(-1).DayOfWeek)
+                else if ((App.SpeechTaskLastCompleted.DayOfWeek == DateTime.Now.AddDays(-1).DayOfWeek) && (interval.Days < 3))
                 {
                     Speech_LastCompletedDate.Text = "✓  Yesterday";
                 }
@@ -233,36 +151,5 @@ namespace Companion
         {
             await Navigation.PushAsync(new MenuPage());
         }
-
-        async void Next_Clicked(object sender, EventArgs e)
-        {
-            // Placeholder function for debugging
-            await DisplayAlert("Test", "This is a test!", "OK", "Retry");
-        }
-
-        //async void Questionnaire_Clicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new QuestionnairePage());
-        //}
-
-        //private void UpdateCompletedDate_Questionnaire()
-        //{
-        //    if (App.CurrentQuestion != 1)
-        //    {
-        //        Questionnaire_LastCompletedDate.Text = "In Progress";
-        //    }
-        //    else
-        //    {
-        //        string last = App.QuestionnaireLastCompleted.ToString().Split(' ')[0];
-        //        if (last.Contains("0001"))
-        //        {
-        //            Questionnaire_LastCompletedDate.Text = " ";
-        //        }
-        //        else
-        //        {
-        //            Questionnaire_LastCompletedDate.Text = "✓ " + last;
-        //        }
-        //    }
-        //}
     }
 }

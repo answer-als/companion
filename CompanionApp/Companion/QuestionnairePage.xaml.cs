@@ -19,6 +19,7 @@ namespace Companion
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             BackButton.Source = ImageSource.FromResource("Companion.Icons.back_icon.png");
+            App.CurrentPage = "Questionnaire";
 
             if (App.QuestionnaireCompleted)
             {
@@ -86,37 +87,45 @@ namespace Companion
         {
             SaveProfile();
             Submit.IsEnabled = false;
+            HTTPPutUploading();
             await PUTProfileToServer();
             //App.QuestionnaireLastCompleted = DateTime.Now;
             if (App.SuccessfulPUT)
             {
-                await DisplayAlert("Success", "Thank you for filling out the survey! Your answers have been saved and uploaded.", "Continue");
                 App.CurrentQuestion = 1;
                 App.QuestionnaireCompleted = true;
+                await HTTPPutSuccess();
                 await Navigation.PushAsync(new TaskPage());
             }
             else
             {
-                await DisplayAlert("Error", "Your answers were saved, but could not be uploaded. Please make sure you are connected to the network, and try again.", "OK");
-                App.CurrentQuestion = 4;
-                App.QuestionnaireCompleted = false;
-                Submit.IsEnabled = true;
+                HTTPPutFail();
             }
+        }
+
+        void HTTPPutUploading()
+        {
+            QuestionView3.IsVisible = false;
+            LoadingScreen.IsVisible = true;
+            LoadingScreen.UploadingProfile();
+        }
+
+        async Task HTTPPutSuccess()
+        {
+            Device.BeginInvokeOnMainThread(LoadingScreen.Success);
+            await Task.Delay(1800);
+        }
+
+        void HTTPPutFail()
+        {
+            LoadingScreen.IsVisible = false;
+            QuestionView3.IsVisible = true;
+            Submit.IsEnabled = true;
+            Application.Current.MainPage.DisplayAlert("Error", "Your answers were saved, but could not be uploaded. Please make sure you are connected to the network, and try again.", "OK");
         }
 
         public StringContent MakeProfileContent()
         {
-            //var profile = new Dictionary<string, string>()
-            //{
-            //    {"EducationLevel", App.EducationLevel},
-            //    {"BirthYear", App.BirthYear},
-            //    {"Sex", App.Sex},
-            //    {"Onset", App.OnsetSite},
-            //    {"EnglishFirstLanguage?", App.English1Lang},
-            //    {"EnglishLearningAge", App.EnglishLearnerAge},
-            //    {"LanguagesSpoken", App.LangsSpoken},
-            //    {"LanguagesExposed", App.LangsExposed}
-            //};
             var data = new
             {
                 EducationLevel = App.EducationLevel,
@@ -138,7 +147,6 @@ namespace Companion
 
             try
             {
-                // TODO: Test if JSON string dictionary gets PUT successfully
                 HttpContent content = MakeProfileContent();
 
                 var readable = await content.ReadAsStringAsync();
@@ -151,7 +159,7 @@ namespace Companion
                 };
 
                 var response = await _client.SendAsync(request);
-                Console.WriteLine("HTTP PUT Response: " + response);
+                Console.WriteLine("HTTP PUT Profile Response: " + response);
                 if (response.IsSuccessStatusCode)
                 {
                     App.SuccessfulPUT = true;

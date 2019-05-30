@@ -9,12 +9,13 @@
               RowSpacing="0"
               BackgroundColor="#006080">
             <Grid.Padding>
-                <OnPlatform iOS="5,25,5,10" Android="5,15,5,15" />
+                <OnPlatform iOS="5,35,5,10" Android="5,15,5,15" />
             </Grid.Padding>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="20" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />                
+                <RowDefinition Height="20" />
                 <RowDefinition Height="8" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -22,7 +23,7 @@
                 <ColumnDefinition Width="70" />
                 <ColumnDefinition Width="90" />
                 <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="10" />
             </Grid.ColumnDefinitions>
             <ImageButton x:Name="BackButton" Grid.Column="0"
                     Margin="10,0,10,0" Grid.ColumnSpan="1"
@@ -35,10 +36,9 @@
                     Grid.RowSpan="2"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
-            <Label Grid.Column="3" Grid.Row="2"
-                    HorizontalOptions="Center"
+            <Label Grid.Column="2" Grid.Row="3"
                     VerticalOptions="Start"
-                    Text="(Not you?)" FontSize="Micro"
+                    Text="Not you?" FontSize="Micro"
                     TextColor="Red" FontAttributes="Bold">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SignOut_Clicked"/>
@@ -58,6 +58,7 @@
                 </Label.FontSize>
             </Label>
             <Label x:Name="User" Grid.Column="2" Grid.Row="2"
+                   Grid.ColumnSpan="2"
                    BackgroundColor="#006080"
                    Text="UserIDHere" TextColor="White"
                    FontAttributes="None" FontSize="Small"

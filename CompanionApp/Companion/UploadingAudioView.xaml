@@ -4,10 +4,16 @@
              x:Class="Companion.UploadingAudioView"
              BackgroundColor="Gray">
     <ContentView.Content>
+        <Frame CornerRadius="10" HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               HasShadow="true"
+               Padding="5"
+               BackgroundColor="Gray">
         <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
             <Label x:Name="UploadingLabel" Text="Uploading Audio Recording..."
                    HorizontalTextAlignment="Center"
                    TextColor="White" FontSize="Large" />
         </StackLayout>
+        </Frame>
     </ContentView.Content>
 </ContentView>

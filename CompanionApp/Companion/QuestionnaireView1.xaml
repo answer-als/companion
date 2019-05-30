@@ -6,7 +6,11 @@
              x:Class="Companion.QuestionnaireView1"
              >
     
-    
+    <Frame CornerRadius="10" HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               HasShadow="true"
+               Padding="5"
+               BackgroundColor="#e6e6e6">
     <ScrollView>
         
         <StackLayout x:Name="Backdrop" Padding="15,15,15,10" 
@@ -54,4 +58,5 @@
             
         </StackLayout>
     </ScrollView>
+    </Frame>
 </ContentView>

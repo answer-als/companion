@@ -12,7 +12,7 @@
                 <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
             </Grid.Padding>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
@@ -57,6 +57,13 @@
                                   Padding="20,10,20,10"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="false"/>
+        
+        <local:UploadingAudioView x:Name="LoadingScreen" Padding="10"
+                                  Margin="20, 90"
+                                  VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="FillAndExpand"
+                                  BackgroundColor="#006080"
+                                  IsVisible="false" />
         
         <Label x:Name="IncompleteWarning"
                x:FieldModifier="Public"

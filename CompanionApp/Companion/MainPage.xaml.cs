@@ -17,6 +17,7 @@ namespace Companion
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             Logo.Source = ImageSource.FromResource("Companion.aals_logo.png");
+            App.CurrentPage = "Login";
         }
 
         protected override void OnAppearing() 

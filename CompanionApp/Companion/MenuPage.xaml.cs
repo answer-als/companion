@@ -13,6 +13,8 @@ namespace Companion
             NavigationPage.SetHasNavigationBar(this, false);
             BackButton.Source = ImageSource.FromResource("Companion.Icons.back_icon.png");
             UserIcon.Source = ImageSource.FromResource("Companion.Icons.bigger_user_icon.png");
+            App.CurrentPage = "Menu";
+
             SpeechIntroSwitch.IsToggled = App.ShowSpeechInstructions;
             User.Text = App.UserID;
         }

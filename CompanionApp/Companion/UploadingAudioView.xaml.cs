@@ -13,17 +13,37 @@ namespace Companion
 
         public void Success()
         {
-            UploadingLabel.Text = "Audio Uploaded Successfully!";
+            UploadingLabel.Text = "Uploaded Successfully!";
         }
 
-        public void Uploading()
+        public void UploadingAudio()
         {
             UploadingLabel.Text = "Uploading Audio Recording...";
+        }
+
+        public void UploadingProfile()
+        {
+            UploadingLabel.Text = "Uploading Profile...";
         }
 
         public void Analyzing()
         {
             UploadingLabel.Text = "Analyzing Audio...";
+        }
+
+        public void LoadingSentence()
+        {
+            UploadingLabel.Text = "Loading Sentence...";
+        }
+
+        public void LoadingImage()
+        {
+            UploadingLabel.Text = "Loading Image...";
+        }
+
+        public void FailedToLoad()
+        {
+            UploadingLabel.Text = "Failed To Load Task!";
         }
     }
 }

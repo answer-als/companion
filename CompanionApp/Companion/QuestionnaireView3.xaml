@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:Companion"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              x:Class="Companion.QuestionnaireView3">
+    
+    <Frame CornerRadius="10" HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               HasShadow="true"
+               Padding="5"
+               BackgroundColor="#e6e6e6">
     <ScrollView>
         
         <StackLayout x:Name="Backdrop" Padding="15,15,15,10" 
@@ -20,6 +26,7 @@
                    FontAttributes="Bold"
                    Margin="0,0,0,5"/>
             <Entry x:Name="SpokenLanguages"
+                   x:FieldModifier="Public"
                    Text="" Placeholder="Enter languages"
                    Margin="50,0"
                    HeightRequest="44" WidthRequest="100"
@@ -34,6 +41,7 @@
                    FontAttributes="Bold"
                    Margin="0,0,0,5"/>
             <Entry x:Name="ExposedLanguages"
+                   x:FieldModifier="Public"
                    Text="" Placeholder="Enter languages"
                    Margin="50,0"
                    HeightRequest="44" WidthRequest="100"/>
@@ -41,4 +49,5 @@
         
         </StackLayout>
     </ScrollView>
+    </Frame>
 </ContentView>

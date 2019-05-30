@@ -5,6 +5,11 @@
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              x:Class="Companion.QuestionnaireView2">
    
+    <Frame CornerRadius="10" HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               HasShadow="true"
+               Padding="5"
+               BackgroundColor="#e6e6e6">
     <ScrollView>
         <StackLayout x:Name="Backdrop" Padding="15,15,15,10" 
               VerticalOptions="Fill" 
@@ -30,11 +35,12 @@
                    TextColor="#006080" FontSize="Small" />
             <Entry x:Name="LearningAge"
                    Text="" Placeholder="Enter age"
-                   Margin="80,0"
+                   Margin="50,0"
                    HeightRequest="44" WidthRequest="100"
                    TextChanged="AnswerProvided" />
 
         
         </StackLayout>
     </ScrollView>
+    </Frame>
 </ContentView>
