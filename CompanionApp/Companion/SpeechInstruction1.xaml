@@ -9,8 +9,11 @@
            HorizontalOptions="Center" 
            VerticalOptions="Start">
         <Image.Margin>
-            <OnPlatform iOS="60,40,60,10" Android="60,20,60,0" />
+            <OnPlatform iOS="60,40,60,10" Android="60,20,60,0" UWP="60,40,60,10" />
         </Image.Margin>
+        <Image.HeightRequest>
+            <OnPlatform UWP="400"/>
+        </Image.HeightRequest>
     </Image>
         
     <Label Margin="40,0,40,0" TextColor="Black"

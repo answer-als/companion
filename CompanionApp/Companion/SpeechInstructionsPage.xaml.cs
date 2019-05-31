@@ -31,7 +31,14 @@ namespace Companion
 
         async void Begin_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SpeechTaskPage());
+            try
+            {
+                await Navigation.PushAsync(new SpeechTaskPage());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex);
+            }
         }
 
         // Get out of Speech task and go back to home Task Page

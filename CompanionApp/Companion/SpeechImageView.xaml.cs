@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using System.Net.Http;
 using Plugin.LocalNotifications;
-using System.Text;
-using Newtonsoft.Json;
 
 namespace Companion
 {

@@ -39,6 +39,7 @@
             </Label>
         </Grid>
         
+
         <local:SpeechPhraseView x:Name="MainPhraseView"
                                 Padding="20,10,20,20"
                                 VerticalOptions="FillAndExpand"

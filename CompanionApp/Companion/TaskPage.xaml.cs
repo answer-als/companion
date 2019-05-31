@@ -137,13 +137,20 @@ namespace Companion
         {
             // Check user preferences to see if they have chosen to display task intstructions
             // If not, navigate directly to task
-            if (App.ShowSpeechInstructions)
+            try
             {
-                await Navigation.PushAsync(new SpeechInstructionsPage());
+                if (App.ShowSpeechInstructions)
+                {
+                    await Navigation.PushAsync(new SpeechInstructionsPage());
+                }
+                else
+                {
+                    await Navigation.PushAsync(new SpeechTaskPage());
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await Navigation.PushAsync(new SpeechTaskPage());
+                Console.WriteLine("Exception: " + ex);
             }
         }
 

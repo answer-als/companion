@@ -4,11 +4,15 @@
              x:Class="Companion.SpeechInstruction3">
     
     <StackLayout VerticalOptions="Fill" >
-        
-    <Image x:Name="MainImage" Margin="60,40,60,10"
+
+        <Image x:Name="MainImage" Margin="60,40,60,10"
            HorizontalOptions="Center" 
-           VerticalOptions="Start"/>
-        
+           VerticalOptions="Start">
+            <Image.HeightRequest>
+                <OnPlatform UWP="400"/>
+            </Image.HeightRequest>
+        </Image>
+           
     <Label Margin="40,0,40,0" TextColor="Black"
            HorizontalTextAlignment="Center"
            HorizontalOptions="Center"
