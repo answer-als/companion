@@ -1,12 +1,18 @@
 ﻿using System;
+using System.IO;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using Plugin.Permissions;
+using Plugin.LocalNotifications;
+using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace Companion
 {
     public partial class TaskPage : ContentPage
     {
+        HttpClient _client;
+
         public TaskPage()
         {
             InitializeComponent();
@@ -15,6 +21,7 @@ namespace Companion
             UserIcon.Source = ImageSource.FromResource("Companion.Icons.user_icon.png");
             App.CurrentPage = "Home";
 
+            _client = new HttpClient();
             CheckPermissions();
 
             App.RecordedButNotSaved = false;
@@ -73,20 +80,22 @@ namespace Companion
         {
             if (App.SpeechTaskCompleted)
             {
-                // TODO: remove this interval and || OR statement in IF conditional
-                TimeSpan interval = DateTime.Now - App.SpeechTaskLastCompleted;
                 int nextTask = App.SpeechTaskLastCompleted.AddDays(7).DayOfYear;
-                if (DateTime.Now.DayOfYear == nextTask || (interval.TotalSeconds > 15))
+                if (DateTime.Now.DayOfYear > nextTask)
                 {
                     SpeechButton.IsEnabled = true;
                     SpeechFrame.HasShadow = true;
+                    SpeechPassButton.IsEnabled = true;
+                    SpeechPassFrame.HasShadow = true;
                 }
                 else
                 {
                     SpeechButton.IsEnabled = false;
                     SpeechFrame.HasShadow = false;
+                    SpeechPassButton.IsEnabled = false;
+                    SpeechPassFrame.HasShadow = false;
                     int nextAvailable = nextTask - DateTime.Now.DayOfYear;
-                    await Application.Current.MainPage.DisplayAlert("No Tasks Available", "Please come back in " + nextAvailable + " days.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("No Tasks Available Yet", "Please come back in " + nextAvailable + " days.", "OK");
                 }
             }
         }
@@ -101,7 +110,7 @@ namespace Companion
             }
             else
             {
-                welcomeMessage += ", welcome!";
+                welcomeMessage = "Welcome, " + welcomeMessage + "!";
             }
             Welcome.Text = welcomeMessage;
         }
@@ -154,9 +163,92 @@ namespace Companion
             }
         }
 
+        async void SpeechPass_Clicked(object sender, EventArgs e)
+        {
+            // Before sending a 0-byte array as an empty PASS signifier, remind users that they
+            // can just submit whatever possible even if its not recording the entire task as intended.
+            // Something is better than nothing!
+            bool pass = await Application.Current.MainPage.DisplayAlert("Are you sure?", "You are about to skip this task until next week. Even if you do not feel capable of completing the entire task, we encourage you to try as much as you can.", "Pass Task", "Go To Task");
+            if (pass)
+            {
+                // Although it was Passed, we consider the Passed Task as Completed
+                App.SpeechTaskCompleted = true;
+                await PutRecordingToServer();
+                if (App.SuccessfulPUT)
+                {
+                    App.SpeechTaskLastCompleted = DateTime.Now;
+                    switch (App.SpeechTaskType)
+                    {
+                        case "Image":
+                            App.SpeechTaskType = "Breath";
+                            break;
+                        case "Breath":
+                            App.SpeechTaskType = "Sentence";
+                            break;
+                        case "Sentence":
+                            App.SpeechTaskType = "Image";
+                            break;
+                    }
+
+                    // Local Notifications For Next Task
+                    CrossLocalNotifications.Current.Show("Speech Task Available", "The next Speech Task is ready for you to complete!", 1, DateTime.Now.AddDays(7));
+                    CrossLocalNotifications.Current.Show("Speech Task Available", "The next Speech Task is ready for you to complete!", 2, DateTime.Now.AddDays(9));
+                    CrossLocalNotifications.Current.Show("Speech Task Is Due!", "The next Speech Task is due. Please login and complete it.", 3, DateTime.Now.AddDays(11));
+
+                    SpeechButton.IsEnabled = false;
+                    SpeechFrame.HasShadow = false;
+                    SpeechPassButton.IsEnabled = false;
+                    SpeechPassFrame.HasShadow = false;
+                    Speech_LastCompletedDate.Text = "✓  Today";
+
+                }
+                else
+                {
+                   await Application.Current.MainPage.DisplayAlert("PASS Failed", "Please check your connection to the internet and try again.", "OK");
+                }
+            }
+            else
+            {
+                Speech_Clicked(sender, e);
+            }
+        }
+
         async void MenuButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MenuPage());
+        }
+
+        public async Task PutRecordingToServer()
+        {
+            Stream pass = new MemoryStream(); ;
+            var uri = new Uri(string.Format(CompanionServer.recording_url + App.UserID + "/Pass", string.Empty));
+
+            try
+            {
+                var content = new StreamContent(pass);
+                content.Headers.Remove("Content-Type");
+                content.Headers.Add("Content-Type", "application/octet-stream");
+                var request = new HttpRequestMessage(HttpMethod.Put, uri)
+                {
+                    Content = content
+                };
+
+                var response = await _client.SendAsync(request);
+                Console.WriteLine("HTTP PUT Response: " + response);
+                if (response.IsSuccessStatusCode)
+                {
+                    App.SuccessfulPUT = true;
+                }
+                else
+                {
+                    App.SuccessfulPUT = false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(@"ERROR {0}", ex.Message);
+            }
         }
     }
 }

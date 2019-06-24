@@ -16,7 +16,6 @@ namespace Companion
             BulbarOption.TextFontSize = 15.0;
             SpinalOption.TextFontSize = 15.0;
             BothOption.TextFontSize = 15.0;
-            NoneOption.TextFontSize = 15.0;
         }
 
         void LoadPrevious()
@@ -36,9 +35,9 @@ namespace Companion
                 BothOption.IsChecked = true;
             }
 
-            if (App.OnsetSite.Equals("Control"))
+            if (!App.OnsetDate.Equals("DidNotAnswer"))
             {
-                NoneOption.IsChecked = true;
+                OnsetDate.Text = App.OnsetDate;
             }
 
             loaded = true;
@@ -61,15 +60,15 @@ namespace Companion
                 App.OnsetSite = "Spinal/Bulbar";
             }
 
-            if (NoneOption.IsChecked)
+            if (!OnsetDate.Text.Equals(""))
             {
-                App.OnsetSite = "Control";
+                App.OnsetDate = OnsetDate.Text;
             }
         }
 
         public bool Completed()
         {
-            return SpinalOption.IsChecked || BulbarOption.IsChecked || BothOption.IsChecked || NoneOption.IsChecked;
+            return (SpinalOption.IsChecked || BulbarOption.IsChecked || BothOption.IsChecked) && !OnsetDate.Text.Equals("");
         }
 
         void AnswerProvided(object sender, EventArgs e)

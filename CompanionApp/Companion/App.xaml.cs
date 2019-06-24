@@ -99,10 +99,35 @@ namespace Companion
             get => Preferences.Get("Sex", "DidNotAnswer");
             set => Preferences.Set("Sex", value);
         }
+        public static string Handedness
+        {
+            get => Preferences.Get("Handedness", "DidNotAnswer");
+            set => Preferences.Set("Handedness", value);
+        }
+        public static string UserType
+        {
+            get => Preferences.Get("UserType", "DidNotAnswer"); // Control vs Patient
+            set => Preferences.Set("UserType", value);
+        }
         public static string OnsetSite
         {
             get => Preferences.Get("OnsetSite", "DidNotAnswer");
             set => Preferences.Set("OnsetSite", value);
+        }
+        public static string OnsetDate
+        {
+            get => Preferences.Get("OnsetDate", "DidNotAnswer");
+            set => Preferences.Set("OnsetDate", value);
+        }
+        public static string Diagnosis
+        {
+            get => Preferences.Get("Diagnosis", "DidNotAnswer");
+            set => Preferences.Set("Diagnosis", value);
+        }
+        public static string OtherDiagnosis
+        {
+            get => Preferences.Get("OtherDiagnosis", "DidNotAnswer");
+            set => Preferences.Set("OtherDiagnosis", value);
         }
         public static string English1Lang
         {

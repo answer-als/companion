@@ -6,6 +6,7 @@
              BackgroundColor="#006080"
              Title="Speech Task"
              x:Name="SpeechTask">
+    
     <StackLayout Margin="0,0,0,0" VerticalOptions="FillAndExpand">
         <Grid Margin="0,0,0,5" 
               BackgroundColor="#006080">
@@ -27,33 +28,34 @@
                          Clicked="HomeButton_Clicked"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         HeightRequest="25" WidthRequest="25"/>
+                         HeightRequest="35" WidthRequest="35"/>
             <Label x:Name="PageTitle" Grid.Column="1"
                    BackgroundColor="#006080"
                    Text="Speech" TextColor="White"
                    VerticalTextAlignment="Center"
                    HorizontalOptions="Center">
                 <Label.FontSize>
-                    <OnPlatform iOS="Medium" Android="Large"/>
+                    <OnPlatform iOS="Large" Android="Large"/>
                 </Label.FontSize>
             </Label>
         </Grid>
-        
-
-        <local:SpeechPhraseView x:Name="MainPhraseView"
-                                Padding="20,10,20,20"
-                                VerticalOptions="FillAndExpand"
-                                IsVisible="false"/>
-        
-        <local:SpeechImageView x:Name="MainImageView"
-                                Padding="20,10,20,20"
-                                VerticalOptions="FillAndExpand"
-                                IsVisible="false"/>
-        
-        <local:SpeechBreathView x:Name="MainBreathView"
-                                Padding="20,10,20,20"
-                                VerticalOptions="FillAndExpand"
-                                IsVisible="true"/>
-        
+        <ScrollView BackgroundColor="#006080" VerticalOptions="FillAndExpand">
+            <StackLayout>
+                <local:SpeechPhraseView x:Name="MainPhraseView"
+                                        Padding="20,10,20,20"
+                                        VerticalOptions="FillAndExpand"
+                                        IsVisible="true"/>
+                
+                <local:SpeechImageView x:Name="MainImageView"
+                                        Padding="20,10,20,20"
+                                        VerticalOptions="FillAndExpand"
+                                        IsVisible="false"/>
+                
+                <local:SpeechBreathView x:Name="MainBreathView"
+                                        Padding="20,10,20,20"
+                                        VerticalOptions="FillAndExpand"
+                                        IsVisible="false"/>
+            </StackLayout>
+        </ScrollView>
     </StackLayout>
 </ContentPage>

@@ -31,25 +31,28 @@
                VerticalTextAlignment="Center"
                HorizontalOptions="Center">
             <Label.FontSize>
-                <OnPlatform iOS="Medium" Android="Large"/>
+                <OnPlatform iOS="Large" Android="Large"/>
             </Label.FontSize>
         </Label>
     </Grid>
-    
-        <local:SpeechInstruction1 x:Name="Instruction1"
-                                  VerticalOptions="FillAndExpand"
-                                  IsVisible="true"/>
-        <!--<local:SpeechInstruction2 x:Name="Instruction2"
-                                  VerticalOptions="FillAndExpand"
-                                  IsVisible="false"/>-->
-        <local:SpeechInstruction3 x:Name="Instruction3"
-                                  VerticalOptions="FillAndExpand"
-                                  IsVisible="false"/>
-    
+        
+    <ScrollView BackgroundColor="#e6e6e6">
+        <StackLayout>
+            <local:SpeechInstruction1 x:Name="Instruction1"
+                                      VerticalOptions="FillAndExpand"
+                                      IsVisible="false"/>
+            <!--<local:SpeechInstruction2 x:Name="Instruction2"
+                                      VerticalOptions="FillAndExpand"
+                                      IsVisible="false"/>-->
+            <local:SpeechInstruction3 x:Name="Instruction3"
+                                      VerticalOptions="FillAndExpand"
+                                      IsVisible="true"/>
+        
         <Button x:Name="Next" Margin="40,30,40,15"
                 BackgroundColor="#006080"
                 Text="Next" TextColor="White"
                 Clicked="Next_Clicked" FontSize="Medium"
+                FontAttributes="Bold"
                 HorizontalOptions="Center"
                 VerticalOptions="EndAndExpand"
                 WidthRequest="200"
@@ -59,6 +62,7 @@
                 BackgroundColor="#00955c"
                 Text="Let's Begin!" TextColor="White"
                 Clicked="Begin_Clicked" FontSize="Medium"
+                FontAttributes="Bold"
                 HorizontalOptions="Center"
                 VerticalOptions="EndAndExpand"
                 HeightRequest="44"
@@ -78,7 +82,7 @@
             
             <Label x:Name="PreviousButton"
                    Text="&lt; Back" Margin="15,0,0,15"
-                   TextColor="#e6e6e6" FontSize="Small"
+                   TextColor="#e6e6e6" FontSize="Medium"
                    FontAttributes="Bold"
                    VerticalTextAlignment="End"
                    VerticalOptions="Center"
@@ -94,6 +98,8 @@
                    VerticalOptions="EndAndExpand"/>
             
         </Grid>
+        </StackLayout>
+    </ScrollView>
+        
     </StackLayout>
-    
 </ContentPage>

@@ -13,7 +13,11 @@ namespace Companion
 
         public void Success()
         {
-            UploadingLabel.Text = "Uploaded Successfully!";
+            UploadingBackground.BackgroundColor = Color.White;
+            UploadingBackground.BorderColor = Color.FromHex("#00955c");
+            UploadingLabel.TextColor = Color.FromHex("#006080");
+            UploadingLabel.FontAttributes = FontAttributes.Bold;
+            UploadingLabel.Text = "Thank you for sending your data!";
         }
 
         public void UploadingAudio()

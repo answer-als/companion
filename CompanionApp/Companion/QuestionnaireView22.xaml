@@ -18,14 +18,27 @@
             <Label Text="Please select the onset site type that best describes your situation:"
                    FontAttributes="Bold" 
                    Margin="0,0,0,5"
-                   TextColor="#006080" FontSize="Small" />
+                   TextColor="#006080" FontSize="Medium" />
             
             <input:RadioButtonGroupView x:Name="groupView" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Vertical">
                 <input:RadioButton x:Name="BulbarOption" Margin="0,10" Text="Bulbar" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
                 <input:RadioButton x:Name="SpinalOption" Margin="0,10" Text="Spinal" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
                 <input:RadioButton x:Name="BothOption" Margin="0,10" Text="Both" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
-                <input:RadioButton x:Name="NoneOption" Margin="0,10" Text="None (Control User)" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
             </input:RadioButtonGroupView>  
+                
+            <BoxView Margin="0,10" HeightRequest="1" 
+                 BackgroundColor="Black" 
+                 HorizontalOptions="Fill"/>
+                
+            <Label Text="Please enter the Month and Year during which your symptoms began (MM/YYYY):"
+                   FontAttributes="Bold" 
+                   Margin="0,0,0,5"
+                   TextColor="#006080" FontSize="Medium" />
+            <Entry x:Name="OnsetDate"
+                   Text="" Placeholder="Enter date (MM/YYYY)"
+                   Margin="20,0"
+                   HeightRequest="44" WidthRequest="100"
+                   TextChanged="AnswerProvided"/> 
     
         </StackLayout>
     </ScrollView>

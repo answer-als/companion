@@ -13,26 +13,26 @@
               VerticalOptions="FillAndExpand" 
               BackgroundColor="#e6e6e6">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
+                <RowDefinition Height="70" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="30" />
-                <RowDefinition Height="60" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="80" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label x:Name="Instructions" Grid.ColumnSpan="5" Margin="20,0,20,10"
+            <Label x:Name="Instructions" Grid.ColumnSpan="5" Margin="20,0,20,5"
                    VerticalOptions="Start"
-                   TextColor="Black" FontSize="Micro"
-                   FontAttributes=""
+                   TextColor="Black" FontSize="Medium"
+                   FontAttributes="Italic"
                    HorizontalTextAlignment="Center"
-                   Text="Record yourself reading this sentence out loud." />
+                   Text="Record yourself reading this sentence out loud" />
             
 
             <local:Sentence x:Name="PhraseView" Padding="15,0,15,10"
@@ -67,7 +67,7 @@
                     Clicked="RecordButton_Toggled"
                     BackgroundColor="Red"
                     Opacity="1"
-                    CornerRadius="20" BorderWidth="5"
+                    CornerRadius="25" BorderWidth="5"
                     BorderColor="LightGray" 
                     IsVisible="true" />
             <ImageButton x:Name="PlayButton"
@@ -77,22 +77,25 @@
                          Opacity="1"
                          IsVisible="false" />
             <Label x:Name="status" Grid.Row="4"
-                   Margin="0,0,0,10"
+                   Margin="5,0,5,0"
                    Grid.ColumnSpan="3" Grid.Column="1"
                    TextColor="Red" Text="Record"
-                   FontSize="Small"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
                    Opacity="1"
                    HorizontalOptions="Center"
                    VerticalOptions="Start"/>
-            <Button x:Name="RetryButton" Margin="0,10,0,10"
+            <Button x:Name="RetryButton" Margin="0,0,0,0"
                     Grid.Row="5" Grid.Column="1"
                     Clicked="RetryButton_Clicked" Text="Retry"
-                    TextColor="White"
+                    TextColor="#006080"
+                    FontAttributes="Bold"
                     BackgroundColor="#00bfff" />
-            <Button x:Name="DoneButton" Margin="0,10,0,10"
+            <Button x:Name="DoneButton" Margin="0,0,0,0"
                     Grid.Row="5" Grid.Column="3"
                     Clicked="DoneButton_Clicked" Text="Done"
-                    TextColor="White"
+                    TextColor="#006080"
+                    FontAttributes="Bold"
                     BackgroundColor="#00bfff"
                     IsVisible="true" />
         </Grid>

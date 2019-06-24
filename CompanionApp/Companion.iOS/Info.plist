@@ -10,6 +10,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -31,11 +33,11 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Answer ALS Companion wants to use your microphone to record audio.</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.answerals.AALSCompanion</string>
+	<string>com.xamarindebug.AALSCompanion</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2</string>
+	<string>0.5</string>
 	<key>CFBundleVersion</key>
-	<string>0.2</string>
+	<string>0.5</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Needs Calendar access.</string>
 </dict>

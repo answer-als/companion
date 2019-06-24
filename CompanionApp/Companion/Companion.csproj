@@ -17,6 +17,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Xam.Plugins.Notifier" Version="3.0.1" />
+    <PackageReference Include="Xamarin.Android.Crashlytics" Version="2.9.4.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="AALS_logo.png" />
@@ -41,12 +42,14 @@
     <None Remove="Icons\completed_icon.png" />
     <None Remove="play_icon.png" />
     <None Remove="Icons\play_icon.png" />
-    <None Remove="PositionDots\Questionnaire\question4.png" />
+    <None Remove="PositionDots\SpeechIntro\intro_2.png" />
+    <None Remove="PositionDots\SpeechIntro\intro_1.png" />
     <None Remove="PositionDots\Questionnaire\question1.png" />
     <None Remove="PositionDots\Questionnaire\question2.png" />
     <None Remove="PositionDots\Questionnaire\question3.png" />
-    <None Remove="PositionDots\SpeechIntro\intro_2.png" />
-    <None Remove="PositionDots\SpeechIntro\intro_1.png" />
+    <None Remove="PositionDots\Questionnaire\question4.png" />
+    <None Remove="PositionDots\Questionnaire\question5.png" />
+    <None Remove="PositionDots\Questionnaire\question6.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="aals_logo.png" />
@@ -60,12 +63,14 @@
     <EmbeddedResource Include="Icons\bigger_user_icon.png" />
     <EmbeddedResource Include="Icons\completed_icon.png" />
     <EmbeddedResource Include="Icons\play_icon.png" />
-    <EmbeddedResource Include="PositionDots\Questionnaire\question4.png" />
+    <EmbeddedResource Include="PositionDots\SpeechIntro\intro_2.png" />
+    <EmbeddedResource Include="PositionDots\SpeechIntro\intro_1.png" />
     <EmbeddedResource Include="PositionDots\Questionnaire\question1.png" />
     <EmbeddedResource Include="PositionDots\Questionnaire\question2.png" />
     <EmbeddedResource Include="PositionDots\Questionnaire\question3.png" />
-    <EmbeddedResource Include="PositionDots\SpeechIntro\intro_2.png" />
-    <EmbeddedResource Include="PositionDots\SpeechIntro\intro_1.png" />
+    <EmbeddedResource Include="PositionDots\Questionnaire\question4.png" />
+    <EmbeddedResource Include="PositionDots\Questionnaire\question5.png" />
+    <EmbeddedResource Include="PositionDots\Questionnaire\question6.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PositionDots\" />

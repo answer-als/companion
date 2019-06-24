@@ -19,7 +19,6 @@ namespace Companion
             User.Text = App.UserID;
         }
 
-        //TODO: Make an "Edit Username" button
         async void SignOut_Clicked(object sender, EventArgs e)
         {
             Preferences.Set("UserID", "Sign Out");
@@ -49,6 +48,13 @@ namespace Companion
 
             // Terminate AALS Companion App session
             System.Diagnostics.Process.GetCurrentProcess().Kill();
+        }
+
+        void ResetTasks_Clicked(object sender, EventArgs e)
+        {
+            // Tasks get "locked" for a week in between completion of last task
+            // We "unlock" Tasks by changing the completed date to before the range
+            App.SpeechTaskLastCompleted = DateTime.Now.AddDays(-9);
         }
     }
 }

@@ -18,7 +18,7 @@
               BackgroundColor="#e6e6e6">
         
             <Label Text="What is your highest degree or level of school you completed?"
-                   TextColor="#006080" FontSize="Small"
+                   TextColor="#006080" FontSize="Medium"
                    FontAttributes="Bold"
                    Margin="0,0,0,5"/>
             <Entry x:Name="EducationLevel"
@@ -33,7 +33,7 @@
                  HorizontalOptions="Fill"/>
         
             <Label Text="What year were you born in?"
-                   TextColor="#006080" FontSize="Small"
+                   TextColor="#006080" FontSize="Medium"
                    FontAttributes="Bold"
                    Margin="0,0,0,5"/>
             <Entry x:Name="BirthYear"
@@ -47,7 +47,7 @@
                  HorizontalOptions="Fill"/>
         
             <Label Text="Please select your sex:"
-                   TextColor="#006080" FontSize="Small"
+                   TextColor="#006080" FontSize="Medium"
                    FontAttributes="Bold"
                    Margin="0"/>
             

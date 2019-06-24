@@ -7,6 +7,11 @@ using Xamarin.Essentials;
 using System.Net.Http;
 using Plugin.LocalNotifications;
 
+#if __IOS__
+using Foundation;
+using AVFoundation;
+#endif
+
 namespace Companion
 {
     public partial class SpeechImageView : ContentView
@@ -49,8 +54,55 @@ namespace Companion
             RetryButton.IsVisible = false;
             PlayButton.IsVisible = false;
 
-            //LayoutChanged += (sender, e) => { Device.BeginInvokeOnMainThread(() => { TaskImage.Source = ImageSource.FromStream(() => new MemoryStream(App.CurrentImage)); }); };
+            #if __IOS__
+                try 
+                {
+                    SetupRecord();
+                }
+                catch (Exception ex)
+                {
+                    Console.Writline(ex);
+                }
+            #endif
         }
+
+#if __IOS__
+        protected void SetupRecord()
+        {
+            var audioSession = AVAudioSession.SharedInstance();
+            Foundation.NSError error;
+            var success = audioSession.SetCategory(AVAudioSession.Category.PlayAndRecord, out error);
+            if (success)
+            {
+                success = audioSession.OverrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, out error);
+                if (success)
+                {
+                    audioSession.SetActive(true, out error);
+                }
+            }
+
+            success = audioSession.SetActive(active, out error);
+            Console.Writeline("Setting up Record mode");
+        }
+
+        protected void SetupPlayback()
+        {
+            var audioSession = AVAudioSession.SharedInstance();
+            Foundation.NSError error;
+            var success = audioSession.SetCategory(AVAudioSession.Category.Playback, out error);
+            if (success)
+            {
+                success = audioSession.OverrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, out error);
+                if (success)
+                {
+                    audioSession.SetActive(true, out error);
+                }
+            }
+
+            success = audioSession.SetActive(active, out error);
+            Console.Writeline("Setting up Playback mode");
+        }
+#endif
 
         public async void EndRecording(object sender, EventArgs e)
         {
@@ -74,7 +126,7 @@ namespace Companion
 
             Device.BeginInvokeOnMainThread(() => {
                 App.IsRecording = false;
-                RecordButton.CornerRadius = 20;
+                RecordButton.CornerRadius = 25;
                 status.Text = "Record";
 
                 var under2 = seconds < 2;
@@ -107,6 +159,17 @@ namespace Companion
                     status.TextColor = Color.Green;
                     RecordButton.IsVisible = false;
                     PlayButton.IsVisible = true;
+
+                    #if __IOS__
+                    try 
+                    {
+                        SetupPlayback();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Writline(ex);
+                    }
+                    #endif
                 }
                 seconds = 0;
             });
@@ -143,13 +206,13 @@ namespace Companion
                     await HTTPPutSuccess();
 
                     // Local Notifications For Next Task
-                    CrossLocalNotifications.Current.Show("Speech Task Available", "The next Speech Task is ready for you to complete!", 1, DateTime.Now.AddSeconds(15)); //DateTime.Now.AddDays(7));
-                    CrossLocalNotifications.Current.Show("Speech Task Available", "The next Speech Task is ready for you to complete!", 2, DateTime.Now.AddSeconds(120)); //DateTime.Now.AddDays(9));
-                    CrossLocalNotifications.Current.Show("Speech Task Is Due!", "The next Speech Task is due. Please login and complete it.", 3, DateTime.Now.AddDays(1)); //DateTime.Now.AddDays(11));
+                    CrossLocalNotifications.Current.Show("Speech Task Available", "The next Speech Task is ready for you to complete!", 1, DateTime.Now.AddDays(7));
+                    CrossLocalNotifications.Current.Show("Speech Task Available", "The next Speech Task is ready for you to complete!", 2, DateTime.Now.AddDays(9));
+                    CrossLocalNotifications.Current.Show("Speech Task Is Due!", "The next Speech Task is due. Please login and complete it.", 3, DateTime.Now.AddDays(11));
 
-                    NavigationPage page = new NavigationPage(new TaskPage());
-                    Application.Current.MainPage = page;
-                    await Navigation.PopToRootAsync();
+
+                    // After successfully sending the data, end the session
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
                 }
                 else
                 {
@@ -194,7 +257,7 @@ namespace Companion
         async Task HTTPPutSuccess()
         {
             Device.BeginInvokeOnMainThread(LoadingScreen.Success);
-            await Task.Delay(2000);
+            await Task.Delay(3000);
         }
 
         void HTTPPutFail()
@@ -291,6 +354,18 @@ namespace Companion
 
             // Reload a new image
             await GetImageFromServer();
+
+            //Set iOS audio setting to Record
+            #if __IOS__
+                try 
+                {
+                    SetupRecord();
+                }
+                catch (Exception ex)
+                {
+                    Console.Writline(ex);
+                }
+            #endif
         }
 
         public async Task GetImageFromServer()
@@ -390,7 +465,7 @@ namespace Companion
                     }
                     else
                     {
-                        status.Text = "Try to talk for 30sec! Tap again to STOP";
+                        status.Text = "Try to talk for 30sec! Tap to STOP";
                         alreadyTried = true;
                     }
                 }

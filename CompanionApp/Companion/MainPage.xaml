@@ -27,12 +27,12 @@
                    HorizontalOptions="CenterAndExpand"/>
             <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                    Text="AALS Companion"
-                   FontSize="Small" FontAttributes="Bold"
+                   FontAttributes="Bold"
                    TextColor="White"
                    HorizontalOptions="Center"
                    VerticalOptions="Start">
                 <Label.FontSize>
-                    <OnPlatform iOS="Small" Android="Medium"/>
+                    <OnPlatform iOS="Medium" Android="Medium"/>
                 </Label.FontSize>
             </Label>
             <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
@@ -66,6 +66,8 @@
                         Text="Login"
                         Clicked="OnLoginClick"
                         TextColor="White"
+                        FontSize="Large"
+                        FontAttributes="Bold"
                         WidthRequest="150"/>
             </StackLayout>
         </Grid>

@@ -12,7 +12,7 @@ using Plugin.Permissions;
 
 namespace Companion.Droid
 {
-    [Activity(Label = "Companion", Icon = "@drawable/aals_icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "Companion", Icon = "@drawable/aals_icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -26,6 +26,11 @@ namespace Companion.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+            // Initiate Fabric
+            Fabric.Fabric.With(this, new Crashlytics.Crashlytics());
+
+            // Optional: Setup Xamarin / Mono Unhandled exception parsing / handling
+            Crashlytics.Crashlytics.HandleManagedExceptions();
 
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);

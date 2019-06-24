@@ -16,8 +16,8 @@
            HeightRequest="80">
         <Label.FormattedText>
             <FormattedString>
-                <Span Text="Rehearse " FontAttributes="Bold" TextColor="#006080" FontSize="Small"/>
-                <Span Text="the sentence shown on the screen." FontAttributes="None" FontSize="Small"/>  
+                <Span Text="Rehearse " FontAttributes="Bold" TextColor="#006080" FontSize="Medium"/>
+                <Span Text="the sentence shown on the screen." FontAttributes="None" FontSize="Medium"/>  
             </FormattedString>
         </Label.FormattedText>
     </Label>

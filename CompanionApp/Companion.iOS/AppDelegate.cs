@@ -6,6 +6,9 @@ using Foundation;
 using UIKit;
 using UserNotifications;
 
+using Firebase.Core;
+using Firebase.Crashlytics;
+
 namespace Companion.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -28,6 +31,10 @@ namespace Companion.iOS
             #endif
             global::Xamarin.Forms.Forms.Init();
             Plugin.InputKit.Platforms.iOS.Config.Init();
+
+            Firebase.Core.App.Configure();
+            Crashlytics.Configure();
+            Fabric.Fabric.SharedSdk.Debug = true; // To enable debugging 
 
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {

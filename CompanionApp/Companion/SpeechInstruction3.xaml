@@ -5,11 +5,11 @@
     
     <StackLayout VerticalOptions="Fill" >
 
-        <Image x:Name="MainImage" Margin="60,40,60,10"
+        <Image x:Name="MainImage" Margin="60,20,60,0"
            HorizontalOptions="Center" 
            VerticalOptions="Start">
             <Image.HeightRequest>
-                <OnPlatform UWP="400"/>
+                <OnPlatform UWP="400" iOS="300" Android="300"/>
             </Image.HeightRequest>
         </Image>
            
@@ -17,14 +17,14 @@
            HorizontalTextAlignment="Center"
            HorizontalOptions="Center"
            VerticalOptions="EndAndExpand"
-           HeightRequest="80">
+           HeightRequest="120">
         <Label.FormattedText>
             <FormattedString>
-                <Span Text="Position your device " FontAttributes="None" FontSize="Small"/>
-                <Span Text="close to your mouth" FontAttributes="Bold" FontSize="Small"  TextColor="#006080"/>
-                <Span Text=". Start the recording and " FontAttributes="None" FontSize="Small"/> 
-                <Span Text="read the sentence out loud" FontAttributes="Bold" TextColor="#006080" FontSize="Small"/>
-                <Span Text=". Then stop the recording." FontAttributes="None" FontSize="Small"/> 
+                <Span Text="Position your device " FontAttributes="None" FontSize="Medium"/>
+                <Span Text="close to your mouth" FontAttributes="Bold" FontSize="Medium"  TextColor="#006080"/>
+                <Span Text=". Start the recording and " FontAttributes="None" FontSize="Medium"/> 
+                <Span Text="read the sentence out loud" FontAttributes="Bold" TextColor="#006080" FontSize="Medium"/>
+                <Span Text=". Then stop the recording." FontAttributes="None" FontSize="Medium"/> 
             </FormattedString>
         </Label.FormattedText>
     </Label>

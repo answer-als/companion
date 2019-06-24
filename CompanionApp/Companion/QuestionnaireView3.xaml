@@ -17,12 +17,13 @@
               BackgroundColor="#e6e6e6">
         
             <Label Text="The following questions are optional."
-                   TextColor="Black" FontSize="Micro"
+                   TextColor="Black" FontSize="Medium"
+                   FontAttributes="Italic"
                    HorizontalOptions="Center"
                    Margin="0,0,0,40"/>
         
             <Label Text="What languages do you speak now?"
-                   TextColor="#006080" FontSize="Small"
+                   TextColor="#006080" FontSize="Medium"
                    FontAttributes="Bold"
                    Margin="0,0,0,5"/>
             <Entry x:Name="SpokenLanguages"
@@ -37,7 +38,7 @@
                  HorizontalOptions="Fill"/>
         
             <Label Text="Please list all of the languages you were exposed to/learned to speak from birth:"
-                   TextColor="#006080" FontSize="Small"
+                   TextColor="#006080" FontSize="Medium"
                    FontAttributes="Bold"
                    Margin="0,0,0,5"/>
             <Entry x:Name="ExposedLanguages"

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1019851642914",
+    "firebase_url": "https://aalscompanion.firebaseio.com",
+    "project_id": "aalscompanion",
+    "storage_bucket": "aalscompanion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019851642914:android:f396e87dc5f81eea",
+        "android_client_info": {
+          "package_name": "aals.companion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019851642914-61pht9kbf166s0ota5cbbrhe5mf06q4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrrC7SwpPsmW0qvQ1k7Q2m9YPfsCILrEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019851642914-61pht9kbf166s0ota5cbbrhe5mf06q4u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

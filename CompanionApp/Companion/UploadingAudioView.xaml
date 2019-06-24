@@ -4,7 +4,7 @@
              x:Class="Companion.UploadingAudioView"
              BackgroundColor="Gray">
     <ContentView.Content>
-        <Frame CornerRadius="10" HorizontalOptions="FillAndExpand"
+        <Frame x:Name="UploadingBackground" CornerRadius="10" HorizontalOptions="FillAndExpand"
                VerticalOptions="FillAndExpand"
                HasShadow="true"
                Padding="5"

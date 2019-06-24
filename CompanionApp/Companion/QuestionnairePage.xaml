@@ -6,10 +6,10 @@
              BackgroundColor="#006080"
              Title="Speech Task">
     <StackLayout x:Name="Backdrop" Margin="0,0,0,0" VerticalOptions="Fill">
-        <Grid Margin="0,0,0,5" 
+        <Grid Margin="0,0,0,0" 
               BackgroundColor="#006080">
             <Grid.Padding>
-                <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
+                <OnPlatform iOS="5,25,5,5" Android="5,15,5,5" />
             </Grid.Padding>
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
@@ -33,28 +33,38 @@
                    VerticalTextAlignment="Center"
                    HorizontalOptions="Center">
                 <Label.FontSize>
-                    <OnPlatform iOS="Medium" Android="Large"/>
+                    <OnPlatform iOS="Large" Android="Large"/>
                 </Label.FontSize>
             </Label>
         </Grid>
         
         <local:QuestionnaireView1 x:Name="QuestionView1"
-                                  Padding="20,10,20,10"
+                                  Padding="20,0,20,0"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="true"/>
         
-        <local:QuestionnaireView22 x:Name="QuestionView22"
-                                  Padding="20,10,20,10"
+        <local:QuestionnaireView2 x:Name="QuestionView2"
+                                  Padding="20,0,20,0"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="false"/>
         
-        <local:QuestionnaireView2 x:Name="QuestionView2"
-                                  Padding="20,10,20,10"
+        <local:QuestionnaireView23 x:Name="QuestionView23"
+                                  Padding="20,0,20,0"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+        
+        <local:QuestionnaireView22 x:Name="QuestionView22"
+                                  Padding="20,0,20,0"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+        
+        <local:QuestionnaireView33 x:Name="QuestionView33"
+                                  Padding="20,0,20,0"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="false"/>
         
         <local:QuestionnaireView3 x:Name="QuestionView3"
-                                  Padding="20,10,20,10"
+                                  Padding="20,0,20,0"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="false"/>
         
@@ -67,24 +77,26 @@
         
         <Label x:Name="IncompleteWarning"
                x:FieldModifier="Public"
-               TextColor="Red" FontSize="Micro"
+               TextColor="White" FontSize="Micro"
                FontAttributes="Bold"
                HorizontalOptions="Center"
                Margin="0"
                Text=" "/>
-        <Button x:Name="Next" Margin="40,15,40,15"
+        <Button x:Name="Next" Margin="40,5,40,5"
                 BackgroundColor="#00bfff"
-                Text="Next" TextColor="White"
+                Text="Next" TextColor="#006080"
                 Clicked="Next_Clicked" FontSize="Medium"
+                FontAttributes="Bold"
                 HorizontalOptions="Center"
                 VerticalOptions="End"
                 WidthRequest="200"
                 HeightRequest="44"
                 IsVisible="true" />
-        <Button x:Name="Submit" Margin="40,15,40,15"
+        <Button x:Name="Submit" Margin="40,5,40,5"
                 BackgroundColor="#00955c"
                 Text="Submit" TextColor="White"
                 Clicked="Submit_Clicked" FontSize="Medium"
+                FontAttributes="Bold"
                 HorizontalOptions="Center"
                 VerticalOptions="End"
                 HeightRequest="44"
@@ -105,7 +117,7 @@
             
             <Label x:Name="PreviousButton"
                    Text="&lt; Back" Margin="15,0,0,15"
-                   TextColor="#e6e6e6" FontSize="Small"
+                   TextColor="#e6e6e6" FontSize="Medium"
                    FontAttributes="Bold"
                    VerticalTextAlignment="End"
                    VerticalOptions="Center"
