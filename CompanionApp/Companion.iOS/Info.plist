@@ -33,11 +33,11 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Answer ALS Companion wants to use your microphone to record audio.</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.xamarindebug.AALSCompanion</string>
+	<string>org.answerals.AALSCompanion</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.5</string>
+	<string>0.7</string>
 	<key>CFBundleVersion</key>
-	<string>0.5</string>
+	<string>0.7</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Needs Calendar access.</string>
 </dict>

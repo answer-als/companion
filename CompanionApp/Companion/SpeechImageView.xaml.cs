@@ -21,6 +21,7 @@ namespace Companion
         bool homeClicked = false;
         bool alreadyTried = false;
         ushort seconds = 0;
+        int volume = 2, delta = 2;
 
         HttpClient _client;
         string hash;
@@ -34,11 +35,11 @@ namespace Companion
 
             recorder = new AudioRecorderService
             {
-                StopRecordingOnSilence = true, // default will stop recording after 2 seconds
+                StopRecordingOnSilence = false,
                 StopRecordingAfterTimeout = true,  // stop recording after a max timeout (defined below)
-                TotalAudioTimeout = TimeSpan.FromSeconds(120), // audio will stop recording after 120 seconds
-                AudioSilenceTimeout = TimeSpan.FromSeconds(5), // audio will stop recording after 5 seconds of silence
-                SilenceThreshold = 0.15F // value between 0 and 1 that determines what makes a silent audio input
+                TotalAudioTimeout = TimeSpan.FromSeconds(300), // audio will stop recording after 5 min
+                // AudioSilenceTimeout = TimeSpan.FromSeconds(5), // audio will stop recording after 5 seconds of silence
+                // SilenceThreshold = 0.15F // value between 0 and 1 that determines what makes a silent audio input
             };
             App.GlobalRecorder = recorder;
 
@@ -53,8 +54,9 @@ namespace Companion
             DoneButton.IsVisible = false;
             RetryButton.IsVisible = false;
             PlayButton.IsVisible = false;
+            VolumeFeedback.IsVisible = false;
 
-            #if __IOS__
+#if __IOS__
                 try 
                 {
                     SetupRecord();
@@ -63,7 +65,7 @@ namespace Companion
                 {
                     Console.Writline(ex);
                 }
-            #endif
+#endif
         }
 
 #if __IOS__
@@ -180,14 +182,6 @@ namespace Companion
         {
             SpeechTaskPage rent = (SpeechTaskPage)this.Parent;
             rent.DisableHomeButton();
-            AnalyzingAudio();
-            await Task.Delay(2000);
-            // TODO: Write code to analyze audio (basic algorithm on Trello)
-            //          > If audio passes tests/checks
-            //              • Conversion to m4a?
-            //          > If audio fails tests/checks
-            //              - Pop-up display should now show particular fail message instead of "Analyzing Audio"/animation
-            //              - Pop-up display should have Retry button, which refreshes the current phrase view
 
             bool audio_success = true;
             if (audio_success)
@@ -232,6 +226,7 @@ namespace Companion
             status.IsVisible = false;
             RetryButton.IsVisible = false;
             DoneButton.IsVisible = false;
+            VolumeFeedback.IsVisible = false;
 
             LoadingScreen.IsVisible = true;
         }
@@ -286,6 +281,7 @@ namespace Companion
             status.IsVisible = true;
             RetryButton.IsVisible = true;
             DoneButton.IsVisible = true;
+            VolumeFeedback.IsVisible = true;
         }
 
         public void HTTPDoneGET()
@@ -297,6 +293,8 @@ namespace Companion
             Timer.IsVisible = true;
             RecordButton.IsVisible = true;
             status.IsVisible = true;
+            VolumeFeedback.IsVisible = true;
+            VolumeFeedback.IsVisible = true;
         }
 
         public async Task PutRecordingToServer()
@@ -483,6 +481,7 @@ namespace Companion
                     App.RecordedButNotSaved = false;
                     seconds = 0;
                     Device.StartTimer(TimeSpan.FromSeconds(1), TimerElapsed);
+                    Device.StartTimer(TimeSpan.FromMilliseconds(50), DisplayVolume);
                     RecordButton.CornerRadius = 8;
                     await recorder.StartRecording();
                     status.Text = "Stop";
@@ -493,6 +492,47 @@ namespace Companion
                     throw exc;
                 }
             }
+        }
+
+        private bool DisplayVolume()
+        {
+            if (!App.IsRecording)
+            {
+                volume = 2;
+                VolumeFeedback.Progress = 0;
+                return false;
+            }
+            // TODO: Display Live Volume Level Meter From Platform Specific Microphone Hardware
+            //Stream audio = recorder.GetAudioFileStream();
+            //string value = audio.ReadByte().ToString();
+            //Console.WriteLine(value);
+            ///////////////////////////////////////////////////////////
+
+            if (volume == 0)
+            {
+                delta = 2;
+            }
+
+            if (volume == 100)
+            {
+                delta = -2;
+            }
+
+            volume += delta;
+
+            if (volume > 30)
+            {
+                VolumeFeedback.ProgressColor = Color.Lime;
+            }
+            else
+            {
+                VolumeFeedback.ProgressColor = Color.Red;
+            }
+
+            //VolumeFeedback.ProgressTo((double) volume / 100, 5, Easing.Linear);
+            VolumeFeedback.Progress = (double)volume / 100;
+
+            return true;
         }
 
         private bool TimerElapsed()

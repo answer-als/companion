@@ -4,6 +4,7 @@
              x:Class="Companion.TaskPage"
              BackgroundColor="#e6e6e6"
              Title="AALS Companion">
+
     <StackLayout Margin="0,0,0,0">
         <Grid Margin="0,0,0,10"
               BackgroundColor="#006080">
@@ -78,7 +79,7 @@
             </Frame>
         </StackLayout>
         <Label x:Name="Speech_LastCompletedDate"
-               HorizontalOptions="Center"
+               HorizontalOptions="End"
                HorizontalTextAlignment="End"
                Margin="20,0,20,10"
                WidthRequest="300"
