@@ -7,17 +7,17 @@
         <Frame CornerRadius="10" HorizontalOptions="FillAndExpand"
                VerticalOptions="FillAndExpand"
                HasShadow="true"
-               Padding="5"
+               Padding="0,5"
                BackgroundColor="#e6e6e6">
         <Grid Padding="0,10,0,10" 
               VerticalOptions="FillAndExpand" 
               BackgroundColor="#e6e6e6">
             <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -27,7 +27,7 @@
                 <ColumnDefinition Width="80" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label x:Name="Instructions" Grid.ColumnSpan="5" Margin="20,0,20,5"
+            <Label x:Name="Instructions" Grid.ColumnSpan="5" Margin="20,0"
                    VerticalOptions="Start"
                    TextColor="Black"
                    FontAttributes=""
@@ -41,12 +41,24 @@
                 </Label.FormattedText>
             </Label>
             
-            <Image x:Name="TaskImage" Grid.Row="1" 
+            <!--<Image x:Name="TaskImage" Grid.Row="1" 
                    Grid.ColumnSpan="5"
                    HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"/>
+                   VerticalOptions="FillAndExpand"
+                   Aspect="AspectFit"/>-->
+                
+            <!--<Image x:Name="TaskImage" Grid.Row="1" 
+                   Grid.ColumnSpan="5"
+                   WidthRequest="400"
+                   Aspect="AspectFit"/>-->
+                
+            <Image x:Name="TaskImage" Grid.Row="1" 
+                   Grid.ColumnSpan="5"
+                   Aspect="AspectFit"
+                   SizeChanged="OnImageRotate"
+                   Margin="0,15"/>
             
-            <local:UploadingAudioView x:Name="LoadingScreen" Padding="15"
+            <local:UploadingAudioView x:Name="LoadingScreen" HeightRequest="120"
                                       Margin="15, 90" Grid.ColumnSpan="5"
                                       Grid.Row="0" Grid.RowSpan="6"
                                       VerticalOptions="FillAndExpand"
@@ -62,6 +74,7 @@
                    Opacity="1"
                    HorizontalOptions="Center"
                    VerticalOptions="Start"
+                   Margin="0,0,0,5"
                    HorizontalTextAlignment="Center">
                 <Entry.FontSize>
                     <OnPlatform iOS="Large" Android="Medium" />
@@ -73,7 +86,7 @@
                     BackgroundColor="Red"
                     Opacity="1"
                     CornerRadius="25" BorderWidth="5"
-                    BorderColor="LightGray" 
+                    BorderColor="LightGray"
                     IsVisible="true" />
             <ImageButton x:Name="PlayButton"
                          Grid.Row="3" Grid.Column="2"
@@ -82,7 +95,7 @@
                          Opacity="1"
                          IsVisible="false" />
             <Label x:Name="status" Grid.Row="4"
-                   Margin="5,0,5,0"
+                   Margin="5"
                    Grid.ColumnSpan="5" Grid.Column="0"
                    TextColor="Red" Text="Record"
                    FontAttributes="Bold"
@@ -99,10 +112,10 @@
                      Progress="0" 
                      Rotation="270">
                 <ProgressBar.ScaleX>
-                    <OnPlatform iOS="5" Android="1"/>
+                    <OnPlatform iOS="3" Android="1.1"/>
                 </ProgressBar.ScaleX>
                 <ProgressBar.ScaleY>
-                    <OnPlatform iOS="1" Android="3"/>
+                    <OnPlatform iOS="1.17" Android="2"/>
                 </ProgressBar.ScaleY>
             </ProgressBar>
             <Button x:Name="RetryButton" Margin="0,0,0,0"

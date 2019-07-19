@@ -7,8 +7,8 @@
              Title="Speech Task"
              x:Name="SpeechTask">
     
-    <StackLayout Margin="0,0,0,0" VerticalOptions="FillAndExpand">
-        <Grid Margin="0,0,0,5" 
+    <StackLayout Margin="0,0,0,0">
+        <Grid Margin="0,0,0,-5" 
               BackgroundColor="#006080">
             <Grid.Padding>
                 <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
@@ -28,7 +28,7 @@
                          Clicked="HomeButton_Clicked"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         HeightRequest="35" WidthRequest="35"/>
+                         HeightRequest="30" WidthRequest="30"/>
             <Label x:Name="PageTitle" Grid.Column="1"
                    BackgroundColor="#006080"
                    Text="Speech" TextColor="White"

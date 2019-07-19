@@ -22,6 +22,7 @@ namespace Companion
         bool alreadyTried = false;
         ushort seconds = 0;
         int volume = 2, delta = 2;
+        double portraitWidth;
 
         HttpClient _client;
         string hash;
@@ -55,6 +56,18 @@ namespace Companion
             RetryButton.IsVisible = false;
             PlayButton.IsVisible = false;
             VolumeFeedback.IsVisible = false;
+
+            if (Application.Current.MainPage.Height > Application.Current.MainPage.Width)
+            {
+                portraitWidth = Application.Current.MainPage.Width;
+                //TaskImage.HorizontalOptions = LayoutOptions.FillAndExpand;
+                TaskImage.HeightRequest = Convert.ToInt32(portraitWidth) - 40;
+            } 
+            else
+            {
+                portraitWidth = Application.Current.MainPage.Height;
+                TaskImage.HeightRequest = Convert.ToInt32(portraitWidth) - 90;
+            }
 
 #if __IOS__
                 try 
@@ -105,6 +118,20 @@ namespace Companion
             Console.Writeline("Setting up Playback mode");
         }
 #endif
+
+        public void OnImageRotate(object sender, EventArgs e)
+        {
+            if (Application.Current.MainPage.Height > Application.Current.MainPage.Width)
+            {
+                portraitWidth = Application.Current.MainPage.Width;
+                TaskImage.HeightRequest = -1;
+            }
+            else
+            {
+                portraitWidth = Application.Current.MainPage.Height;
+                TaskImage.HeightRequest = Convert.ToInt32(portraitWidth) - 90;
+            }
+        }
 
         public async void EndRecording(object sender, EventArgs e)
         {

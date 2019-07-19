@@ -17,6 +17,8 @@ namespace Companion
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            MonthlyReminder.Parent = this;
+
             MenuButton.Source = ImageSource.FromResource("Companion.Icons.menu_icon.png");
             UserIcon.Source = ImageSource.FromResource("Companion.Icons.user_icon.png");
             App.CurrentPage = "Home";
@@ -73,7 +75,23 @@ namespace Companion
             // Update Questionnaire Last Completed Display
             //UpdateCompletedDate_Questionnaire();
 
+            // Monthly Reminder to be shown at the beginning of each new month
+            string lastMonth = App.Month.ToString().Split(' ')[0];
+            if (lastMonth.Contains("0001") || !(DateTime.Now.Month == App.Month.Month && DateTime.Now.Year == App.Month.Year))
+            {
+                // This occurs only on the very first run of the app. Default year on launch is 0001
+                Body.IsVisible = false;
+                MonthlyReminder.IsVisible = true;
+            }
+
             base.OnAppearing();
+        }
+
+        public void LeavePopUp()
+        {
+            App.Month = DateTime.Now;
+            MonthlyReminder.IsVisible = false;
+            Body.IsVisible = true;
         }
 
         async void SpeechTaskAvailability()

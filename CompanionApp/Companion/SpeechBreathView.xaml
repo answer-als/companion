@@ -37,7 +37,11 @@
                     <FormattedString>
                         <Span Text="Take a " FontAttributes="None" FontSize="Medium"/>
                         <Span Text="SINGLE" FontAttributes="Bold" FontSize="Medium" TextColor="#006080" />
-                        <Span Text=" breath as deep as you can. Then, record yourself counting out loud to the highest number you can reach before breathing again." FontAttributes="None" FontSize="Medium"/>
+                        <Span Text=" breath as deep as you can. Then, record yourself " FontAttributes="None" FontSize="Medium"/>
+                        <Span Text="counting out loud " FontAttributes="Bold" FontSize="Medium" TextColor="#006080" />
+                        <Span Text="to the highest number you can reach before breathing again. Be sure to " FontAttributes="None" FontSize="Medium"/>
+                        <Span Text="only breathe once " FontAttributes="Bold" FontSize="Medium" TextColor="#006080" />
+                        <Span Text="during the entire recording!" FontAttributes="None" FontSize="Medium"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
@@ -95,10 +99,10 @@
                          Progress="0" 
                          Rotation="270">
                 <ProgressBar.ScaleX>
-                    <OnPlatform iOS="5" Android="1"/>
+                    <OnPlatform iOS="3" Android="1.1"/>
                 </ProgressBar.ScaleX>
                 <ProgressBar.ScaleY>
-                    <OnPlatform iOS="1" Android="3"/>
+                    <OnPlatform iOS="1.17" Android="2"/>
                 </ProgressBar.ScaleY>
             </ProgressBar>
             <Button x:Name="RetryButton" Margin="0,10,0,10"

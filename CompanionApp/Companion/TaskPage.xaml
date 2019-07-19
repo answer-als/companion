@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Companion"
              x:Class="Companion.TaskPage"
              BackgroundColor="#e6e6e6"
              Title="AALS Companion">
 
     <StackLayout Margin="0,0,0,0">
-        <Grid Margin="0,0,0,10"
+        <Grid Margin="0,0,0,0"
               BackgroundColor="#006080">
             <Grid.Padding>
                 <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
@@ -35,6 +36,7 @@
                     VerticalOptions="Center"
                     HeightRequest="20" WidthRequest="25" />
         </Grid>
+        <StackLayout x:Name="Body" IsVisible="true">
         <StackLayout Orientation="Horizontal" Margin="0,10">
             <Image x:Name="UserIcon" Margin="20,0,0,10"
                    WidthRequest="25" HeightRequest="25" />
@@ -118,6 +120,13 @@
                WidthRequest="300"
                Text="Last Completed: Never" TextColor="Black"
                FontSize="Micro" FontAttributes="Bold" />-->
+        </StackLayout>
         
+        <local:PopUpMessage x:Name="MonthlyReminder"
+                                      Margin="15,25"
+                                      VerticalOptions="FillAndExpand"
+                                      HorizontalOptions="FillAndExpand"
+                                      BackgroundColor="#e6e6e6"
+                                      IsVisible="false" />
     </StackLayout>
 </ContentPage>

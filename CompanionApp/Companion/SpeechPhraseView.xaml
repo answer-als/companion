@@ -102,10 +102,10 @@
                          Progress="0" 
                          Rotation="270">
                 <ProgressBar.ScaleX>
-                    <OnPlatform iOS="5" Android="1"/>
+                    <OnPlatform iOS="3" Android="1.1"/>
                 </ProgressBar.ScaleX>
                 <ProgressBar.ScaleY>
-                    <OnPlatform iOS="1" Android="3"/>
+                    <OnPlatform iOS="1.17" Android="2"/>
                 </ProgressBar.ScaleY>
             </ProgressBar>
             <Button x:Name="RetryButton" Margin="0,0,0,0"

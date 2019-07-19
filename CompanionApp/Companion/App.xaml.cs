@@ -23,6 +23,11 @@ namespace Companion
             get => Preferences.Get("UserID", "Sign Out");
             set => Preferences.Set("UserID", value);
         }
+        public static DateTime Month
+        {
+            get => Preferences.Get("Month", DateTime.MinValue);
+            set => Preferences.Set("Month", value);
+        }
         public static string CurrentPage
         {
             get => Preferences.Get("CurrentPage", "Login"); // Other pages include 'Questionnaire', 'Home', 'Menu', and 'Speech'
