@@ -7,11 +7,6 @@ using Xamarin.Essentials;
 using System.Net.Http;
 using Plugin.LocalNotifications;
 
-#if __IOS__
-using Foundation;
-using AVFoundation;
-#endif
-
 namespace Companion
 {
     public partial class SpeechPhraseView : ContentView
@@ -53,74 +48,11 @@ namespace Companion
             PlayButton.IsVisible = false;
             VolumeFeedback.IsVisible = false;
 
-#if __IOS__
-                try 
-                {
-                    Console.WriteLine("Setting Up PlayAndRecord");
-                    SetupRecord();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
-#endif
+
+            Console.WriteLine("Routing Audio Playback to Speaker - Phrase");
+            DependencyService.Get<IRecordingInterface>().RouteAudioToSpeaker();
+
         }
-
-#if __IOS__
-        protected void SetupRecord()
-        {
-            var audioSession = AVAudioSession.SharedInstance();
-            Foundation.NSError error;
-            var success = audioSession.SetCategory(AVAudioSession.Category.PlayAndRecord, out error);
-            if (success)
-            {
-                Console.WriteLine("PlayAndRecord Category has been set");
-                success = audioSession.OverrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, out error);
-                if (success)
-                {
-                    Console.WriteLine("Audio successfully routed to speaker in PlayAndRecord mode");
-                    audioSession.SetActive(true, out error);
-                }
-                else
-                {
-                    Console.WriteLine("Audio could not be routed to Speaker in PlayAndRecord mode");
-                }
-            }
-            else
-            {
-                Console.WriteLine("PlayAndRecord Category could not be set");
-            }
-
-            success = audioSession.SetActive(active, out error);
-        }
-
-        protected void SetupPlayback()
-        {
-            var audioSession = AVAudioSession.SharedInstance();
-            Foundation.NSError error;
-            var success = audioSession.SetCategory(AVAudioSession.Category.Playback, out error);
-            if (success)
-            {
-                Console.WriteLine("Playback Category has been set");
-                success = audioSession.OverrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, out error);
-                if (success)
-                {
-                    Console.WriteLine("Audio successfully routed to speaker in Playback mode");
-                    audioSession.SetActive(true, out error);
-                }
-                else
-                {
-                    Console.WriteLine("Audio could not be routed to speaker in Playback mode");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Playback Category could not be set");
-            }
-
-            success = audioSession.SetActive(active, out error);
-        }
-#endif
 
         public async void EndRecording(object sender, EventArgs e)
         {
@@ -180,17 +112,6 @@ namespace Companion
                     RecordButton.IsVisible = false;
                     PlayButton.IsVisible = true;
 
-#if __IOS__
-                    try 
-                    {
-                        Console.WriteLine("Setting Up Playback");
-                        SetupPlayback();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
-#endif
                 }
             });
         }
@@ -372,18 +293,6 @@ namespace Companion
             // Reload a new Sentence
             await GetSentenceFromServer();
 
-            //Set iOS audio setting to Record
-#if __IOS__
-                try 
-                {
-                    Console.WriteLine("Setting Up PlayAndRecord");
-                    SetupRecord();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
-#endif
         }
 
         public async Task GetSentenceFromServer()
@@ -404,7 +313,7 @@ namespace Companion
                     var headerValues = response.Headers.ToString().Split('\n');
                     foreach (string val in headerValues)
                     {
-                        if (val.Contains("hash"))
+                        if (val.Contains("Hash") || val.Contains("hash"))
                         {
                             hash = val.Split(' ')[1];
                             App.CurrentSentenceHash = hash;

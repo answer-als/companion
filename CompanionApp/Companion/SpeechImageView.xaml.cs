@@ -7,11 +7,6 @@ using Xamarin.Essentials;
 using System.Net.Http;
 using Plugin.LocalNotifications;
 
-#if __IOS__
-using Foundation;
-using AVFoundation;
-#endif
-
 namespace Companion
 {
     public partial class SpeechImageView : ContentView
@@ -69,55 +64,9 @@ namespace Companion
                 TaskImage.HeightRequest = Convert.ToInt32(portraitWidth) - 90;
             }
 
-#if __IOS__
-                try 
-                {
-                    SetupRecord();
-                }
-                catch (Exception ex)
-                {
-                    Console.Writline(ex);
-                }
-#endif
+            Console.WriteLine("Routing Audio Playback to Speaker - Image");
+            DependencyService.Get<IRecordingInterface>().RouteAudioToSpeaker();
         }
-
-#if __IOS__
-        protected void SetupRecord()
-        {
-            var audioSession = AVAudioSession.SharedInstance();
-            Foundation.NSError error;
-            var success = audioSession.SetCategory(AVAudioSession.Category.PlayAndRecord, out error);
-            if (success)
-            {
-                success = audioSession.OverrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, out error);
-                if (success)
-                {
-                    audioSession.SetActive(true, out error);
-                }
-            }
-
-            success = audioSession.SetActive(active, out error);
-            Console.Writeline("Setting up Record mode");
-        }
-
-        protected void SetupPlayback()
-        {
-            var audioSession = AVAudioSession.SharedInstance();
-            Foundation.NSError error;
-            var success = audioSession.SetCategory(AVAudioSession.Category.Playback, out error);
-            if (success)
-            {
-                success = audioSession.OverrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, out error);
-                if (success)
-                {
-                    audioSession.SetActive(true, out error);
-                }
-            }
-
-            success = audioSession.SetActive(active, out error);
-            Console.Writeline("Setting up Playback mode");
-        }
-#endif
 
         public void OnImageRotate(object sender, EventArgs e)
         {
@@ -189,16 +138,6 @@ namespace Companion
                     RecordButton.IsVisible = false;
                     PlayButton.IsVisible = true;
 
-                    #if __IOS__
-                    try 
-                    {
-                        SetupPlayback();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.Writline(ex);
-                    }
-                    #endif
                 }
                 seconds = 0;
             });
@@ -380,17 +319,6 @@ namespace Companion
             // Reload a new image
             await GetImageFromServer();
 
-            //Set iOS audio setting to Record
-            #if __IOS__
-                try 
-                {
-                    SetupRecord();
-                }
-                catch (Exception ex)
-                {
-                    Console.Writline(ex);
-                }
-            #endif
         }
 
         public async Task GetImageFromServer()
@@ -411,7 +339,8 @@ namespace Companion
                     var headerValues = response.Headers.ToString().Split('\n');
                     foreach (string val in headerValues)
                     {
-                        if (val.Contains("hash"))
+
+                        if (val.Contains("Hash") || val.Contains("hash"))
                         {
                             hash = val.Split(' ')[1];
                             App.CurrentSentenceHash = hash;

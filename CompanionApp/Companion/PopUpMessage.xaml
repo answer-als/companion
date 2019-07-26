@@ -7,24 +7,10 @@
                Padding="5"
                BackgroundColor="#faf1cf"
                BorderColor="Olive">
+        <ScrollView>
         <StackLayout VerticalOptions="CenterAndExpand"
                      HorizontalOptions="FillAndExpand">
                 
-            <!--<Label x:Name="MessageLabel" Margin="20"
-                   HorizontalTextAlignment="Start"
-                   TextColor="Black">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Dear Participant, " FontAttributes="Italic Bold" FontSize="Large"/>
-                        <Span Text="
-
-                            Thank you for helping us to gain insight into ALS progression! We hope that your use of the AALS Companion app will eventually help ALS patients. We are using the data collected to model the disease so that we can better understand it. The goal of the tasks is to obtain clear data for analysis. Please do the best that you can, while keeping the instructions in mind. For instance, make sure to only record your voice as each task requests, and do not include audible coaching of others in the audio recordings. Thanks again for your involvement!" FontAttributes="None" FontSize="Medium"/>
-                        <Span Text="
-                                
-                            ~The Answer ALS Team" FontAttributes="Bold Italic" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>-->
             <Label x:Name="MessageLabel1" Margin="20,20,0,0"
                    HorizontalTextAlignment="Start"
                    TextColor="Black" FontSize="Large"
@@ -53,6 +39,7 @@
                     />
                     
         </StackLayout>
+        </ScrollView>
         </Frame>
     </ContentView.Content>
 </ContentView>

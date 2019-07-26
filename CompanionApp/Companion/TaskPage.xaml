@@ -5,7 +5,7 @@
              x:Class="Companion.TaskPage"
              BackgroundColor="#e6e6e6"
              Title="AALS Companion">
-
+             
     <StackLayout Margin="0,0,0,0">
         <Grid Margin="0,0,0,0"
               BackgroundColor="#006080">

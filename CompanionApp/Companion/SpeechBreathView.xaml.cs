@@ -7,11 +7,6 @@ using Xamarin.Essentials;
 using System.Net.Http;
 using Plugin.LocalNotifications;
 
-#if __IOS__
-using Foundation;
-using AVFoundation;
-#endif
-
 namespace Companion
 {
     public partial class SpeechBreathView : ContentView
@@ -51,55 +46,9 @@ namespace Companion
             RetryButton.IsVisible = false;
             PlayButton.IsVisible = false;
 
-#if __IOS__
-                try 
-                {
-                    SetupRecord();
-                }
-                catch (Exception ex)
-                {
-                    Console.Writline(ex);
-                }
-#endif
+            Console.WriteLine("Routing Audio Playback to Speaker");
+            DependencyService.Get<IRecordingInterface>().RouteAudioToSpeaker();
         }
-
-#if __IOS__
-        protected void SetupRecord()
-        {
-            var audioSession = AVAudioSession.SharedInstance();
-            Foundation.NSError error;
-            var success = audioSession.SetCategory(AVAudioSession.Category.PlayAndRecord, out error);
-            if (success)
-            {
-                success = audioSession.OverrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, out error);
-                if (success)
-                {
-                    audioSession.SetActive(true, out error);
-                }
-            }
-
-            success = audioSession.SetActive(active, out error);
-            Console.Writeline("Setting up Record mode");
-        }
-
-        protected void SetupPlayback()
-        {
-            var audioSession = AVAudioSession.SharedInstance();
-            Foundation.NSError error;
-            var success = audioSession.SetCategory(AVAudioSession.Category.Playback, out error);
-            if (success)
-            {
-                success = audioSession.OverrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, out error);
-                if (success)
-                {
-                    audioSession.SetActive(true, out error);
-                }
-            }
-
-            success = audioSession.SetActive(active, out error);
-            Console.Writeline("Setting up Playback mode");
-        }
-#endif
 
         public async void EndRecording(object sender, EventArgs e)
         {
@@ -158,16 +107,6 @@ namespace Companion
                     RecordButton.IsVisible = false;
                     PlayButton.IsVisible = true;
 
-                #if __IOS__
-                    try 
-                    {
-                        SetupPlayback();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.Writline(ex);
-                    }
-                #endif
                 }
                 seconds = 0;
             });
@@ -312,17 +251,6 @@ namespace Companion
             RetryButton.IsVisible = false;
             App.RecordedButNotSaved = false;
 
-            //Set iOS audio setting to Record
-            #if __IOS__
-                try 
-                {
-                    SetupRecord();
-                }
-                catch (Exception ex)
-                {
-                    Console.Writline(ex);
-                }
-            #endif
         }
 
         void PlayButton_Clicked(object sender, EventArgs e)

@@ -79,7 +79,7 @@ namespace Companion
             string lastMonth = App.Month.ToString().Split(' ')[0];
             if (lastMonth.Contains("0001") || !(DateTime.Now.Month == App.Month.Month && DateTime.Now.Year == App.Month.Year))
             {
-                // This occurs only on the very first run of the app. Default year on launch is 0001
+                // This occurs on the first run, and when its a different month since last log in
                 Body.IsVisible = false;
                 MonthlyReminder.IsVisible = true;
             }
