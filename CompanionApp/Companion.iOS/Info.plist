@@ -33,12 +33,16 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Answer ALS Companion wants to use your microphone to record audio.</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.xamarindebug.AALSCompanion</string>
-	<key>CFBundleShortVersionString</key>
-	<string>0.7</string>
-	<key>CFBundleVersion</key>
-	<string>0.7</string>
+	<string>org.answerals.AALSCompanion</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Needs Calendar access.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location data is not used directly in the AALS Companion app but is referenced by external libraries.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location data is not used directly in the AALS Companion app but is referenced by external libraries.</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
 </dict>
 </plist>

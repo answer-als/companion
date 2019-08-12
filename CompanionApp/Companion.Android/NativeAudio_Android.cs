@@ -15,5 +15,10 @@ namespace Companion.Droid
         {
             // Do nothing...Android audio routes to speaker by default.
         }
+
+        public float VolumeLevel()
+        {
+            return Plugin.AudioRecorder.AudioRecorderService.volumeMeter;
+        }
     }
 }

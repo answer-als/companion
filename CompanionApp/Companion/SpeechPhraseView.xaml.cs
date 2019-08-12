@@ -15,7 +15,7 @@ namespace Companion
         public AudioPlayer player;
         bool homeClicked = false;
         ushort seconds = 0;
-        int volume = 2, delta = 2;
+        int counter = 0;
 
         HttpClient _client;
         string sentence, hash;
@@ -30,7 +30,7 @@ namespace Companion
             {
                 StopRecordingOnSilence = false,
                 StopRecordingAfterTimeout = true,  // stop recording after a max timeout (defined below)
-                TotalAudioTimeout = TimeSpan.FromSeconds(300), // audio will stop recording after 5 min
+                TotalAudioTimeout = TimeSpan.FromSeconds(120), // audio will stop recording after 2 min
                 // AudioSilenceTimeout = TimeSpan.FromSeconds(5), // audio will stop recording after 5 seconds of silence
                 // SilenceThreshold = 0.15F // value between 0 and 1 that determines what makes a silent audio input
             };
@@ -82,7 +82,8 @@ namespace Companion
 
                 var under2 = seconds < 2;
 
-                if (silence)
+                // Make sure that this doesnt get called. Remove '&& false' when using TimeoutAfterSilence
+                if (silence && false)
                 {
                     // Silence timeout stopped the recording and it will be empty!
                     App.CurrentPage = "Alert";
@@ -402,6 +403,7 @@ namespace Companion
                     App.RecordedButNotSaved = false;
                     seconds = 0;
                     Device.StartTimer(TimeSpan.FromSeconds(1), TimerElapsed);
+                    // NOTE: The DisplayVolume function and 'counter' variable are dependent on the 50ms cycle
                     Device.StartTimer(TimeSpan.FromMilliseconds(50), DisplayVolume);
                     RecordButton.CornerRadius = 8;
                     await recorder.StartRecording();
@@ -419,29 +421,14 @@ namespace Companion
         {
             if (!App.IsRecording)
             {
-                volume = 2;
                 VolumeFeedback.Progress = 0;
                 return false;
             }
-            // TODO: Display Live Volume Level Meter From Platform Specific Microphone Hardware
-            //Stream audio = recorder.GetAudioFileStream();
-            //string value = audio.ReadByte().ToString();
-            //Console.WriteLine(value);
-            ///////////////////////////////////////////////////////////
 
-            if (volume == 0)
-            {
-                delta = 2;
-            }
+            float vol;
+            vol = AudioRecorderService.volumeMeter;
 
-            if (volume == 100)
-            {
-                delta = -2;
-            }
-
-            volume += delta;
-
-            if (volume > 30)
+            if ((vol > 0.15F) && (vol < 0.85F))
             {
                 VolumeFeedback.ProgressColor = Color.Lime;
             }
@@ -450,8 +437,22 @@ namespace Companion
                 VolumeFeedback.ProgressColor = Color.Red;
             }
 
-            //VolumeFeedback.ProgressTo((double) volume / 100, 5, Easing.Linear);
-            VolumeFeedback.Progress = (double) volume / 100;
+            VolumeFeedback.ProgressTo(vol, 50, Easing.CubicOut);
+            //VolumeFeedback.Progress = vol;
+
+            if (vol > 0.15F)
+            {
+                if (counter > 50)
+                {
+                    status.Text = "Background Noise Detected!";
+                }
+                counter += 1;
+            }
+            else
+            {
+                status.Text = "Stop";
+                counter = 0;
+            }
 
             return true;
         }
@@ -478,16 +479,17 @@ namespace Companion
                     }
                     else if (seconds < 70)
                     {
-                        secs = "01:0" + secs;
+                        secs = "01:0" + (seconds - 60);
                     }
                     else if (seconds < 120)
                     {
-                        secs = "01:" + secs;
+                        secs = "01:" + (seconds - 60);
                     }
                     else
                     {
                         // Recordings shouldnt last thing long
                         // Total timeout should stop the recording
+                        secs = "02:00";
                     }
                     // This is a work-around for a bug with the Timer display
                     if (secs.Equals("1"))

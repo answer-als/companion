@@ -9,7 +9,7 @@ namespace Companion
         public SpeechInstruction2()
         {
             InitializeComponent();
-            MainImage.Source = ImageSource.FromResource("Companion.SpeechIntroImages.memorize.png");
+            MainImage.Source = ImageSource.FromResource("Companion.SpeechIntroImages.place_device.png");
         }
 
 

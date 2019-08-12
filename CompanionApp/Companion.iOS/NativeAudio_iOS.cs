@@ -36,5 +36,11 @@ namespace Companion.iOS
 
             Console.WriteLine("++++++++++++++++Setting up Record mode with Speaker++++++++++++++++");
         }
+
+        public float VolumeLevel()
+        {
+            var val = Plugin.AudioRecorder.AudioRecorderService.volumeMeter;
+            return val;
+        }
     }
 }

@@ -20,11 +20,12 @@
            HeightRequest="120">
         <Label.FormattedText>
             <FormattedString>
-                <Span Text="Position your device " FontAttributes="None" FontSize="Medium"/>
-                <Span Text="close to your mouth" FontAttributes="Bold" FontSize="Medium"  TextColor="#006080"/>
-                <Span Text=". Start the recording and " FontAttributes="None" FontSize="Medium"/> 
-                <Span Text="read the sentence out loud" FontAttributes="Bold" TextColor="#006080" FontSize="Medium"/>
-                <Span Text=". Then stop the recording." FontAttributes="None" FontSize="Medium"/> 
+                <Span Text="When recording your voice, try to keep the volume meter in the " FontAttributes="None" FontSize="Medium"/>
+                <Span Text="green zone" FontAttributes="Bold" FontSize="Medium"  TextColor="#0a8b00"/>
+                <Span Text=". Avoid the " FontAttributes="None" FontSize="Medium"/>
+                <Span Text="red zone" FontAttributes="Bold" FontSize="Medium"  TextColor="#d91717"/>
+                <Span Text=" as much as possible." FontAttributes="None" FontSize="Medium"/>
+                    
             </FormattedString>
         </Label.FormattedText>
     </Label>

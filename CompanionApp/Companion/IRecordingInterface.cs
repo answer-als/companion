@@ -4,6 +4,6 @@ namespace Companion
     public interface IRecordingInterface
     {
         void RouteAudioToSpeaker();
-        //double VolumeLevel();
+        float VolumeLevel();
     }
 }

@@ -18,6 +18,11 @@ namespace Companion
         public static bool SuccessfulPUT { get; set; }
         public static bool SuccessfulGET { get; set; }
         public static bool RecordedButNotSaved { get; set; }
+        public static bool LoggedIn
+        {
+            get => Preferences.Get("LoggedIn", false);
+            set => Preferences.Set("LoggedIn", value);
+        }
         public static string UserID
         {
             get => Preferences.Get("UserID", "Sign Out");
@@ -164,7 +169,15 @@ namespace Companion
             IsRecording = false;
             SuccessfulGET = false;
             SuccessfulPUT = false;
-            MainPage = new NavigationPage(new MainPage());
+
+            // Make sure that we only visit the Log In page on the first startup.
+            if (LoggedIn)
+            {
+                MainPage = new NavigationPage(new TaskPage());
+            } else
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
         }
 
         protected override void OnStart()

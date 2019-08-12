@@ -41,9 +41,9 @@
             <local:SpeechInstruction1 x:Name="Instruction1"
                                       VerticalOptions="FillAndExpand"
                                       IsVisible="false"/>
-            <!--<local:SpeechInstruction2 x:Name="Instruction2"
+            <local:SpeechInstruction2 x:Name="Instruction2"
                                       VerticalOptions="FillAndExpand"
-                                      IsVisible="false"/>-->
+                                      IsVisible="false"/>
             <local:SpeechInstruction3 x:Name="Instruction3"
                                       VerticalOptions="FillAndExpand"
                                       IsVisible="true"/>

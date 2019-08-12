@@ -37,24 +37,24 @@ namespace Companion
             await Navigation.PopAsync();
         }
 
-        void Quit_Clicked(object sender, EventArgs e)
-        {
-            // Refresh some of the preferences for debugging
-            //Preferences.Remove("SpeechLastCompleted");
-            //Preferences.Remove("SpeechCompleted");
-            //Preferences.Remove("SpeechTaskState");
-            //Preferences.Remove("QuestionnaireCompleted");
-            //Preferences.Remove("QuestionnaireLastCompleted");
+        //void Quit_Clicked(object sender, EventArgs e)
+        //{
+        //    // Refresh some of the preferences for debugging
+        //    //Preferences.Remove("SpeechLastCompleted");
+        //    //Preferences.Remove("SpeechCompleted");
+        //    //Preferences.Remove("SpeechTaskState");
+        //    //Preferences.Remove("QuestionnaireCompleted");
+        //    //Preferences.Remove("QuestionnaireLastCompleted");
 
-            // Terminate AALS Companion App session
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
-        }
+        //    // Terminate AALS Companion App session
+        //    System.Diagnostics.Process.GetCurrentProcess().Kill();
+        //}
 
-        void ResetTasks_Clicked(object sender, EventArgs e)
-        {
-            // Tasks get "locked" for a week in between completion of last task
-            // We "unlock" Tasks by changing the completed date to before the range
-            App.SpeechTaskLastCompleted = DateTime.Now.AddDays(-9);
-        }
+        //void ResetTasks_Clicked(object sender, EventArgs e)
+        //{
+        //    // Tasks get "locked" for a week in between completion of last task
+        //    // We "unlock" Tasks by changing the completed date to before the range
+        //    App.SpeechTaskLastCompleted = DateTime.Now.AddDays(-9);
+        //}
     }
 }

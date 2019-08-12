@@ -99,6 +99,7 @@ namespace Companion
                 {
                     LoginErrorLabel.Text = " ";
                     Preferences.Set("UserID", userIDEntry.Text);
+                    App.LoggedIn = true;
                     NavigateToTasks(sender, e);
                 }
                 else

@@ -85,7 +85,7 @@
                          IsVisible="false" />
             <Label x:Name="status" Grid.Row="4"
                    Margin="5,0,5,0"
-                   Grid.ColumnSpan="3" Grid.Column="1"
+                   Grid.ColumnSpan="5" Grid.Column="0"
                    TextColor="Red" Text="Record"
                    FontSize="Medium"
                    FontAttributes="Bold"

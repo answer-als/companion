@@ -9,7 +9,7 @@ namespace Companion
         public SpeechInstruction3()
         {
             InitializeComponent();
-            MainImage.Source = ImageSource.FromResource("Companion.SpeechIntroImages.place_device.png");
+            MainImage.Source = ImageSource.FromResource("Companion.SpeechIntroImages.volume_meter.png");
         }
     }
 }
