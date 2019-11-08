@@ -6,47 +6,80 @@ namespace Companion
 {
     public partial class QuestionnaireView3 : ContentView
     {
+        bool loaded = false;
+
         public QuestionnaireView3()
         {
             InitializeComponent();
 
             LoadPrevious();
+            RightOption.TextFontSize = 15.0;
+            LeftOption.TextFontSize = 15.0;
+            ControlOption.TextFontSize = 15.0;
+            PatientOption.TextFontSize = 15.0;
         }
 
         void LoadPrevious()
         {
-            if (!App.LangsSpoken.Equals("DidNotAnswer"))
+            if (App.Handedness.Equals("Right"))
             {
-                SpokenLanguages.Text = App.LangsSpoken;
+                RightOption.IsChecked = true;
             }
 
-            if (!App.LangsExposed.Equals("DidNotAnswer"))
+            if (App.Handedness.Equals("Left"))
             {
-                ExposedLanguages.Text = App.LangsExposed;
+                LeftOption.IsChecked = true;
             }
+
+            if (App.UserType.Equals("Control"))
+            {
+                ControlOption.IsChecked = true;
+            }
+
+            if (App.UserType.Equals("Patient"))
+            {
+                PatientOption.IsChecked = true;
+            }
+
+            loaded = true;
         }
 
         public void SaveResponses()
         {
-            if (!SpokenLanguages.Text.Equals(""))
+            if (RightOption.IsChecked)
             {
-                App.LangsSpoken = SpokenLanguages.Text;
+                App.Handedness = "Right";
             }
 
-            if (!ExposedLanguages.Text.Equals(""))
+            if (LeftOption.IsChecked)
             {
-                App.LangsExposed = ExposedLanguages.Text;
+                App.Handedness = "Left";
+            }
+
+            if (ControlOption.IsChecked)
+            {
+                App.UserType = "Control";
+            }
+
+            if (PatientOption.IsChecked)
+            {
+                App.UserType = "Patient";
             }
         }
 
-        void RadioButton_Clicked(object sender, EventArgs e)
+        public bool Completed()
         {
-            // Nothing
+            return (RightOption.IsChecked || LeftOption.IsChecked) && (ControlOption.IsChecked || PatientOption.IsChecked);
         }
 
-        void FocusNext(object sender, EventArgs e)
+
+        void AnswerProvided(object sender, EventArgs e)
         {
-            ExposedLanguages.Focus();
+            if (loaded)
+            {
+                QuestionnairePage rent = (QuestionnairePage)this.Parent;
+                rent.HideWarning();
+            }
         }
     }
 }

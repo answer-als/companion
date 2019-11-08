@@ -41,7 +41,7 @@
         </Grid>
         <ScrollView BackgroundColor="#006080" VerticalOptions="FillAndExpand">
             <StackLayout>
-                <local:SpeechPhraseView x:Name="MainPhraseView"
+                <local:SpeechSentenceView x:Name="MainSentenceView"
                                         Padding="20,10,20,20"
                                         VerticalOptions="FillAndExpand"
                                         IsVisible="true"/>

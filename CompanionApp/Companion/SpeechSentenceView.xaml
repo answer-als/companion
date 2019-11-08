@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Companion"
-             x:Class="Companion.SpeechPhraseView">
+             x:Class="Companion.SpeechSentenceView">
     <ContentView.Content>
         <Frame CornerRadius="10" HorizontalOptions="FillAndExpand"
                VerticalOptions="FillAndExpand"
@@ -35,13 +35,13 @@
                    Text="Record yourself reading this sentence out loud" />
             
 
-            <local:Sentence x:Name="PhraseView" Padding="15,0,15,10"
+            <local:Sentence x:Name="SentenceView" Padding="15,0,15,10"
                            Grid.Row="1" Grid.ColumnSpan="5"
                            VerticalOptions="CenterAndExpand"
                            HorizontalOptions="FillAndExpand" 
                            IsVisible="true"/>
             
-            <local:UploadingAudioView x:Name="LoadingScreen" Padding="15"
+            <local:LoadingView x:Name="LoadingScreen" Padding="15"
                                       Margin="15, 90" Grid.ColumnSpan="5"
                                       HeightRequest="330"
                                       MinimumHeightRequest="330"

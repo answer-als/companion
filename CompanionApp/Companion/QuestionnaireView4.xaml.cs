@@ -4,11 +4,11 @@ using Xamarin.Forms;
 
 namespace Companion
 {
-    public partial class QuestionnaireView22 : ContentView
+    public partial class QuestionnaireView4 : ContentView
     {
         bool loaded = false;
 
-        public QuestionnaireView22()
+        public QuestionnaireView4()
         {
             InitializeComponent();
 

@@ -9,7 +9,7 @@ using Plugin.LocalNotifications;
 
 namespace Companion
 {
-    public partial class SpeechPhraseView : ContentView
+    public partial class SpeechSentenceView : ContentView
     {
         public AudioRecorderService recorder;
         public AudioPlayer player;
@@ -20,7 +20,7 @@ namespace Companion
         HttpClient _client;
         string sentence, hash;
 
-        public SpeechPhraseView()
+        public SpeechSentenceView()
         {
             InitializeComponent();
             PlayButton.Source = ImageSource.FromResource("Companion.Icons.play_icon.png");
@@ -159,7 +159,7 @@ namespace Companion
 
         void DisplayLoadingScreen()
         {
-            PhraseView.IsVisible = false;
+            SentenceView.IsVisible = false;
             Instructions.IsVisible = false;
             Timer.IsVisible = false;
             PlayButton.IsVisible = false;
@@ -216,7 +216,7 @@ namespace Companion
         {
             LoadingScreen.IsVisible = false;
 
-            PhraseView.IsVisible = true;
+            SentenceView.IsVisible = true;
             Instructions.IsVisible = true;
             Timer.IsVisible = true;
             PlayButton.IsVisible = true;
@@ -230,7 +230,7 @@ namespace Companion
         {
             LoadingScreen.IsVisible = false;
 
-            PhraseView.IsVisible = true;
+            SentenceView.IsVisible = true;
             Instructions.IsVisible = true;
             Timer.IsVisible = true;
             RecordButton.IsVisible = true;
@@ -276,7 +276,7 @@ namespace Companion
             // Refresh Sentence
             PlayButton.IsVisible = false;
             RecordButton.IsVisible = true;
-            PhraseView.IsVisible = true;
+            SentenceView.IsVisible = true;
             LoadingScreen.IsVisible = false;
 
             RecordButton.Opacity = 1;
@@ -324,7 +324,7 @@ namespace Companion
                     sentence = await response.Content.ReadAsStringAsync();
                     App.CurrentSentence = sentence;
                     HTTPDoneGET();
-                    PhraseView.sent.Text = sentence;
+                    SentenceView.sent.Text = sentence;
                 }
                 else
                 {
@@ -357,7 +357,7 @@ namespace Companion
                     player.Pause();
                     DoneButton.IsEnabled = true;
                     RetryButton.IsEnabled = true;
-                } 
+                }
                 else
                 {
                     var filePath = recorder.GetAudioFilePath();

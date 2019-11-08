@@ -13,7 +13,7 @@ namespace Companion
             HomeButton.Source = ImageSource.FromResource("Companion.Icons.home_icon.png");
             App.CurrentPage = "Speech";
 
-            MainPhraseView.Parent = this;
+            MainSentenceView.Parent = this;
             MainImageView.Parent = this;
             MainBreathView.Parent = this;
 
@@ -24,21 +24,21 @@ namespace Companion
         {
             if (App.SpeechTaskType.Equals("Sentence"))
             {
-                MainPhraseView.IsVisible = true;
+                MainSentenceView.IsVisible = true;
                 MainImageView.IsVisible = false;
                 MainBreathView.IsVisible = false;
-                await MainPhraseView.GetSentenceFromServer();
+                await MainSentenceView.GetSentenceFromServer();
             }
             else if (App.SpeechTaskType.Equals("Image"))
             {
-                MainPhraseView.IsVisible = false;
+                MainSentenceView.IsVisible = false;
                 MainImageView.IsVisible = true;
                 MainBreathView.IsVisible = false;
                 await MainImageView.GetImageFromServer();
             }
             else if (App.SpeechTaskType.Equals("Breath"))
             {
-                MainPhraseView.IsVisible = false;
+                MainSentenceView.IsVisible = false;
                 MainImageView.IsVisible = false;
                 MainBreathView.IsVisible = true;
             }
@@ -54,9 +54,9 @@ namespace Companion
             {
                 App.IsRecording = false;
 
-                if (MainPhraseView.IsVisible)
+                if (MainSentenceView.IsVisible)
                 {
-                    MainPhraseView.EndRecording(sender, e);
+                    MainSentenceView.EndRecording(sender, e);
                 }
                 else if (MainImageView.IsVisible)
                 {
@@ -81,9 +81,9 @@ namespace Companion
                 {
                     if (!App.RecordedButNotSaved)
                     {
-                        if (MainPhraseView.IsVisible)
+                        if (MainSentenceView.IsVisible)
                         {
-                            MainPhraseView.RetryButton_Clicked(sender, e);
+                            MainSentenceView.RetryButton_Clicked(sender, e);
                         }
                         else if (MainImageView.IsVisible)
                         {
@@ -103,7 +103,7 @@ namespace Companion
                 App.CurrentPage = "Speech";
                 if (result)
                 {
-                    MainPhraseView.player.Pause();
+                    MainSentenceView.player.Pause();
                     MainImageView.player.Pause();
                     MainBreathView.player.Pause();
 
@@ -115,7 +115,7 @@ namespace Companion
             }
             else
             {
-                MainPhraseView.player.Pause();
+                MainSentenceView.player.Pause();
                 MainImageView.player.Pause();
                 MainBreathView.player.Pause();
 

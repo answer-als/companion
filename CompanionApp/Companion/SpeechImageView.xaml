@@ -58,7 +58,7 @@
                    SizeChanged="OnImageRotate"
                    Margin="0,15"/>
             
-            <local:UploadingAudioView x:Name="LoadingScreen" HeightRequest="330"
+            <local:LoadingView x:Name="LoadingScreen" HeightRequest="330"
                                       MinimumHeightRequest="330"
                                       Margin="15, 90" Grid.ColumnSpan="5"
                                       Grid.Row="0" Grid.RowSpan="6"

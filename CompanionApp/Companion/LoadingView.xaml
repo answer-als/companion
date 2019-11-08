@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Companion.UploadingAudioView"
+             x:Class="Companion.LoadingView"
              >
     <ContentView.Content>
         <Frame x:Name="UploadingBackground" CornerRadius="10" HorizontalOptions="FillAndExpand"
@@ -10,7 +10,7 @@
                Padding="5"
                BackgroundColor="Gray">
         <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-            <Label x:Name="UploadingLabel" Text="Uploading Audio Recording..."
+            <Label x:Name="UploadingLabel" Text="Loading..."
                    HorizontalTextAlignment="Center"
                    TextColor="White" FontSize="Large" />
         </StackLayout>

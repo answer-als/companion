@@ -219,5 +219,19 @@ namespace Companion
                 await MainPage.Navigation.PopToRootAsync();
             }
         }
+
+        // TODO: Use this as the global option for DisplayAlert when called in the various ContentPages/Views
+        //void AlertMessage(string title, string body, string accept, string cancel, string pg)
+        //{
+        //    CurrentPage = "Alert";
+        //    if (cancel.Equals("None"))
+        //    {
+        //        Current.MainPage.DisplayAlert(title, body, accept);
+        //    } else
+        //    {
+        //        Current.MainPage.DisplayAlert(title, body, accept, cancel);
+        //    }
+        //    CurrentPage = pg;
+        //}
     }
 }

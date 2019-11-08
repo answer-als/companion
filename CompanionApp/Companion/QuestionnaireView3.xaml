@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Companion"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
@@ -16,39 +16,31 @@
               VerticalOptions="Fill" 
               BackgroundColor="#e6e6e6">
         
-            <Label Text="The following questions are optional."
-                   TextColor="Black" FontSize="Medium"
-                   FontAttributes="Italic"
-                   HorizontalOptions="Center"
-                   Margin="0,0,0,40"/>
-        
-            <Label Text="What languages do you speak now?"
+            <Label Text="Are you Right Handed or Left Handed?"
                    TextColor="#006080" FontSize="Medium"
                    FontAttributes="Bold"
-                   Margin="0,0,0,5"/>
-            <Entry x:Name="SpokenLanguages"
-                   x:FieldModifier="Public"
-                   Text="" Placeholder="Enter languages"
-                   Margin="50,0"
-                   HeightRequest="44" WidthRequest="100"
-                   Completed="FocusNext"/>
+                   Margin="0"/>
+            <input:RadioButtonGroupView x:Name="groupViewHanded" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Horizontal">
+                <input:RadioButton x:Name="RightOption" Margin="10,10,10,0" Text="Right" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
+                <input:RadioButton x:Name="LeftOption" Margin="10,10,10,0" Text="Left" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
+            </input:RadioButtonGroupView>  
         
             <BoxView Margin="0,10" HeightRequest="1" 
                  BackgroundColor="Black" 
                  HorizontalOptions="Fill"/>
         
-            <Label Text="Please list all of the languages you were exposed to/learned to speak from birth:"
+            <Label Text="Are you a Control User or Patient in this study?"
                    TextColor="#006080" FontSize="Medium"
                    FontAttributes="Bold"
-                   Margin="0,0,0,5"/>
-            <Entry x:Name="ExposedLanguages"
-                   x:FieldModifier="Public"
-                   Text="" Placeholder="Enter languages"
-                   Margin="50,0"
-                   HeightRequest="44" WidthRequest="100"/>
-
-        
+                   Margin="0"/>
+            
+            <input:RadioButtonGroupView x:Name="groupViewUser" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Horizontal">
+                <input:RadioButton x:Name="ControlOption" Margin="10,10,10,0" Text="Control" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
+                <input:RadioButton x:Name="PatientOption" Margin="10,10,10,0" Text="Patient" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
+            </input:RadioButtonGroupView>  
+            
         </StackLayout>
     </ScrollView>
     </Frame>
+    
 </ContentView>

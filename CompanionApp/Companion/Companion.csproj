@@ -104,9 +104,6 @@
     <Compile Update="SpeechTaskPage.xaml.cs">
       <DependentUpon>QuestionnaireView4.xaml</DependentUpon>
     </Compile>
-    <Compile Update="SpeechPhraseView.xaml.cs">
-      <DependentUpon>QuestionnaireView4.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Plugin.AudioRecorder">

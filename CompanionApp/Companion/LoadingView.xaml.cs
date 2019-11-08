@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace Companion
 {
-    public partial class UploadingAudioView : ContentView
+    public partial class LoadingView : ContentView
     {
-        public UploadingAudioView()
+        public LoadingView()
         {
             InitializeComponent();
         }

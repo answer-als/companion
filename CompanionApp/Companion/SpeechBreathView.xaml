@@ -46,7 +46,7 @@
                 </Label.FormattedText>
             </Label>
             
-            <local:UploadingAudioView x:Name="LoadingScreen" Padding="10"
+            <local:LoadingView x:Name="LoadingScreen" Padding="10"
                                       HeightRequest="330"
                                       MinimumHeightRequest="330"
                                       Margin="15, 90" Grid.ColumnSpan="5"

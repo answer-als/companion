@@ -48,27 +48,27 @@
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="false"/>
         
-        <local:QuestionnaireView23 x:Name="QuestionView23"
-                                  Padding="20,0,20,0"
-                                  VerticalOptions="FillAndExpand"
-                                  IsVisible="false"/>
-        
-        <local:QuestionnaireView22 x:Name="QuestionView22"
-                                  Padding="20,0,20,0"
-                                  VerticalOptions="FillAndExpand"
-                                  IsVisible="false"/>
-        
-        <local:QuestionnaireView33 x:Name="QuestionView33"
-                                  Padding="20,0,20,0"
-                                  VerticalOptions="FillAndExpand"
-                                  IsVisible="false"/>
-        
         <local:QuestionnaireView3 x:Name="QuestionView3"
                                   Padding="20,0,20,0"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="false"/>
         
-        <local:UploadingAudioView x:Name="LoadingScreen" Padding="10"
+        <local:QuestionnaireView4 x:Name="QuestionView4"
+                                  Padding="20,0,20,0"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+        
+        <local:QuestionnaireView5 x:Name="QuestionView5"
+                                  Padding="20,0,20,0"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+        
+        <local:QuestionnaireView6 x:Name="QuestionView6"
+                                  Padding="20,0,20,0"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+        
+        <local:LoadingView x:Name="LoadingScreen" Padding="10"
                                   Margin="20, 90"
                                   VerticalOptions="FillAndExpand"
                                   HorizontalOptions="FillAndExpand"
