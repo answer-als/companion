@@ -26,6 +26,18 @@ namespace Companion
         public SpeechImageView()
         {
             InitializeComponent();
+
+            //// Change to OnPlatform syntax is confusing and docs do not address the Entry element.
+            //// Default XAML is set for iOS.
+            //// Ref https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/fonts
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                Timer.FontSize = 17;
+
+                VolumeFeedback.ScaleX = 1.1;
+                VolumeFeedback.ScaleY = 2;
+            }
+
             PlayButton.Source = ImageSource.FromResource("Companion.Icons.play_icon.png");
             _client = new HttpClient();
 
@@ -172,8 +184,30 @@ namespace Companion
                     CrossLocalNotifications.Current.Show("Speech Task Is Due!", "The next Speech Task is due. Please login and complete it.", 3, DateTime.Now.AddDays(11));
 
 
+                    //// This is where the app exits. Modify to cycle through each task prior to exit.
                     // After successfully sending the data, end the session
-                    System.Diagnostics.Process.GetCurrentProcess().Kill();
+                    //                    System.Diagnostics.Process.GetCurrentProcess().Kill();
+
+                    App.SpeechTasksRemaining--;
+
+                    if (App.SpeechTasksRemaining <= 0)
+                    {
+                        App.SpeechTasksRemaining = 3;
+                    }
+
+//                    await Task.Delay(1000);
+
+                    //// Remove this page and instruction pages. Should end up at speech task page.
+                    //// Ref https://stackoverflow.com/questions/24856116/how-to-popasync-more-than-1-page-in-xamarin-forms-navigation
+                    for (var counter = 1; counter < 3; counter++)
+                    {
+//                        Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+                    }
+
+//                    await Navigation.PopAsync();
+                    await Navigation.PopToRootAsync();
+
+
                 }
                 else
                 {
@@ -462,7 +496,7 @@ namespace Companion
             }
 
             float vol;
-            vol = AudioRecorderService.volumeMeter;
+            vol = AudioRecorderService.volumeLevel;
 
             if ((vol > 0.15F) && (vol < 0.85F))
             {

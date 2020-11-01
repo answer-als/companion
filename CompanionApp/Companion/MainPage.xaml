@@ -53,6 +53,7 @@
                        HeightRequest="44"
                        WidthRequest="150"/>
                 <Entry x:Name="passwordEntry"
+                       IsVisible="false"
                        IsPassword="true"
                        BackgroundColor="White"
                        Placeholder="Enter password"

@@ -94,6 +94,11 @@ namespace Companion
             // User ID check
             if (ValidUserID(userIDEntry.Text))
             {
+                LoginErrorLabel.Text = " ";
+                Preferences.Set("UserID", userIDEntry.Text);
+                App.LoggedIn = true;
+                NavigateToTasks(sender, e);
+                /*
                 // Password Verification
                 if (passwordEntry.Text.Equals(App.Password))
                 {
@@ -106,6 +111,7 @@ namespace Companion
                 {
                     LoginErrorLabel.Text = "Password Incorrect! Please try again.";
                 }
+                */
             }
         }
     }

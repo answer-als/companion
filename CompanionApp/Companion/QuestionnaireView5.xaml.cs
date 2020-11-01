@@ -13,33 +13,39 @@ namespace Companion
             InitializeComponent();
 
             LoadPrevious();
-            ALSOption.TextFontSize = 15.0;
-            PLSOption.TextFontSize = 15.0;
-            OtherOption.TextFontSize = 15.0;
+            NormalOption.TextFontSize = 15.0;
+            EarlyOption.TextFontSize = 15.0;
+            DietaryOption.TextFontSize = 15.0;
+            SupplementalOption.TextFontSize = 15.0;
+            NpoOption.TextFontSize = 15.0;
         }
 
         void LoadPrevious()
         {
-            if (App.Diagnosis.Equals("ALS"))
+            if (!App.SwallowingNotes.Equals("DidNotAnswer"))
             {
-                ALSOption.IsChecked = true;
-                OtherDiagnosis.Text = "N/A";
+                SwallowingNotes.Text = App.SwallowingNotes;
             }
 
-            if (App.Diagnosis.Equals("PLS"))
+            if (App.Swallowing.Equals("Normal"))
             {
-                PLSOption.IsChecked = true;
-                OtherDiagnosis.Text = "N/A";
+                NormalOption.IsChecked = true;
             }
-
-            if (App.Diagnosis.Equals("Other"))
+            else if (App.Swallowing.Equals("Early"))
             {
-                OtherOption.IsChecked = true;
+                EarlyOption.IsChecked = true;
             }
-
-            if (!App.OtherDiagnosis.Equals("DidNotAnswer"))
+            else if (App.Swallowing.Equals("Dietary"))
             {
-                OtherDiagnosis.Text = App.OtherDiagnosis;
+                DietaryOption.IsChecked = true;
+            }
+            else if (App.Swallowing.Equals("Supplemental"))
+            {
+                SupplementalOption.IsChecked = true;
+            }
+            else if (App.Swallowing.Equals("NPO"))
+            {
+                NpoOption.IsChecked = true;
             }
 
             loaded = true;
@@ -47,33 +53,36 @@ namespace Companion
 
         public void SaveResponses()
         {
-            if (ALSOption.IsChecked)
+            if (!SwallowingNotes.Text.Equals(""))
             {
-                App.Diagnosis = "ALS";
-                App.OtherDiagnosis = "N/A";
-                return;
+                App.SwallowingNotes = SwallowingNotes.Text;
             }
 
-            if (PLSOption.IsChecked)
+            if (NormalOption.IsChecked)
             {
-                App.Diagnosis = "PLS";
-                App.OtherDiagnosis = "N/A";
+                App.Swallowing = "Normal";
             }
-
-            if (OtherOption.IsChecked)
+            else if (EarlyOption.IsChecked)
             {
-                App.Diagnosis = "Other";
+                App.Salivation = "Early";
             }
-
-            if (!OtherDiagnosis.Text.Equals(""))
+            else if (DietaryOption.IsChecked)
             {
-                App.OtherDiagnosis = OtherDiagnosis.Text;
+                App.Salivation = "Dietary";
+            }
+            else if (SupplementalOption.IsChecked)
+            {
+                App.Salivation = "Supplemental";
+            }
+            else if (NpoOption.IsChecked)
+            {
+                App.Salivation = "NPO";
             }
         }
 
         public bool Completed()
         {
-            return ALSOption.IsChecked || PLSOption.IsChecked || (OtherOption.IsChecked && !OtherDiagnosis.Text.Equals(""));
+            return (NormalOption.IsChecked || EarlyOption.IsChecked || DietaryOption.IsChecked || SupplementalOption.IsChecked || NpoOption.IsChecked);
         }
 
         void AnswerProvided(object sender, EventArgs e)

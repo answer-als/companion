@@ -16,6 +16,21 @@ namespace Companion
         public TaskPage()
         {
             InitializeComponent();
+
+            //// Change to OnPlatform syntax is confusing and docs do not address the Entry element.
+            //// Default XAML is set for iOS.
+            //// Ref https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/fonts
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                OuterGrid.Padding = new Thickness(5, 25, 5, 15);
+            }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                OuterGrid.Padding = new Thickness(5, 15, 5, 15);
+            }
+
+//            SpeechTasksRemaining.Text = App.SpeechTasksRemaining.ToString();
+
             NavigationPage.SetHasNavigationBar(this, false);
             MonthlyReminder.Parent = this;
 
@@ -55,7 +70,7 @@ namespace Companion
 
                 if (status != Plugin.Permissions.Abstractions.PermissionStatus.Unknown)
                 {
-                    await DisplayAlert("Access to Microphone Denied", "Can not continue. Restart and try again.", "OK");
+                    await DisplayAlert("Access to Microphone Denied", "Cannot continue. Restart and try again.", "OK");
                 }
             }
             catch (Exception ex)
@@ -66,6 +81,8 @@ namespace Companion
 
         protected override void OnAppearing()
         {
+            SpeechTasksRemaining.Text = App.SpeechTasksRemaining.ToString() + " speech " + (App.SpeechTasksRemaining > 1 ? "tasks" : "task" ) + " remaining for this week.";
+
             // Has it been a week or more since last task completion?
             SpeechTaskAvailability();
 
@@ -98,23 +115,59 @@ namespace Companion
         {
             if (App.SpeechTaskCompleted)
             {
-                int nextTask = App.SpeechTaskLastCompleted.AddDays(7).DayOfYear;
-                if (DateTime.Now.DayOfYear > nextTask)
+                //// Temporary change to allow for demo mode
+                /// Entire block swapped
+                SpeechButton.IsEnabled = true;
+                SpeechFrame.HasShadow = true;
+                SpeechPassButton.IsEnabled = true;
+                SpeechPassFrame.HasShadow = true;
+
+                await Task.Delay(1);
+
+                //// This is the copy of the original block.
+                if ( App.SpeechTasksRemaining <= 0 )
                 {
-                    SpeechButton.IsEnabled = true;
-                    SpeechFrame.HasShadow = true;
-                    SpeechPassButton.IsEnabled = true;
-                    SpeechPassFrame.HasShadow = true;
+                    App.SpeechTasksRemaining = 3;
+
+                    int nextTask = App.SpeechTaskLastCompleted.AddSeconds(5).Second;
+                    if (DateTime.Now.Second > nextTask)
+                    {
+                        SpeechButton.IsEnabled = true;
+                        SpeechFrame.HasShadow = true;
+                        SpeechPassButton.IsEnabled = true;
+                        SpeechPassFrame.HasShadow = true;
+                    }
+                    else
+                    {
+                        SpeechButton.IsEnabled = false;
+                        SpeechFrame.HasShadow = false;
+                        SpeechPassButton.IsEnabled = false;
+                        SpeechPassFrame.HasShadow = false;
+                        int nextAvailable = nextTask - DateTime.Now.Second;
+                        await Application.Current.MainPage.DisplayAlert("No Tasks Available Yet", "Please come back in " + nextAvailable + " seconds.", "OK");
+                    }
+
                 }
-                else
-                {
-                    SpeechButton.IsEnabled = false;
-                    SpeechFrame.HasShadow = false;
-                    SpeechPassButton.IsEnabled = false;
-                    SpeechPassFrame.HasShadow = false;
-                    int nextAvailable = nextTask - DateTime.Now.DayOfYear;
-                    await Application.Current.MainPage.DisplayAlert("No Tasks Available Yet", "Please come back in " + nextAvailable + " days.", "OK");
-                }
+
+                /*
+                                int nextTask = App.SpeechTaskLastCompleted.AddDays(7).DayOfYear;
+                                if (DateTime.Now.DayOfYear > nextTask)
+                                {
+                                    SpeechButton.IsEnabled = true;
+                                    SpeechFrame.HasShadow = true;
+                                    SpeechPassButton.IsEnabled = true;
+                                    SpeechPassFrame.HasShadow = true;
+                                }
+                                else
+                                {
+                                    SpeechButton.IsEnabled = false;
+                                    SpeechFrame.HasShadow = false;
+                                    SpeechPassButton.IsEnabled = false;
+                                    SpeechPassFrame.HasShadow = false;
+                                    int nextAvailable = nextTask - DateTime.Now.DayOfYear;
+                                    await Application.Current.MainPage.DisplayAlert("No Tasks Available Yet", "Please come back in " + nextAvailable + " days.", "OK");
+                                }
+                */
             }
         }
 

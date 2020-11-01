@@ -14,8 +14,54 @@
         
         <StackLayout x:Name="Backdrop" Padding="15,15,15,10" 
               VerticalOptions="Fill" 
-              BackgroundColor="#e6e6e6">
+              BackgroundColor="#275898">
         
+
+            <Label Text="Handwriting"
+                   TextColor="#e6e6e6" FontSize="Medium"
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,5"/>
+
+            <Label Text="This is about how well you write with a pen using your dominant hand, without any assistive devices (such as foam tubing or mechanical aids) due to finger weakness."
+                   TextColor="#e6e6e6" FontSize="Medium"
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,5"/>
+
+            <StackLayout Orientation="Vertical" BackgroundColor="White">
+                <input:RadioButtonGroupView x:Name="groupView" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Vertical" BackgroundColor="White" WidthRequest="300" Margin="20, 20, 20, 0">
+                    <input:RadioButton x:Name="NormalOption" Margin="10,10,10,0" Text="Normal" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>
+                    <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
+                    <input:RadioButton x:Name="SlowOption" Margin="10,10,10,0" Text="Slow or sloppy; all words are legible" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>            
+                    <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
+                    <input:RadioButton x:Name="NotAllLegibleOption" Margin="10,10,10,0" Text="Not all words are legible" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>
+                    <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
+                    <input:RadioButton x:Name="AbleToGripOption" Margin="10,10,10,0" Text="Able to grip pen but unable to write" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
+                    <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
+                    <input:RadioButton x:Name="UnableToGripOption" Margin="10,10,10,0" Text="Unable to grip pen" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
+                    <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
+                </input:RadioButtonGroupView>  
+
+                <Entry x:Name="HandwritingNotes"
+                    Text="" Placeholder="Anything you want to add? (optional)"
+                    FontSize="Small"
+                    Margin="30, 10, 30, 10"
+                    HeightRequest="44" WidthRequest="300"
+                    TextChanged="AnswerProvided"
+                    TextColor="DarkGray"
+                    BackgroundColor="White"   
+                 />
+
+                <Label Text="6/15"
+                    TextColor="#006080" FontSize="Small"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,5"/>
+             </StackLayout>
+
+        
+<!--
             <Label Text="The following questions are optional."
                    TextColor="Black" FontSize="Medium"
                    FontAttributes="Italic"
@@ -46,7 +92,7 @@
                    Text="" Placeholder="Enter languages"
                    Margin="50,0"
                    HeightRequest="44" WidthRequest="100"/>
-
+            -->
         
         </StackLayout>
     </ScrollView>

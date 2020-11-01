@@ -18,7 +18,7 @@ namespace Companion.Droid
 
         public float VolumeLevel()
         {
-            return Plugin.AudioRecorder.AudioRecorderService.volumeMeter;
+            return Plugin.AudioRecorder.AudioRecorderService.volumeLevel;
         }
     }
 }

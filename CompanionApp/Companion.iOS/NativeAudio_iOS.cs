@@ -39,7 +39,7 @@ namespace Companion.iOS
 
         public float VolumeLevel()
         {
-            var val = Plugin.AudioRecorder.AudioRecorderService.volumeMeter;
+            var val = Plugin.AudioRecorder.AudioRecorderService.volumeLevel;
             return val;
         }
     }

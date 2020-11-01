@@ -11,7 +11,10 @@
         <Grid Margin="0,0,0,-5" 
               BackgroundColor="#006080">
             <Grid.Padding>
-                <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android, UWP">5,15,5,15</On>
+                    <On Platform="iOS">5,25,5,15</On>
+                </OnPlatform>
             </Grid.Padding>
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
@@ -32,11 +35,9 @@
             <Label x:Name="PageTitle" Grid.Column="1"
                    BackgroundColor="#006080"
                    Text="Speech" TextColor="White"
+                   FontSize="Large"
                    VerticalTextAlignment="Center"
                    HorizontalOptions="Center">
-                <Label.FontSize>
-                    <OnPlatform iOS="Large" Android="Large"/>
-                </Label.FontSize>
             </Label>
         </Grid>
         <ScrollView BackgroundColor="#006080" VerticalOptions="FillAndExpand">
@@ -52,6 +53,11 @@
                                         IsVisible="false"/>
                 
                 <local:SpeechBreathView x:Name="MainBreathView"
+                                        Padding="20,10,20,20"
+                                        VerticalOptions="FillAndExpand"
+                                        IsVisible="false"/>
+                
+                <local:SpeechBreathAhView x:Name="MainBreathAhView"
                                         Padding="20,10,20,20"
                                         VerticalOptions="FillAndExpand"
                                         IsVisible="false"/>

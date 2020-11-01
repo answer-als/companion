@@ -7,11 +7,8 @@
              Title="AALS Companion">
              
     <StackLayout Margin="0,0,0,0">
-        <Grid Margin="0,0,0,0"
+        <Grid Margin="0,0,0,0" x:Name="OuterGrid" 
               BackgroundColor="#006080">
-            <Grid.Padding>
-                <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
-            </Grid.Padding>
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
@@ -23,11 +20,9 @@
             <Label x:Name="PageTitle" Grid.Column="1"
                    BackgroundColor="#006080"
                    Text="AALS Companion" TextColor="White"
+                   FontSize="Large"
                    VerticalTextAlignment="Center"
                    HorizontalOptions="Center">
-                <Label.FontSize>
-                    <OnPlatform iOS="Large" Android="Large"/>
-                </Label.FontSize>
             </Label>
             <ImageButton x:Name="MenuButton" Grid.Column="0"
                     BackgroundColor="#006080"
@@ -79,6 +74,29 @@
                         HeightRequest="60"
                         />
             </Frame>
+        </StackLayout>
+        <StackLayout Orientation="Vertical" Margin="20,10" BackgroundColor="Transparent">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,0" BackgroundColor="Transparent">
+                <Label x:Name="SpeechTasksRemaining" Margin="0,0,0,0"
+                       TextColor="#033333"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       Text=""
+                       FontSize="Medium" FontAttributes="Bold" />
+                <!--
+                <Label x:Name="SpeechTasksRemaining" Margin="0,0,0,0"
+                       TextColor="#033333"
+                       HorizontalTextAlignment="Left"
+                       VerticalTextAlignment="Center"
+                       Text="0"
+                       FontSize="Medium" FontAttributes="Bold" />
+                -->
+            </StackLayout>
+            <Label x:Name="PressSpeechButtonPrompt" Margin="0,0,0,0"
+                   TextColor="#033333"
+                   HorizontalTextAlignment="Center"
+                   Text="Press the 'Speech' button to continue."
+                   FontSize="Medium" FontAttributes="Bold" />
         </StackLayout>
         <Label x:Name="Speech_LastCompletedDate"
                HorizontalOptions="End"

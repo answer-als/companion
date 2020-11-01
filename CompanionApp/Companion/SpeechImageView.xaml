@@ -30,7 +30,6 @@
             <Label x:Name="Instructions" Grid.ColumnSpan="5" Margin="20,0"
                    VerticalOptions="Start"
                    TextColor="Black"
-                   FontAttributes=""
                    HorizontalTextAlignment="Center">
                 <Label.FormattedText>
                     <FormattedString>
@@ -73,13 +72,11 @@
                    TextColor="Black" Text="00:00"
                    IsEnabled="false"
                    Opacity="1"
+                   FontSize="Large"
                    HorizontalOptions="Center"
                    VerticalOptions="Start"
                    Margin="0,0,0,5"
                    HorizontalTextAlignment="Center">
-                <Entry.FontSize>
-                    <OnPlatform iOS="Large" Android="Medium" />
-                </Entry.FontSize>
             </Entry>
             <Button x:Name="RecordButton"
                     Grid.Row="3" Grid.Column="2"
@@ -106,18 +103,14 @@
                    VerticalOptions="Start"/>
             <ProgressBar x:Name="VolumeFeedback"
                      Margin="0,0,0,25"
+                     ScaleX="3"
+                     ScaleY="1.17"
                      VerticalOptions="Start"
                      Grid.Row="3" Grid.RowSpan="2"
                      Grid.Column="3"
                      ProgressColor="Red"
                      Progress="0" 
                      Rotation="270">
-                <ProgressBar.ScaleX>
-                    <OnPlatform iOS="3" Android="1.1"/>
-                </ProgressBar.ScaleX>
-                <ProgressBar.ScaleY>
-                    <OnPlatform iOS="1.17" Android="2"/>
-                </ProgressBar.ScaleY>
             </ProgressBar>
             <Button x:Name="RetryButton" Margin="0,0,0,0"
                     Grid.Row="5" Grid.Column="1"

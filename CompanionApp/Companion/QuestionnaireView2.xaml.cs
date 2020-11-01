@@ -13,25 +13,29 @@ namespace Companion
             InitializeComponent();
 
             LoadPrevious();
-            YesOption.TextFontSize = 15.0;
-            NoOption.TextFontSize = 15.0;
+            KgOption.TextFontSize = 15.0;
+            LbOption.TextFontSize = 15.0;
         }
 
         void LoadPrevious()
         {
-            if (!App.EnglishLearnerAge.Equals("DidNotAnswer"))
+            if (!App.WeightNotes.Equals("DidNotAnswer"))
             {
-                LearningAge.Text = App.EnglishLearnerAge;
+                WeightNotes.Text = App.WeightNotes;
             }
 
-            if (App.English1Lang.Equals("Yes"))
+            if (!App.Weight.Equals("DidNotAnswer"))
             {
-                YesOption.IsChecked = true;
+                Weight.Text = App.Weight;
             }
 
-            if (App.English1Lang.Equals("No"))
+            if (App.WeightUnits.Equals("Kg"))
             {
-                NoOption.IsChecked = true;
+                KgOption.IsChecked = true;
+            }
+            else if (App.WeightUnits.Equals("Lb"))
+            {
+                LbOption.IsChecked = true;
             }
 
             loaded = true;
@@ -39,27 +43,29 @@ namespace Companion
 
         public void SaveResponses()
         {
-            if (YesOption.IsChecked)
+            if (KgOption.IsChecked)
             {
-                App.English1Lang = "Yes";
-                App.EnglishLearnerAge = "N/A";
-                return;
+                App.WeightUnits = "Kg";
+            }
+            else if (LbOption.IsChecked)
+            {
+                App.WeightUnits = "Lb";
             }
 
-            if (NoOption.IsChecked)
+            if (!Weight.Text.Equals(""))
             {
-                App.English1Lang = "No";
+                App.Weight = Weight.Text;
             }
 
-            if (!LearningAge.Text.Equals(""))
+            if (!WeightNotes.Text.Equals(""))
             {
-                App.EnglishLearnerAge = LearningAge.Text;
+                App.WeightNotes = WeightNotes.Text;
             }
         }
 
         public bool Completed()
         {
-            return YesOption.IsChecked || (NoOption.IsChecked && !LearningAge.Text.Equals(""));
+            return KgOption.IsChecked || (LbOption.IsChecked && !Weight.Text.Equals(""));
         }
 
         void AnswerProvided(object sender, EventArgs e)

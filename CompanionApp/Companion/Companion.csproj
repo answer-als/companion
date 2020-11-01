@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <ReleaseVersion>1.1.4</ReleaseVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -10,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="Xamarin.Forms.InputKit" Version="3.0.11" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
@@ -83,6 +84,10 @@
     <Folder Include="Icons\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="QuestionnaireView6 %28copy%29.xaml.cs" />
+    <Compile Remove="QuestionnaireView7 %28copy%29.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="__SpeechIntro.xaml.cs">
       <DependentUpon>__SpeechIntro.xaml</DependentUpon>
     </Compile>
@@ -103,6 +108,9 @@
     </Compile>
     <Compile Update="SpeechTaskPage.xaml.cs">
       <DependentUpon>QuestionnaireView4.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="QuestionnaireView7.xaml.cs">
+      <DependentUpon>QuestionnaireView7.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -94,6 +94,11 @@ namespace Companion
             get => Preferences.Get("CurrentQuestion", 1);
             set => Preferences.Set("CurrentQuestion", value);
         }
+        public static int SpeechTasksRemaining
+        {
+            get => Preferences.Get("SpeechTasksRemaining", 3);
+            set => Preferences.Set("SpeechTasksRemaining", value);
+        }
         public static string EducationLevel
         {
             get => Preferences.Get("EducationLevel", "DidNotAnswer");
@@ -104,10 +109,150 @@ namespace Companion
             get => Preferences.Get("BirthYear", "DidNotAnswer");
             set => Preferences.Set("BirthYear", value);
         }
-        public static string Sex
+        public static string Person
         {
-            get => Preferences.Get("Sex", "DidNotAnswer");
-            set => Preferences.Set("Sex", value);
+            get => Preferences.Get("Person", "DidNotAnswer");
+            set => Preferences.Set("Person", value);
+        }
+        public static string PersonNotes
+        {
+            get => Preferences.Get("PersonNotes", "DidNotAnswer");
+            set => Preferences.Set("PersonNotes", value);
+        }
+        public static string Weight
+        {
+            get => Preferences.Get("Weight", "DidNotAnswer");
+            set => Preferences.Set("Weight", value);
+        }
+        public static string WeightUnits
+        {
+            get => Preferences.Get("WeightUnits", "DidNotAnswer");
+            set => Preferences.Set("WeightUnits", value);
+        }
+        public static string WeightNotes
+        {
+            get => Preferences.Get("WeightNotes", "DidNotAnswer");
+            set => Preferences.Set("WeightNotes", value);
+        }
+        public static string Speech
+        {
+            get => Preferences.Get("WeightUnits", "DidNotAnswer");
+            set => Preferences.Set("WeightUnits", value);
+        }
+        public static string SpeechNotes
+        {
+            get => Preferences.Get("WeightNotes", "DidNotAnswer");
+            set => Preferences.Set("WeightNotes", value);
+        }
+        public static string Salivation
+        {
+            get => Preferences.Get("Salivation", "DidNotAnswer");
+            set => Preferences.Set("Salivation", value);
+        }
+        public static string SalivationNotes
+        {
+            get => Preferences.Get("SalivationNotes", "DidNotAnswer");
+            set => Preferences.Set("SalivationNotes", value);
+        }
+        public static string Swallowing
+        {
+            get => Preferences.Get("Swallowing", "DidNotAnswer");
+            set => Preferences.Set("Swallowing", value);
+        }
+        public static string SwallowingNotes
+        {
+            get => Preferences.Get("SwallowingNotes", "DidNotAnswer");
+            set => Preferences.Set("SwallowingNotes", value);
+        }
+        public static string Handwriting
+        {
+            get => Preferences.Get("Handwriting", "DidNotAnswer");
+            set => Preferences.Set("Handwriting", value);
+        }
+        public static string HandwritingNotes
+        {
+            get => Preferences.Get("SwallowingNotes", "DidNotAnswer");
+            set => Preferences.Set("SwallowingNotes", value);
+        }
+        public static string CuttingFood
+        {
+            get => Preferences.Get("CuttingFood", "DidNotAnswer");
+            set => Preferences.Set("CuttingFood", value);
+        }
+        public static string CuttingFoodNotes
+        {
+            get => Preferences.Get("CuttingFoodNotes", "DidNotAnswer");
+            set => Preferences.Set("CuttingFoodNotes", value);
+        }
+        public static string Dressing
+        {
+            get => Preferences.Get("Dressing", "DidNotAnswer");
+            set => Preferences.Set("Dressing", value);
+        }
+        public static string DressingNotes
+        {
+            get => Preferences.Get("DressingNotes", "DidNotAnswer");
+            set => Preferences.Set("DressingNotes", value);
+        }
+        public static string TurningInBed
+        {
+            get => Preferences.Get("TurningInBed", "DidNotAnswer");
+            set => Preferences.Set("TurningInBed", value);
+        }
+        public static string TurningInBedNotes
+        {
+            get => Preferences.Get("TurningInBedNotes", "DidNotAnswer");
+            set => Preferences.Set("TurningInBedNotes", value);
+        }
+        public static string Walking
+        {
+            get => Preferences.Get("Walking", "DidNotAnswer");
+            set => Preferences.Set("Walking", value);
+        }
+        public static string WalkingNotes
+        {
+            get => Preferences.Get("WalkingNotes", "DidNotAnswer");
+            set => Preferences.Set("WalkingNotes", value);
+        }
+        public static string ClimbingStairs
+        {
+            get => Preferences.Get("ClimbingStairs", "DidNotAnswer");
+            set => Preferences.Set("ClimbingStairs", value);
+        }
+        public static string ClimbingStairsNotes
+        {
+            get => Preferences.Get("ClimbingStairsNotes", "DidNotAnswer");
+            set => Preferences.Set("ClimbingStairsNotes", value);
+        }
+        public static string Dyspnea
+        {
+            get => Preferences.Get("Dyspnea", "DidNotAnswer");
+            set => Preferences.Set("Dyspnea", value);
+        }
+        public static string DyspneaNotes
+        {
+            get => Preferences.Get("DyspneaNotes", "DidNotAnswer");
+            set => Preferences.Set("DyspneaNotes", value);
+        }
+        public static string Orthopnea
+        {
+            get => Preferences.Get("Orthopnea", "DidNotAnswer");
+            set => Preferences.Set("Orthopnea", value);
+        }
+        public static string OrthopneaNotes
+        {
+            get => Preferences.Get("OrthopneaNotes", "DidNotAnswer");
+            set => Preferences.Set("OrthopneaNotes", value);
+        }
+        public static string RespiratoryInsufficiency
+        {
+            get => Preferences.Get("RespiratoryInsufficiency", "DidNotAnswer");
+            set => Preferences.Set("RespiratoryInsufficiency", value);
+        }
+        public static string RespiratoryInsufficiencyNotes
+        {
+            get => Preferences.Get("RespiratoryInsufficiencyNotes", "DidNotAnswer");
+            set => Preferences.Set("RespiratoryInsufficiencyNotes", value);
         }
         public static string Handedness
         {
@@ -159,11 +304,17 @@ namespace Companion
             get => Preferences.Get("LangsExposed", "DidNotAnswer");
             set => Preferences.Set("LangsExposed", value);
         }
-
-        public App()
+        public static bool IsCountTask
+        {
+            get => Preferences.Get("IsCountTask", true);
+            set => Preferences.Set("IsCountTask", value);
+        }
+ 
+    public App()
         {
             InitializeComponent();
             LoginVisits = 0;
+            //// Not needed for v1.2
             Password = "Gleason5";
             RecordedButNotSaved = false;
             IsRecording = false;

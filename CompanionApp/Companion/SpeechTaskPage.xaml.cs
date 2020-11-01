@@ -16,6 +16,7 @@ namespace Companion
             MainSentenceView.Parent = this;
             MainImageView.Parent = this;
             MainBreathView.Parent = this;
+            MainBreathAhView.Parent = this;
 
             DisplayCurrentTask();
         }
@@ -27,6 +28,7 @@ namespace Companion
                 MainSentenceView.IsVisible = true;
                 MainImageView.IsVisible = false;
                 MainBreathView.IsVisible = false;
+                MainBreathAhView.IsVisible = false;
                 await MainSentenceView.GetSentenceFromServer();
             }
             else if (App.SpeechTaskType.Equals("Image"))
@@ -34,13 +36,26 @@ namespace Companion
                 MainSentenceView.IsVisible = false;
                 MainImageView.IsVisible = true;
                 MainBreathView.IsVisible = false;
+                MainBreathAhView.IsVisible = false;
                 await MainImageView.GetImageFromServer();
             }
             else if (App.SpeechTaskType.Equals("Breath"))
             {
                 MainSentenceView.IsVisible = false;
                 MainImageView.IsVisible = false;
-                MainBreathView.IsVisible = true;
+
+                if ( App.IsCountTask == true )
+                {
+                    MainBreathView.IsVisible = true;
+                    MainBreathAhView.IsVisible = false;
+                    App.IsCountTask = false;
+                }
+                else
+                {
+                    MainBreathView.IsVisible = false;
+                    MainBreathAhView.IsVisible = true;
+                    App.IsCountTask = true;
+                }
             }
         }
 
@@ -65,6 +80,10 @@ namespace Companion
                 else if (MainBreathView.IsVisible)
                 {
                     MainBreathView.EndRecording(sender, e);
+                }
+                else if (MainBreathAhView.IsVisible)
+                {
+                    MainBreathAhView.EndRecording(sender, e);
                 }
 
                 App.CurrentPage = "Alert";
@@ -93,6 +112,10 @@ namespace Companion
                         {
                             MainBreathView.RetryButton_Clicked(sender, e);
                         }
+                        else if (MainBreathAhView.IsVisible)
+                        {
+                            MainBreathAhView.RetryButton_Clicked(sender, e);
+                        }
                     }
                 }
             }
@@ -106,6 +129,7 @@ namespace Companion
                     MainSentenceView.player.Pause();
                     MainImageView.player.Pause();
                     MainBreathView.player.Pause();
+                    MainBreathAhView.player.Pause();
 
                     App.RecordedButNotSaved = false;
                     NavigationPage page = new NavigationPage(new TaskPage());
@@ -118,6 +142,7 @@ namespace Companion
                 MainSentenceView.player.Pause();
                 MainImageView.player.Pause();
                 MainBreathView.player.Pause();
+                MainBreathAhView.player.Pause();
 
                 NavigationPage page = new NavigationPage(new TaskPage());
                 Application.Current.MainPage = page;

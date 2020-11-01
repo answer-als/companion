@@ -13,12 +13,13 @@ namespace Companion
             InitializeComponent();
 
             LoadPrevious();
-            MaleOption.TextFontSize = 15.0;
-            FemaleOption.TextFontSize = 15.0;
+            PersonOption.TextFontSize = 15.0;
+            FamilyOption.TextFontSize = 15.0;
         }
 
         void LoadPrevious()
         {
+            /*
             if (!App.EducationLevel.Equals("DidNotAnswer"))
             {
                 EducationLevel.Text = App.EducationLevel;
@@ -28,15 +29,31 @@ namespace Companion
             {
                 BirthYear.Text = App.BirthYear;
             }
-
-            if (App.Sex.Equals("Male"))
+            */
+            if (!App.PersonNotes.Equals("DidNotAnswer"))
             {
-                MaleOption.IsChecked = true;
+                PersonNotes.Text = App.PersonNotes;
             }
 
-            if (App.Sex.Equals("Female"))
+            if (App.Person.Equals("Person"))
             {
-                FemaleOption.IsChecked = true;
+                PersonOption.IsChecked = true;
+            }
+            else if (App.Person.Equals("Family"))
+            {
+                FamilyOption.IsChecked = true;
+            }
+            else if (App.Person.Equals("Caregiver"))
+            {
+                CaregiverOption.IsChecked = true;
+            }
+            else if (App.Person.Equals("Nurse"))
+            {
+                NurseOption.IsChecked = true;
+            }
+            else if (App.Person.Equals("Physican"))
+            {
+                PhysicanOption.IsChecked = true;
             }
 
             loaded = true;
@@ -44,30 +61,42 @@ namespace Companion
 
         public void SaveResponses()
         {
+            /*
             if (!EducationLevel.Text.Equals(""))
             {
                 App.EducationLevel = EducationLevel.Text;
             }
-
-            if (!BirthYear.Text.Equals(""))
+            */
+            if (!PersonNotes.Text.Equals(""))
             {
-                App.BirthYear = BirthYear.Text;
+                App.PersonNotes = PersonNotes.Text;
             }
-
-            if (FemaleOption.IsChecked)
+            
+            if (PersonOption.IsChecked)
             {
-                App.Sex = "Female";
+                App.Person = "Person";
             }
-
-            if (MaleOption.IsChecked)
+            else if (FamilyOption.IsChecked)
             {
-                App.Sex = "Male";
+                App.Person = "Family";
+            }
+            else if (CaregiverOption.IsChecked)
+            {
+                App.Person = "Caregiver";
+            }
+            else if (NurseOption.IsChecked)
+            {
+                App.Person = "Nurse";
+            }
+            else if (PhysicanOption.IsChecked)
+            {
+                App.Person = "Physican";
             }
         }
 
         public bool Completed()
         {
-            return (MaleOption.IsChecked || FemaleOption.IsChecked) && !BirthYear.Text.Equals("") && !EducationLevel.Text.Equals("");
+            return (PersonOption.IsChecked || FamilyOption.IsChecked || CaregiverOption.IsChecked || NurseOption.IsChecked || PhysicanOption.IsChecked) /*&& !BirthYear.Text.Equals("") && !EducationLevel.Text.Equals("")*/;
         }
 
 
@@ -82,7 +111,7 @@ namespace Companion
 
         void FocusNext(object sender, EventArgs e)
         {
-            BirthYear.Focus();
+            //BirthYear.Focus();
         }
     }
 }

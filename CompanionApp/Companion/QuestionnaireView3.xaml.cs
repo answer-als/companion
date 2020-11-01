@@ -13,32 +13,39 @@ namespace Companion
             InitializeComponent();
 
             LoadPrevious();
-            RightOption.TextFontSize = 15.0;
-            LeftOption.TextFontSize = 15.0;
-            ControlOption.TextFontSize = 15.0;
-            PatientOption.TextFontSize = 15.0;
+            NormalOption.TextFontSize = 15.0;
+            DetectableOption.TextFontSize = 15.0;
+            IntelligibleOption.TextFontSize = 15.0;
+            NonVocalOption.TextFontSize = 15.0;
+            LossOption.TextFontSize = 15.0;
         }
 
         void LoadPrevious()
         {
-            if (App.Handedness.Equals("Right"))
+            if (!App.SpeechNotes.Equals("DidNotAnswer"))
             {
-                RightOption.IsChecked = true;
+                SpeechNotes.Text = App.SpeechNotes;
             }
 
-            if (App.Handedness.Equals("Left"))
+            if (App.Speech.Equals("Normal"))
             {
-                LeftOption.IsChecked = true;
+                NormalOption.IsChecked = true;
             }
-
-            if (App.UserType.Equals("Control"))
+            else if (App.Speech.Equals("Detectable"))
             {
-                ControlOption.IsChecked = true;
+                DetectableOption.IsChecked = true;
             }
-
-            if (App.UserType.Equals("Patient"))
+            else if (App.Speech.Equals("Intelligible"))
             {
-                PatientOption.IsChecked = true;
+                IntelligibleOption.IsChecked = true;
+            }
+            else if (App.Speech.Equals("NonVocal"))
+            {
+                NonVocalOption.IsChecked = true;
+            }
+            else if (App.Speech.Equals("Loss"))
+            {
+                LossOption.IsChecked = true;
             }
 
             loaded = true;
@@ -46,30 +53,36 @@ namespace Companion
 
         public void SaveResponses()
         {
-            if (RightOption.IsChecked)
+            if (NormalOption.IsChecked)
             {
-                App.Handedness = "Right";
+                App.Speech = "Normal";
+            }
+            else if (DetectableOption.IsChecked)
+            {
+                App.Speech = "Detectable";
+            }
+            else if (IntelligibleOption.IsChecked)
+            {
+                App.Speech = "Intelligible";
+            }
+            else if (NonVocalOption.IsChecked)
+            {
+                App.Speech = "NonVocal";
+            }
+            else if (LossOption.IsChecked)
+            {
+                App.Speech = "Loss";
             }
 
-            if (LeftOption.IsChecked)
+            if (!SpeechNotes.Equals("DidNotAnswer"))
             {
-                App.Handedness = "Left";
-            }
-
-            if (ControlOption.IsChecked)
-            {
-                App.UserType = "Control";
-            }
-
-            if (PatientOption.IsChecked)
-            {
-                App.UserType = "Patient";
+                App.SpeechNotes = SpeechNotes.Text;
             }
         }
 
         public bool Completed()
         {
-            return (RightOption.IsChecked || LeftOption.IsChecked) && (ControlOption.IsChecked || PatientOption.IsChecked);
+            return (NormalOption.IsChecked || DetectableOption.IsChecked || IntelligibleOption.IsChecked || NonVocalOption.IsChecked || LossOption.IsChecked);
         }
 
 

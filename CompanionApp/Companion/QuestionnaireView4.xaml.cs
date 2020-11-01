@@ -13,31 +13,39 @@ namespace Companion
             InitializeComponent();
 
             LoadPrevious();
-            BulbarOption.TextFontSize = 15.0;
-            SpinalOption.TextFontSize = 15.0;
-            BothOption.TextFontSize = 15.0;
+            NormalOption.TextFontSize = 15.0;
+            SlightOption.TextFontSize = 15.0;
+            ModerateOption.TextFontSize = 15.0;
+            MarkedExcessOption.TextFontSize = 15.0;
+            MarkedDroolingOption.TextFontSize = 15.0;
         }
 
         void LoadPrevious()
         {
-            if (App.OnsetSite.Equals("Bulbar"))
+            if (!App.SalivationNotes.Equals("DidNotAnswer"))
             {
-                BulbarOption.IsChecked = true;
+                SalivationNotes.Text = App.SalivationNotes;
             }
 
-            if (App.OnsetSite.Equals("Spinal"))
+            if (App.Salivation.Equals("Normal"))
             {
-                SpinalOption.IsChecked = true;
+                NormalOption.IsChecked = true;
             }
-
-            if (App.OnsetSite.Equals("Spinal/Bulbar"))
+            else if (App.Salivation.Equals("Slight"))
             {
-                BothOption.IsChecked = true;
+                SlightOption.IsChecked = true;
             }
-
-            if (!App.OnsetDate.Equals("DidNotAnswer"))
+            else if (App.Salivation.Equals("Moderate"))
             {
-                OnsetDate.Text = App.OnsetDate;
+                ModerateOption.IsChecked = true;
+            }
+            else if (App.Salivation.Equals("MarkedExcess"))
+            {
+                MarkedExcessOption.IsChecked = true;
+            }
+            else if (App.Salivation.Equals("MarkedDrooling"))
+            {
+                MarkedDroolingOption.IsChecked = true;
             }
 
             loaded = true;
@@ -45,30 +53,36 @@ namespace Companion
 
         public void SaveResponses()
         {
-            if (SpinalOption.IsChecked)
+            if (!SalivationNotes.Text.Equals(""))
             {
-                App.OnsetSite = "Spinal";
+                App.SalivationNotes = SalivationNotes.Text;
             }
 
-            if (BulbarOption.IsChecked)
+            if (NormalOption.IsChecked)
             {
-                App.OnsetSite = "Bulbar";
+                App.Salivation = "Normal";
             }
-
-            if (BothOption.IsChecked)
+            else if (SlightOption.IsChecked)
             {
-                App.OnsetSite = "Spinal/Bulbar";
+                App.Salivation = "Slight";
             }
-
-            if (!OnsetDate.Text.Equals(""))
+            else if (ModerateOption.IsChecked)
             {
-                App.OnsetDate = OnsetDate.Text;
+                App.Salivation = "Moderate";
+            }
+            else if (MarkedExcessOption.IsChecked)
+            {
+                App.Salivation = "MarkedExcess";
+            }
+            else if (MarkedDroolingOption.IsChecked)
+            {
+                App.Salivation = "MarkedDrooling";
             }
         }
 
         public bool Completed()
         {
-            return (SpinalOption.IsChecked || BulbarOption.IsChecked || BothOption.IsChecked) && !OnsetDate.Text.Equals("");
+            return (NormalOption.IsChecked || SlightOption.IsChecked || ModerateOption.IsChecked || MarkedExcessOption.IsChecked || MarkedDroolingOption.IsChecked);
         }
 
         void AnswerProvided(object sender, EventArgs e)
