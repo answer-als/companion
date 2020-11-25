@@ -29,14 +29,15 @@ namespace Companion
                 OuterGrid.Padding = new Thickness(5, 15, 5, 15);
             }
 
-//            SpeechTasksRemaining.Text = App.SpeechTasksRemaining.ToString();
-
             NavigationPage.SetHasNavigationBar(this, false);
             MonthlyReminder.Parent = this;
 
             MenuButton.Source = ImageSource.FromResource("Companion.Icons.menu_icon.png");
             UserIcon.Source = ImageSource.FromResource("Companion.Icons.user_icon.png");
+            Logo.Source = ImageSource.FromResource("Companion.aals_logo.png");
+
             App.CurrentPage = "Home";
+            Application.Current.MainPage = this;
 
             _client = new HttpClient();
             CheckPermissions();
@@ -79,9 +80,41 @@ namespace Companion
             }
         }
 
+        /*
+         * Unused in this location but this is the logic for determining if the questionnaire should appear.
+         */
+        async protected void CheckQuestionnaireExpiration()
+        {
+            if (App.QuestionnaireLastCompleted == DateTime.MinValue)
+            {
+                Application.Current.MainPage = this;
+
+                App.QuestionnaireCompleted = false;
+                await Navigation.PushAsync(new QuestionnairePage());
+            }
+            else if (DateTime.Now.CompareTo(App.QuestionnaireLastCompleted.AddMonths(1)) >= 0)
+            {
+                // Require FRS task monthly
+                DateTime today = DateTime.Now;
+                DateTime dueDate = App.QuestionnaireLastCompleted.AddMonths(1);
+
+                // Ref https://docs.microsoft.com/en-us/dotnet/api/system.datetime.compareto?view=net-5.0
+                if (today.CompareTo(dueDate) >= 0)
+                {
+                }
+
+                Application.Current.MainPage = this;
+
+                App.QuestionnaireCompleted = false;
+                await Navigation.PushAsync(new QuestionnairePage());
+            }
+        }
+
         protected override void OnAppearing()
         {
-            SpeechTasksRemaining.Text = App.SpeechTasksRemaining.ToString() + " speech " + (App.SpeechTasksRemaining > 1 ? "tasks" : "task" ) + " remaining for this week.";
+//            CheckQuestionnaireExpiration();
+
+            SpeechTasksRemaining.Text = App.SpeechTasksRemaining.ToString() + " speech " + (App.SpeechTasksRemaining == 1 ? "task" : "tasks") + " remaining for this week.";
 
             // Has it been a week or more since last task completion?
             SpeechTaskAvailability();
@@ -115,6 +148,7 @@ namespace Companion
         {
             if (App.SpeechTaskCompleted)
             {
+                /*
                 //// Temporary change to allow for demo mode
                 /// Entire block swapped
                 SpeechButton.IsEnabled = true;
@@ -123,8 +157,9 @@ namespace Companion
                 SpeechPassFrame.HasShadow = true;
 
                 await Task.Delay(1);
-
+                
                 //// This is the copy of the original block.
+                /// Demo mode.
                 if ( App.SpeechTasksRemaining <= 0 )
                 {
                     App.SpeechTasksRemaining = 3;
@@ -148,25 +183,59 @@ namespace Companion
                     }
 
                 }
+                */
+                
+                if (App.SpeechTasksRemaining <= 0)
+                {
+                    int nextTask = App.SpeechTaskLastCompleted.AddDays(7).DayOfYear;
+                    if (DateTime.Now.DayOfYear >= nextTask)
+                    {
+                        SpeechButton.IsEnabled = true;
+                        SpeechFrame.HasShadow = true;
+                        SpeechPassButton.IsEnabled = true;
+                        SpeechPassFrame.HasShadow = true;
 
+                        App.SpeechTasksRemaining = 3;
+                        SpeechTasksRemaining.Text = App.SpeechTasksRemaining.ToString() + " speech " + (App.SpeechTasksRemaining == 1 ? "task" : "tasks") + " remaining for this week.";
+                    }
+                    else
+                    {
+                        SpeechButton.IsEnabled = false;
+                        SpeechFrame.HasShadow = false;
+                        SpeechPassButton.IsEnabled = false;
+                        SpeechPassFrame.HasShadow = false;
+                        int nextAvailable = nextTask - DateTime.Now.DayOfYear;
+                        await Application.Current.MainPage.DisplayAlert("No Tasks Available Yet", "Please come back in " + nextAvailable + (nextAvailable > 1 ? " days." : " day."), "OK");
+
+                        await Task.Delay(1000);
+                        System.Diagnostics.Process.GetCurrentProcess().Kill();
+                    }
+
+                }
+                
                 /*
-                                int nextTask = App.SpeechTaskLastCompleted.AddDays(7).DayOfYear;
-                                if (DateTime.Now.DayOfYear > nextTask)
-                                {
-                                    SpeechButton.IsEnabled = true;
-                                    SpeechFrame.HasShadow = true;
-                                    SpeechPassButton.IsEnabled = true;
-                                    SpeechPassFrame.HasShadow = true;
-                                }
-                                else
-                                {
-                                    SpeechButton.IsEnabled = false;
-                                    SpeechFrame.HasShadow = false;
-                                    SpeechPassButton.IsEnabled = false;
-                                    SpeechPassFrame.HasShadow = false;
-                                    int nextAvailable = nextTask - DateTime.Now.DayOfYear;
-                                    await Application.Current.MainPage.DisplayAlert("No Tasks Available Yet", "Please come back in " + nextAvailable + " days.", "OK");
-                                }
+                int nextTask = App.SpeechTaskLastCompleted.AddDays(7).DayOfYear;
+                if (DateTime.Now.DayOfYear > nextTask)
+                {
+                    SpeechButton.IsEnabled = true;
+                    SpeechFrame.HasShadow = true;
+                    SpeechPassButton.IsEnabled = true;
+                    SpeechPassFrame.HasShadow = true;
+
+                    App.SpeechTasksRemaining = 3;
+                }
+                else
+                {
+                    SpeechButton.IsEnabled = false;
+                    SpeechFrame.HasShadow = false;
+                    SpeechPassButton.IsEnabled = false;
+                    SpeechPassFrame.HasShadow = false;
+                    int nextAvailable = nextTask - DateTime.Now.DayOfYear;
+                    await Application.Current.MainPage.DisplayAlert("No Tasks Available Yet", "Please come back in " + nextAvailable + " days.", "OK");
+
+                    await Task.Delay(1000);
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
+                }
                 */
             }
         }

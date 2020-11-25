@@ -38,7 +38,7 @@
             <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
                    x:Name="LoginErrorLabel"
                    Text=" "
-                   FontSize="Micro" TextColor="Red"
+                   FontSize="Micro" TextColor="White"
                    HorizontalOptions="Center"
                    VerticalOptions="End"/>
             <StackLayout Grid.Row="4" Grid.Column="1">

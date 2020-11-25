@@ -51,7 +51,7 @@
                     BackgroundColor="White"   
                  />
 
-                <Label Text="5/15"
+                <Label Text="4/14"
                     TextColor="#006080" FontSize="Small"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"

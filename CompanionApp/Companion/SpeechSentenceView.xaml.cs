@@ -17,6 +17,9 @@ namespace Companion
         ushort seconds = 0;
         int counter = 0;
 
+        // Limit to 1 retry
+        int numRetriesRemaining = 1;
+
         HttpClient _client;
         string sentence, hash;
 
@@ -77,7 +80,16 @@ namespace Companion
         {
             DoneButton.IsEnabled = true;
             RecordButton.IsEnabled = true;
-            RetryButton.IsEnabled = true;
+
+            if (numRetriesRemaining > 0)
+            {
+                RetryButton.IsEnabled = true;
+            }
+            else
+            {
+                RetryButton.IsEnabled = false;
+            }
+
             status.Text = "Play";
         }
 
@@ -166,9 +178,12 @@ namespace Companion
 
                     if (App.SpeechTasksRemaining <= 0)
                     {
-                        App.SpeechTasksRemaining = 3;
-                    }
+                        //App.SpeechTasksRemaining = 3;
+                        await Application.Current.MainPage.DisplayAlert("Tasks Complete", "No more speech tasks for this week. Come back in 7 days.", "OK");
 
+                        System.Diagnostics.Process.GetCurrentProcess().Kill();
+                    }
+                    
 //                    await Task.Delay(1000);
 
                     //// Remove this page and instruction pages. Should end up at speech task page.
@@ -180,6 +195,7 @@ namespace Companion
 
 //                    await Navigation.PopAsync();
                     await Navigation.PopToRootAsync();
+                    
                 }
                 else
                 {
@@ -323,6 +339,17 @@ namespace Companion
             RetryButton.IsVisible = false;
             App.RecordedButNotSaved = false;
 
+            numRetriesRemaining--;
+
+            if (numRetriesRemaining > 0)
+            {
+                RetryButton.IsEnabled = true;
+            }
+            else
+            {
+                RetryButton.IsEnabled = false;
+            }
+
             // Reload a new Sentence
             await GetSentenceFromServer();
 
@@ -388,7 +415,15 @@ namespace Companion
                     status.Text = "Play";
                     player.Pause();
                     DoneButton.IsEnabled = true;
-                    RetryButton.IsEnabled = true;
+
+                    if (numRetriesRemaining > 0)
+                    {
+                        RetryButton.IsEnabled = true;
+                    }
+                    else
+                    {
+                        RetryButton.IsEnabled = false;
+                    }
                 }
                 else
                 {

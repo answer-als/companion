@@ -105,6 +105,27 @@
                WidthRequest="300"
                Text=" " TextColor="Black"
                FontSize="Small" FontAttributes="Bold" />
+            <!--
+                <Image x:Name="Logo"                
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+            -->
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Image x:Name="Logo"
+                Grid.Row="0" Grid.Column="1"                
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+            </Grid>
+            
+         
+
         <!--<Button x:Name="OtherButton"
                 Margin="20,0,20,50"
                 HorizontalOptions="CenterAndExpand"

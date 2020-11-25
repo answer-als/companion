@@ -32,7 +32,7 @@
                    TextColor="Black" FontSize="Medium"
                    FontAttributes="Italic"
                    HorizontalTextAlignment="Center"
-                   Text="Record yourself reading this sentence out loud" />
+                   Text="Record yourself reading this sentence out loud. You may retry the task one time by tapping the Retry button." />
             
 
             <local:Sentence x:Name="SentenceView" Padding="15,0,15,10"

@@ -79,11 +79,11 @@ namespace Companion
             get => Preferences.Get("SpeechLastCompleted", DateTime.MinValue);
             set => Preferences.Set("SpeechLastCompleted", value);
         }
-        //public static DateTime QuestionnaireLastCompleted
-        //{
-        //    get => Preferences.Get("QuestionnaireLastCompleted", DateTime.MinValue);
-        //    set => Preferences.Set("QuestionnaireLastCompleted", value);
-        //}
+        public static DateTime QuestionnaireLastCompleted
+        {
+            get => Preferences.Get("QuestionnaireLastCompleted", DateTime.MinValue);
+            set => Preferences.Set("QuestionnaireLastCompleted", value);
+        }
         public static bool QuestionnaireCompleted
         {
             get => Preferences.Get("QuestionnaireCompleted", false);
@@ -324,8 +324,34 @@ namespace Companion
             // Make sure that we only visit the Log In page on the first startup.
             if (LoggedIn)
             {
-                MainPage = new NavigationPage(new TaskPage());
-            } else
+                if (App.QuestionnaireLastCompleted == DateTime.MinValue)
+                {
+                    App.QuestionnaireCompleted = false;
+//                    await Navigation.PushAsync(new QuestionnairePage());
+                    MainPage = new NavigationPage(new QuestionnairePage());
+                }
+                else if (DateTime.Now.CompareTo(App.QuestionnaireLastCompleted.AddMonths(1)) >= 0)
+                {
+                    // Require FRS task monthly
+                    DateTime today = DateTime.Now;
+                    DateTime dueDate = App.QuestionnaireLastCompleted.AddMonths(1);
+
+                    // Ref https://docs.microsoft.com/en-us/dotnet/api/system.datetime.compareto?view=net-5.0
+                    if (today.CompareTo(dueDate) >= 0)
+                    {
+                    }
+                    App.QuestionnaireCompleted = false;
+//                    await Navigation.PushAsync(new QuestionnairePage());
+                    MainPage = new NavigationPage(new QuestionnairePage());
+                }
+                else
+                {
+                    MainPage = new NavigationPage(new TaskPage());
+                }
+
+                //                MainPage = new NavigationPage(new TaskPage());
+            }
+            else
             {
                 MainPage = new NavigationPage(new MainPage());
             }

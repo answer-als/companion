@@ -40,7 +40,7 @@
                         <Span Text="saying 'Ah' " FontAttributes="Bold" FontSize="Medium" TextColor="#006080" />
                         <Span Text="for as long as you can before breathing again. Be sure to " FontAttributes="None" FontSize="Medium"/>
                         <Span Text="only breathe once " FontAttributes="Bold" FontSize="Medium" TextColor="#006080" />
-                        <Span Text="during the entire recording!" FontAttributes="None" FontSize="Medium"/>
+                        <Span Text="during the entire recording! You may retry the task one time by tapping the Retry button." FontAttributes="None" FontSize="Medium"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>

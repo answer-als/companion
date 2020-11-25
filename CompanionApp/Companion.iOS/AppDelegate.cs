@@ -33,8 +33,8 @@ namespace Companion.iOS
             Plugin.InputKit.Platforms.iOS.Config.Init();
 
             Firebase.Core.App.Configure();
-            Crashlytics.Configure();
-            Fabric.Fabric.SharedSdk.Debug = true; // To enable debugging 
+//            Crashlytics.Configure();
+//            Fabric.Fabric.SharedSdk.Debug = true; // To enable debugging 
 
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {

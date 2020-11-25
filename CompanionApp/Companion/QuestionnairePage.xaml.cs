@@ -364,13 +364,14 @@ namespace Companion
             Submit.IsEnabled = false;
             HTTPPutUploading();
             await PUTProfileToServer();
-            //App.QuestionnaireLastCompleted = DateTime.Now;
+            App.QuestionnaireLastCompleted = DateTime.Now;
             if (App.SuccessfulPUT)
             {
                 App.CurrentQuestion = 1;
                 App.QuestionnaireCompleted = true;
                 //await HTTPPutSuccess();
-                await Navigation.PushAsync(new TaskPage());
+                Application.Current.MainPage = new TaskPage();
+//                await Navigation.PushAsync(new TaskPage());
             }
             else
             {
@@ -403,6 +404,7 @@ namespace Companion
         {
             var data = new
             {
+                /*
                 EducationLevel = App.EducationLevel,
                 BirthYear = App.BirthYear,
                 Person = App.Person,
@@ -415,7 +417,46 @@ namespace Companion
                 Diagnosis = App.Diagnosis,
                 OtherDiagnosis = App.OtherDiagnosis,
                 LanguagesSpoken = App.LangsSpoken,
-                LanguagesExposed = App.LangsExposed
+                LanguagesExposed = App.LangsExposed,
+                */
+                Person = App.Person,
+                PersonNotes = App.PersonNotes,
+
+                Speech = App.Speech,
+                SpeechNotes = App.SpeechNotes,
+
+                Salivation = App.Salivation,
+                SalivationNotes = App.SalivationNotes,
+
+                Swallowing = App.Swallowing,
+                SwallowingNotes = App.SwallowingNotes,
+
+                Handwriting = App.Handwriting,
+                HandwritingNotes = App.HandwritingNotes,
+
+                CuttingFood = App.CuttingFood,
+                CuttingFoodNotes = App.CuttingFoodNotes,
+
+                Dressing = App.Dressing,
+                DressingNotes = App.DressingNotes,
+
+                TurningInBed = App.TurningInBed,
+                TurningInBedNotes = App.TurningInBedNotes,
+
+                Walking = App.Walking,
+                WalkingNotes = App.WalkingNotes,
+
+                ClimbingStairs = App.ClimbingStairs,
+                ClimbingStairsNotes = App.ClimbingStairsNotes,
+
+                Dyspnea = App.Dyspnea,
+                DyspneaNotes = App.DyspneaNotes,
+
+                Orthopnea = App.Orthopnea,
+                OrthopneaNotes = App.OrthopneaNotes,
+
+                RespiratoryInsufficiency = App.RespiratoryInsufficiency,
+                RespiratoryInsufficiencyNotes = App.RespiratoryInsufficiencyNotes
             };
             var result = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
             return result;
@@ -459,7 +500,7 @@ namespace Companion
         void SaveProfile()
         {
             QuestionView1.SaveResponses();
-            QuestionView2.SaveResponses();
+            //QuestionView2.SaveResponses();
             QuestionView3.SaveResponses();
             QuestionView4.SaveResponses();
             QuestionView5.SaveResponses();
@@ -472,6 +513,7 @@ namespace Companion
             QuestionView12.SaveResponses();
             QuestionView13.SaveResponses();
             QuestionView14.SaveResponses();
+            QuestionView15.SaveResponses();
         }
 
         void Next_Clicked(object sender, EventArgs e)
@@ -483,10 +525,12 @@ namespace Companion
                     {
                         QuestionView1.SaveResponses();
                         QuestionView1.IsVisible = false;
-                        QuestionView2.IsVisible = true;
+                        // Skip over Q2 instead of renaming all the exisitng views
+                        //QuestionView2.IsVisible = true;
+                        QuestionView3.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
                         PreviousButton.Text = "< Back";
-                        App.CurrentQuestion = 2;
+                        App.CurrentQuestion = 3;
                     }
                     else
                     {
@@ -512,7 +556,10 @@ namespace Companion
                     {
                         QuestionView3.SaveResponses();
                         QuestionView3.IsVisible = false;
-
+                        QuestionView4.IsVisible = true;
+                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
+                        App.CurrentQuestion = 4;
+                        /*
                         // If Control User, then SKIP to Question 6, else go to next question
                         if (App.UserType.Equals("Control"))
                         {
@@ -528,6 +575,7 @@ namespace Companion
                             //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
                             App.CurrentQuestion = 4;
                         }
+                        */
                     }
                     else
                     {
@@ -808,9 +856,13 @@ namespace Companion
                     break;
                 case 3:
                     QuestionView3.IsVisible = false;
-                    QuestionView2.IsVisible = true;
+                    // Skip over Q2 instead of renaming all the exisitng views
+                    //QuestionView2.IsVisible = true;
+                    QuestionView1.IsVisible = true;
                     //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
-                    App.CurrentQuestion = 2;
+                    PreviousButton.Text = " ";
+                    PreviousButton.IsVisible = false;
+                    App.CurrentQuestion = 1;
                     break;
                 case 2:
                     QuestionView2.IsVisible = false;

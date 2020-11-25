@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using System.Text.RegularExpressions;
 
 namespace Companion
 {
@@ -50,6 +51,30 @@ namespace Companion
             {
                 await Navigation.PushAsync(new QuestionnairePage());
             }
+            /*
+            if (App.QuestionnaireLastCompleted == DateTime.MinValue)
+            {
+                App.QuestionnaireCompleted = false;
+                await Navigation.PushAsync(new QuestionnairePage());
+            }
+            else if (DateTime.Now.CompareTo(App.QuestionnaireLastCompleted.AddMonths(1) ) >= 0)
+            {
+                // Require FRS task monthly
+                DateTime today = DateTime.Now;
+                DateTime dueDate = App.QuestionnaireLastCompleted.AddMonths(1);
+
+                // Ref https://docs.microsoft.com/en-us/dotnet/api/system.datetime.compareto?view=net-5.0
+                if (today.CompareTo(dueDate) >= 0)
+                {
+                }
+                App.QuestionnaireCompleted = false;
+                await Navigation.PushAsync(new QuestionnairePage());
+            }
+            else if (App.QuestionnaireCompleted)
+            {
+                await Navigation.PushAsync(new TaskPage());
+            }
+            */
         }
 
         void OnFinishUserID(object sender, EventArgs e)
@@ -65,6 +90,8 @@ namespace Companion
 
         private bool ValidUserID(string userID)
         {
+            LoginErrorLabel.TextColor = Color.White;
+
             if (string.IsNullOrEmpty(userID))
             {
                 LoginErrorLabel.Text = "Please enter your User ID.";
@@ -73,6 +100,11 @@ namespace Companion
             if (userID.Equals("Error") || userID.Equals("Sign Out"))
             {
                 LoginErrorLabel.Text = "Please enter a valid User ID.";
+                return false;
+            }
+            if (Regex.IsMatch(userID, "^[A-Z][0-9]{4}[A-Z]") == false)
+            {
+                LoginErrorLabel.Text = "I don't recognize that User ID. Please try again.";
                 return false;
             }
             return true;
