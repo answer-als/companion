@@ -8,14 +8,16 @@
              x:Name="SpeechTask">
     
     <StackLayout Margin="0,0,0,0">
-        <Grid Margin="0,0,0,-5" 
+        <Grid x:Name="MyGrid" Margin="0,0,0,-5" 
               BackgroundColor="#006080">
+            <!--
             <Grid.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android, UWP">5,15,5,15</On>
                     <On Platform="iOS">5,25,5,15</On>
                 </OnPlatform>
             </Grid.Padding>
+            -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>

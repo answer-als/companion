@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 namespace Companion
 {
+    // This view is not used
     public partial class QuestionnaireView2 : ContentView
     {
         bool loaded = false; 
@@ -19,6 +20,7 @@ namespace Companion
 
         void LoadPrevious()
         {
+            /*
             if (!App.WeightNotes.Equals("DidNotAnswer"))
             {
                 WeightNotes.Text = App.WeightNotes;
@@ -37,12 +39,13 @@ namespace Companion
             {
                 LbOption.IsChecked = true;
             }
-
+            */
             loaded = true;
         }
 
         public void SaveResponses()
         {
+            /*
             if (KgOption.IsChecked)
             {
                 App.WeightUnits = "Kg";
@@ -61,6 +64,7 @@ namespace Companion
             {
                 App.WeightNotes = WeightNotes.Text;
             }
+            */
         }
 
         public bool Completed()

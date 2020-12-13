@@ -29,27 +29,17 @@
 
             <StackLayout Orientation="Vertical" BackgroundColor="White">
                 <input:RadioButtonGroupView x:Name="groupView" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Vertical" BackgroundColor="White" WidthRequest="300" Margin="20, 20, 20, 0">
-                    <input:RadioButton x:Name="NormalOption" Margin="10,10,10,0" Text="Normal" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>
+                    <input:RadioButton x:Name="NormalOption" Value="4" Margin="10,10,10,0" Text="Normal" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
-                    <input:RadioButton x:Name="SlightOption" Margin="10,10,10,0" Text="Slight but defininte excess of saliva in mouth; may have nighttime drooling" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>            
+                    <input:RadioButton x:Name="SlightOption" Value="3" Margin="10,10,10,0" Text="Slight but defininte excess of saliva in mouth; may have nighttime drooling" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>            
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
-                    <input:RadioButton x:Name="ModerateOption" Margin="10,10,10,0" Text="Moderately excessive saliva; may have minimal drooling" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>
+                    <input:RadioButton x:Name="ModerateOption" Value="2" Margin="10,10,10,0" Text="Moderately excessive saliva; may have minimal drooling" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
-                    <input:RadioButton x:Name="MarkedExcessOption" Margin="10,10,10,0" Text="Marked excess of saliva with some drooling" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
+                    <input:RadioButton x:Name="MarkedExcessOption" Value="1" Margin="10,10,10,0" Text="Marked excess of saliva with some drooling" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
-                    <input:RadioButton x:Name="MarkedDroolingOption" Margin="10,10,10,0" Text="Marked drooling; requires constant tissue or handkerchief" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
+                    <input:RadioButton x:Name="MarkedDroolingOption" Value="0" Margin="10,10,10,0" Text="Marked drooling; requires constant tissue or handkerchief" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
                 </input:RadioButtonGroupView>  
-
-                <Entry x:Name="SalivationNotes"
-                    Text="" Placeholder="Anything you want to add? (optional)"
-                    FontSize="Small"
-                    Margin="30, 10, 30, 10"
-                    HeightRequest="44" WidthRequest="300"
-                    TextChanged="AnswerProvided"
-                    TextColor="DarkGray"
-                    BackgroundColor="White"   
-                 />
 
                 <Label Text="3/14"
                     TextColor="#006080" FontSize="Small"

@@ -99,210 +99,70 @@ namespace Companion
             get => Preferences.Get("SpeechTasksRemaining", 3);
             set => Preferences.Set("SpeechTasksRemaining", value);
         }
-        public static string EducationLevel
-        {
-            get => Preferences.Get("EducationLevel", "DidNotAnswer");
-            set => Preferences.Set("EducationLevel", value);
-        }
-        public static string BirthYear
-        {
-            get => Preferences.Get("BirthYear", "DidNotAnswer");
-            set => Preferences.Set("BirthYear", value);
-        }
         public static string Person
         {
             get => Preferences.Get("Person", "DidNotAnswer");
             set => Preferences.Set("Person", value);
-        }
-        public static string PersonNotes
-        {
-            get => Preferences.Get("PersonNotes", "DidNotAnswer");
-            set => Preferences.Set("PersonNotes", value);
-        }
-        public static string Weight
-        {
-            get => Preferences.Get("Weight", "DidNotAnswer");
-            set => Preferences.Set("Weight", value);
-        }
-        public static string WeightUnits
-        {
-            get => Preferences.Get("WeightUnits", "DidNotAnswer");
-            set => Preferences.Set("WeightUnits", value);
-        }
-        public static string WeightNotes
-        {
-            get => Preferences.Get("WeightNotes", "DidNotAnswer");
-            set => Preferences.Set("WeightNotes", value);
         }
         public static string Speech
         {
             get => Preferences.Get("WeightUnits", "DidNotAnswer");
             set => Preferences.Set("WeightUnits", value);
         }
-        public static string SpeechNotes
-        {
-            get => Preferences.Get("WeightNotes", "DidNotAnswer");
-            set => Preferences.Set("WeightNotes", value);
-        }
         public static string Salivation
         {
             get => Preferences.Get("Salivation", "DidNotAnswer");
             set => Preferences.Set("Salivation", value);
-        }
-        public static string SalivationNotes
-        {
-            get => Preferences.Get("SalivationNotes", "DidNotAnswer");
-            set => Preferences.Set("SalivationNotes", value);
         }
         public static string Swallowing
         {
             get => Preferences.Get("Swallowing", "DidNotAnswer");
             set => Preferences.Set("Swallowing", value);
         }
-        public static string SwallowingNotes
-        {
-            get => Preferences.Get("SwallowingNotes", "DidNotAnswer");
-            set => Preferences.Set("SwallowingNotes", value);
-        }
         public static string Handwriting
         {
             get => Preferences.Get("Handwriting", "DidNotAnswer");
             set => Preferences.Set("Handwriting", value);
-        }
-        public static string HandwritingNotes
-        {
-            get => Preferences.Get("SwallowingNotes", "DidNotAnswer");
-            set => Preferences.Set("SwallowingNotes", value);
         }
         public static string CuttingFood
         {
             get => Preferences.Get("CuttingFood", "DidNotAnswer");
             set => Preferences.Set("CuttingFood", value);
         }
-        public static string CuttingFoodNotes
-        {
-            get => Preferences.Get("CuttingFoodNotes", "DidNotAnswer");
-            set => Preferences.Set("CuttingFoodNotes", value);
-        }
         public static string Dressing
         {
             get => Preferences.Get("Dressing", "DidNotAnswer");
             set => Preferences.Set("Dressing", value);
-        }
-        public static string DressingNotes
-        {
-            get => Preferences.Get("DressingNotes", "DidNotAnswer");
-            set => Preferences.Set("DressingNotes", value);
         }
         public static string TurningInBed
         {
             get => Preferences.Get("TurningInBed", "DidNotAnswer");
             set => Preferences.Set("TurningInBed", value);
         }
-        public static string TurningInBedNotes
-        {
-            get => Preferences.Get("TurningInBedNotes", "DidNotAnswer");
-            set => Preferences.Set("TurningInBedNotes", value);
-        }
         public static string Walking
         {
             get => Preferences.Get("Walking", "DidNotAnswer");
             set => Preferences.Set("Walking", value);
-        }
-        public static string WalkingNotes
-        {
-            get => Preferences.Get("WalkingNotes", "DidNotAnswer");
-            set => Preferences.Set("WalkingNotes", value);
         }
         public static string ClimbingStairs
         {
             get => Preferences.Get("ClimbingStairs", "DidNotAnswer");
             set => Preferences.Set("ClimbingStairs", value);
         }
-        public static string ClimbingStairsNotes
-        {
-            get => Preferences.Get("ClimbingStairsNotes", "DidNotAnswer");
-            set => Preferences.Set("ClimbingStairsNotes", value);
-        }
         public static string Dyspnea
         {
             get => Preferences.Get("Dyspnea", "DidNotAnswer");
             set => Preferences.Set("Dyspnea", value);
-        }
-        public static string DyspneaNotes
-        {
-            get => Preferences.Get("DyspneaNotes", "DidNotAnswer");
-            set => Preferences.Set("DyspneaNotes", value);
         }
         public static string Orthopnea
         {
             get => Preferences.Get("Orthopnea", "DidNotAnswer");
             set => Preferences.Set("Orthopnea", value);
         }
-        public static string OrthopneaNotes
-        {
-            get => Preferences.Get("OrthopneaNotes", "DidNotAnswer");
-            set => Preferences.Set("OrthopneaNotes", value);
-        }
         public static string RespiratoryInsufficiency
         {
             get => Preferences.Get("RespiratoryInsufficiency", "DidNotAnswer");
             set => Preferences.Set("RespiratoryInsufficiency", value);
-        }
-        public static string RespiratoryInsufficiencyNotes
-        {
-            get => Preferences.Get("RespiratoryInsufficiencyNotes", "DidNotAnswer");
-            set => Preferences.Set("RespiratoryInsufficiencyNotes", value);
-        }
-        public static string Handedness
-        {
-            get => Preferences.Get("Handedness", "DidNotAnswer");
-            set => Preferences.Set("Handedness", value);
-        }
-        public static string UserType
-        {
-            get => Preferences.Get("UserType", "DidNotAnswer"); // Control vs Patient
-            set => Preferences.Set("UserType", value);
-        }
-        public static string OnsetSite
-        {
-            get => Preferences.Get("OnsetSite", "DidNotAnswer");
-            set => Preferences.Set("OnsetSite", value);
-        }
-        public static string OnsetDate
-        {
-            get => Preferences.Get("OnsetDate", "DidNotAnswer");
-            set => Preferences.Set("OnsetDate", value);
-        }
-        public static string Diagnosis
-        {
-            get => Preferences.Get("Diagnosis", "DidNotAnswer");
-            set => Preferences.Set("Diagnosis", value);
-        }
-        public static string OtherDiagnosis
-        {
-            get => Preferences.Get("OtherDiagnosis", "DidNotAnswer");
-            set => Preferences.Set("OtherDiagnosis", value);
-        }
-        public static string English1Lang
-        {
-            get => Preferences.Get("English1Lang", "DidNotAnswer");
-            set => Preferences.Set("English1Lang", value);
-        }
-        public static string EnglishLearnerAge
-        {
-            get => Preferences.Get("EnglishLearnerAge", "DidNotAnswer");
-            set => Preferences.Set("EnglishLearnerAge", value);
-        }
-        public static string LangsSpoken
-        {
-            get => Preferences.Get("LangsSpoken", "DidNotAnswer");
-            set => Preferences.Set("LangsSpoken", value);
-        }
-        public static string LangsExposed
-        {
-            get => Preferences.Get("LangsExposed", "DidNotAnswer");
-            set => Preferences.Set("LangsExposed", value);
         }
         public static bool IsCountTask
         {
@@ -324,11 +184,12 @@ namespace Companion
             // Make sure that we only visit the Log In page on the first startup.
             if (LoggedIn)
             {
+                
                 if (App.QuestionnaireLastCompleted == DateTime.MinValue)
                 {
                     App.QuestionnaireCompleted = false;
 //                    await Navigation.PushAsync(new QuestionnairePage());
-                    MainPage = new NavigationPage(new QuestionnairePage());
+                    MainPage = new NavigationPage(new MainPage());
                 }
                 else if (DateTime.Now.CompareTo(App.QuestionnaireLastCompleted.AddMonths(1)) >= 0)
                 {
@@ -342,14 +203,14 @@ namespace Companion
                     }
                     App.QuestionnaireCompleted = false;
 //                    await Navigation.PushAsync(new QuestionnairePage());
-                    MainPage = new NavigationPage(new QuestionnairePage());
+                    MainPage = new NavigationPage(new MainPage());
                 }
                 else
                 {
                     MainPage = new NavigationPage(new TaskPage());
                 }
-
-                //                MainPage = new NavigationPage(new TaskPage());
+                
+                //MainPage = new NavigationPage(new TaskPage());
             }
             else
             {

@@ -10,6 +10,29 @@ namespace Companion
         public MenuPage()
         {
             InitializeComponent();
+
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                MyGrid.Padding = new Thickness(5, 15, 5, 15);
+                NotYou.Margin = new Thickness(0, 3, 0, 0);
+                SpeechTaskIntro.FontSize = (double)NamedSize.Large;
+                Back.FontSize = (double)NamedSize.Large;
+            }
+            else if (Device.RuntimePlatform == Device.iOS)
+            {
+                MyGrid.Padding = new Thickness(5, 35, 5, 20);
+                NotYou.Margin = new Thickness(0, 4, 0, 0);
+                SpeechTaskIntro.FontSize = (double)NamedSize.Default;
+                Back.FontSize = (double)NamedSize.Medium;
+            }
+            else if (Device.RuntimePlatform == Device.UWP)
+            {
+                MyGrid.Padding = new Thickness(5, 35, 5, 20);
+                NotYou.Margin = new Thickness(0, 3, 0, 0);
+                SpeechTaskIntro.FontSize = (double)NamedSize.Default;
+                Back.FontSize = (double)NamedSize.Large;
+            }
+
             NavigationPage.SetHasNavigationBar(this, false);
             BackButton.Source = ImageSource.FromResource("Companion.Icons.back_icon.png");
             UserIcon.Source = ImageSource.FromResource("Companion.Icons.bigger_user_icon.png");

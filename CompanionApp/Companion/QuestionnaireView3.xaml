@@ -30,27 +30,17 @@
 
             <StackLayout Orientation="Vertical" BackgroundColor="White">
                 <input:RadioButtonGroupView x:Name="groupView" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Vertical" BackgroundColor="White" WidthRequest="300" Margin="20, 20, 20, 0">
-                    <input:RadioButton x:Name="NormalOption" Margin="10,10,10,0" Text="Normal speech processes" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>
+                    <input:RadioButton x:Name="NormalOption" Value="4" Margin="10,10,10,0" Text="Normal speech processes" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
-                    <input:RadioButton x:Name="DetectableOption" Margin="10,10,10,0" Text="Detectable speech disturbance" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>            
+                    <input:RadioButton x:Name="DetectableOption" Value="3" Margin="10,10,10,0" Text="Detectable speech disturbance" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>            
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
-                    <input:RadioButton x:Name="IntelligibleOption" Margin="10,10,10,0" Text="Intelligible with repeating" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>
+                    <input:RadioButton x:Name="IntelligibleOption" Value="2" Margin="10,10,10,0" Text="Intelligible with repeating" LabelPosition="After" Clicked="AnswerProvided" Color="Black"/>
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
-                    <input:RadioButton x:Name="NonVocalOption" Margin="10,10,10,0" Text="Speech combined with non-vocal communication" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
+                    <input:RadioButton x:Name="NonVocalOption" Value="1" Margin="10,10,10,0" Text="Speech combined with non-vocal communication" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
-                    <input:RadioButton x:Name="LossOption" Margin="10,10,10,0" Text="Loss of useful speech" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
+                    <input:RadioButton x:Name="LossOption" Value="0" Margin="10,10,10,0" Text="Loss of useful speech" LabelPosition="After" Clicked="AnswerProvided" Color="#006080"/>
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
                 </input:RadioButtonGroupView>  
-
-                <Entry x:Name="SpeechNotes"
-                    Text="" Placeholder="Anything you want to add? (optional)"
-                    FontSize="Small"
-                    Margin="30, 10, 30, 10"
-                    HeightRequest="44" WidthRequest="300"
-                    TextChanged="AnswerProvided"
-                    TextColor="DarkGray"
-                    BackgroundColor="White"   
-                 />
 
                 <Label Text="2/14"
                     TextColor="#006080" FontSize="Small"

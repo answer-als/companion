@@ -12,6 +12,20 @@ namespace Companion
         public SpeechInstructionsPage()
         {
             InitializeComponent();
+
+            //// Change to OnPlatform syntax is confusing and docs do not address the Entry element.
+            //// Default XAML is set for iOS.
+            //// Ref https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/fonts
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                OuterGrid.Padding = new Thickness(5, 25, 5, 15);
+                //PageTitle.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
+            }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                OuterGrid.Padding = new Thickness(5, 15, 5, 15);
+            }
+
             NavigationPage.SetHasNavigationBar(this, false);
             OnArrivalUI();
         }

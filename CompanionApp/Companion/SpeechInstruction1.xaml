@@ -2,25 +2,31 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Companion.SpeechInstruction1">
-    
-    <StackLayout VerticalOptions="Fill" >
+
+    <StackLayout VerticalOptions="Start" >
         
     <Image x:Name="MainImage"
            HorizontalOptions="Center" 
-           VerticalOptions="Start">
+           VerticalOptions="Start"
+           HeightRequest="200"
+           Margin="60,20,60,0">
+        <!--
         <Image.Margin>
+            "60,20,60,10"
             <OnPlatform iOS="60,20,60,10" Android="60,20,60,0" UWP="60,40,60,10" />
         </Image.Margin>
         <Image.HeightRequest>
+            "300"
             <OnPlatform UWP="400" iOS="300" Android="300"/>
         </Image.HeightRequest>
+        -->
     </Image>
-        
+
     <Label Margin="40,0,40,0" TextColor="Black"
            HorizontalTextAlignment="Center"
            HorizontalOptions="Center"
            VerticalOptions="EndAndExpand"
-           HeightRequest="100">
+           HeightRequest="300">
         <Label.FormattedText>
             <FormattedString>
                 <Span Text="Make sure there is " FontAttributes="None" FontSize="Medium"/>
@@ -29,8 +35,7 @@
             </FormattedString>
         </Label.FormattedText>
     </Label>
-        
+                
     </StackLayout>
-    
-        
+
 </ContentView>

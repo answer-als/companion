@@ -18,6 +18,20 @@ namespace Companion
         public QuestionnairePage()
         {
             InitializeComponent();
+
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                MyGrid.Padding = new Thickness(5, 15, 5, 15);
+            }
+            else if (Device.RuntimePlatform == Device.iOS)
+            {
+                MyGrid.Padding = new Thickness(5, 25, 5, 15);
+            }
+            else if (Device.RuntimePlatform == Device.UWP)
+            {
+                MyGrid.Padding = new Thickness(5, 15, 5, 15);
+            }
+
             NavigationPage.SetHasNavigationBar(this, false);
             BackButton.Source = ImageSource.FromResource("Companion.Icons.back_icon.png");
             App.CurrentPage = "Questionnaire";
@@ -54,8 +68,8 @@ namespace Companion
         // Make sure to launch the questionnaire on the page that the user last left off on
         void StartCorrectly()
         {
-//            PreviousButton.IsVisible = true;
-//            PreviousButton.Text = "< Back";
+            PreviousButton.IsVisible = true;
+            PreviousButton.Text = " ";
 
             switch (App.CurrentQuestion)
             {
@@ -370,8 +384,8 @@ namespace Companion
                 App.CurrentQuestion = 1;
                 App.QuestionnaireCompleted = true;
                 //await HTTPPutSuccess();
-                Application.Current.MainPage = new TaskPage();
-//                await Navigation.PushAsync(new TaskPage());
+//                Application.Current.MainPage = new TaskPage();
+                await Navigation.PushAsync(new TaskPage());
             }
             else
             {
@@ -419,44 +433,46 @@ namespace Companion
                 LanguagesSpoken = App.LangsSpoken,
                 LanguagesExposed = App.LangsExposed,
                 */
-                Person = App.Person,
-                PersonNotes = App.PersonNotes,
 
+                Person = App.Person,
+
+                alsfrs_1 = App.Speech,
+                alsfrs_2 = App.Salivation,
+                alsfrs_3 = App.Swallowing,
+                alsfrs_4 = App.Handwriting,
+                alsfrs_5 = App.CuttingFood,
+                alsfrs_6 = App.Dressing,
+                alsfrs_7 = App.TurningInBed,
+                alsfrs_8 = App.Walking,
+                alsfrs_9 = App.ClimbingStairs,
+                alsfrs_R1 = App.Dyspnea,
+                alsfrs_R2 = App.Orthopnea,
+                alsfrs_R3 = App.RespiratoryInsufficiency,
+                /*
                 Speech = App.Speech,
-                SpeechNotes = App.SpeechNotes,
 
                 Salivation = App.Salivation,
-                SalivationNotes = App.SalivationNotes,
 
                 Swallowing = App.Swallowing,
-                SwallowingNotes = App.SwallowingNotes,
 
                 Handwriting = App.Handwriting,
-                HandwritingNotes = App.HandwritingNotes,
 
                 CuttingFood = App.CuttingFood,
-                CuttingFoodNotes = App.CuttingFoodNotes,
 
                 Dressing = App.Dressing,
-                DressingNotes = App.DressingNotes,
 
                 TurningInBed = App.TurningInBed,
-                TurningInBedNotes = App.TurningInBedNotes,
 
                 Walking = App.Walking,
-                WalkingNotes = App.WalkingNotes,
 
                 ClimbingStairs = App.ClimbingStairs,
-                ClimbingStairsNotes = App.ClimbingStairsNotes,
 
                 Dyspnea = App.Dyspnea,
-                DyspneaNotes = App.DyspneaNotes,
 
                 Orthopnea = App.Orthopnea,
-                OrthopneaNotes = App.OrthopneaNotes,
 
                 RespiratoryInsufficiency = App.RespiratoryInsufficiency,
-                RespiratoryInsufficiencyNotes = App.RespiratoryInsufficiencyNotes
+                */
             };
             var result = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
             return result;
@@ -518,6 +534,8 @@ namespace Companion
 
         void Next_Clicked(object sender, EventArgs e)
         {
+            IncompleteWarning.Text = " ";
+
             switch (App.CurrentQuestion)
             {
                 case 1:
@@ -544,6 +562,7 @@ namespace Companion
                         QuestionView2.IsVisible = false;
                         QuestionView3.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 3;
                     }
                     else
@@ -558,6 +577,7 @@ namespace Companion
                         QuestionView3.IsVisible = false;
                         QuestionView4.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 4;
                         /*
                         // If Control User, then SKIP to Question 6, else go to next question
@@ -589,6 +609,7 @@ namespace Companion
                         QuestionView4.IsVisible = false;
                         QuestionView5.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question5.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 5;
                     }
                     else
@@ -605,6 +626,7 @@ namespace Companion
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         //Next.IsVisible = false;
                         //Submit.IsVisible = true;
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 6;
                     }
                     else
@@ -619,6 +641,7 @@ namespace Companion
                         QuestionView6.IsVisible = false;
                         QuestionView7.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 7;
                     }
                     else
@@ -633,6 +656,7 @@ namespace Companion
                         QuestionView7.IsVisible = false;
                         QuestionView8.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 8;
                     }
                     else
@@ -647,6 +671,7 @@ namespace Companion
                         QuestionView8.IsVisible = false;
                         QuestionView9.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 9;
                     }
                     else
@@ -661,6 +686,7 @@ namespace Companion
                         QuestionView9.IsVisible = false;
                         QuestionView10.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 10;
                     }
                     else
@@ -675,6 +701,7 @@ namespace Companion
                         QuestionView10.IsVisible = false;
                         QuestionView11.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 11;
                     }
                     else
@@ -689,6 +716,7 @@ namespace Companion
                         QuestionView11.IsVisible = false;
                         QuestionView12.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 12;
                     }
                     else
@@ -703,6 +731,7 @@ namespace Companion
                         QuestionView12.IsVisible = false;
                         QuestionView13.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 13;
                     }
                     else
@@ -717,6 +746,7 @@ namespace Companion
                         QuestionView13.IsVisible = false;
                         QuestionView14.IsVisible = true;
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 14;
                     }
                     else
@@ -733,6 +763,7 @@ namespace Companion
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         Next.IsVisible = false;
                         Submit.IsVisible = true;
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 15;
                     }
                     else
@@ -744,6 +775,7 @@ namespace Companion
                         //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         Next.IsVisible = false;
                         Submit.IsVisible = true;
+                        PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 15;
                     break;
             }
@@ -758,6 +790,7 @@ namespace Companion
         {
             Next.IsVisible = true;
             Submit.IsVisible = false;
+            IncompleteWarning.Text = " ";
 
             switch (App.CurrentQuestion)
             {
@@ -856,12 +889,12 @@ namespace Companion
                     break;
                 case 3:
                     QuestionView3.IsVisible = false;
-                    // Skip over Q2 instead of renaming all the exisitng views
+                    // Skip over Q2 instead of renaming all the existing views
                     //QuestionView2.IsVisible = true;
                     QuestionView1.IsVisible = true;
                     //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
                     PreviousButton.Text = " ";
-                    PreviousButton.IsVisible = false;
+                    //PreviousButton.IsVisible = false;
                     App.CurrentQuestion = 1;
                     break;
                 case 2:
@@ -869,7 +902,7 @@ namespace Companion
                     QuestionView1.IsVisible = true;
                     //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question1.png");
                     PreviousButton.Text = " ";
-                    PreviousButton.IsVisible = false;
+                    //PreviousButton.IsVisible = false;
                     App.CurrentQuestion = 1;
                     break;
             }

@@ -9,6 +9,20 @@ namespace Companion
         public SpeechTaskPage()
         {
             InitializeComponent();
+
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                MyGrid.Padding = new Thickness(5, 15, 5, 15);
+            }
+            else if (Device.RuntimePlatform == Device.iOS)
+            {
+                MyGrid.Padding = new Thickness(5, 25, 5, 15);
+            }
+            else if (Device.RuntimePlatform == Device.UWP)
+            {
+                MyGrid.Padding = new Thickness(5, 15, 5, 15);
+            }
+
             NavigationPage.SetHasNavigationBar(this, false);
             HomeButton.Source = ImageSource.FromResource("Companion.Icons.home_icon.png");
             App.CurrentPage = "Speech";

@@ -6,11 +6,13 @@
     
     <StackLayout VerticalOptions="Fill"
                  Spacing="0" BackgroundColor="#e6e6e6">
-    <Grid Margin="0,0,0,10" VerticalOptions="StartAndExpand"
+    <Grid Margin="0,0,0,10" VerticalOptions="StartAndExpand" x:Name="OuterGrid"
           BackgroundColor="#006080">
+        <!--
         <Grid.Padding>
             <OnPlatform iOS="5,25,5,15" Android="5,15,5,15" />
         </Grid.Padding>
+        -->
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
@@ -29,25 +31,28 @@
                BackgroundColor="#006080"
                Text="Speech" TextColor="White"
                VerticalTextAlignment="Center"
-               HorizontalOptions="Center">
+               HorizontalOptions="Center" FontSize="Large">
+            <!--
             <Label.FontSize>
                 <OnPlatform iOS="Large" Android="Large"/>
             </Label.FontSize>
+            -->
         </Label>
     </Grid>
-        
+
     <ScrollView BackgroundColor="#e6e6e6">
         <StackLayout>
+                
             <local:SpeechInstruction1 x:Name="Instruction1"
-                                      VerticalOptions="FillAndExpand"
+                                      VerticalOptions="Start"
                                       IsVisible="false"/>
             <local:SpeechInstruction2 x:Name="Instruction2"
-                                      VerticalOptions="FillAndExpand"
+                                      VerticalOptions="Start"
                                       IsVisible="false"/>
             <local:SpeechInstruction3 x:Name="Instruction3"
-                                      VerticalOptions="FillAndExpand"
-                                      IsVisible="true"/>
-        
+                                      VerticalOptions="Start"
+                                      IsVisible="false"/>
+            
         <Button x:Name="Next" Margin="40,30,40,15"
                 BackgroundColor="#006080"
                 Text="Next" TextColor="White"

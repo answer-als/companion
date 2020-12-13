@@ -6,14 +6,16 @@
              BackgroundColor="#006080"
              Title="Speech Task">
     <StackLayout x:Name="Backdrop" Margin="0,0,0,0" VerticalOptions="Fill">
-        <Grid Margin="0,0,0,0" 
+        <Grid x:Name="MyGrid" Margin="0,0,0,0" 
               BackgroundColor="#006080">
+            <!--
             <Grid.Padding>
                  <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android, UWP">5,15,5,15</On>
                     <On Platform="iOS">5,25,5,15</On>
                 </OnPlatform>
             </Grid.Padding>
+                -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>

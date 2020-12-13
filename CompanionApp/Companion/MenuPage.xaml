@@ -6,12 +6,14 @@
              BackgroundColor="#e6e6e6">
     
     <StackLayout Margin="0,0,0,0">
-        <Grid Margin="0,0,0,10"
+        <Grid x:Name="MyGrid" Margin="0,0,0,10"
               RowSpacing="0"
               BackgroundColor="#006080">
+            <!--
             <Grid.Padding>
                 <OnPlatform iOS="5,35,5,20" Android="5,15,5,15" />
             </Grid.Padding>
+            -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="20" />
@@ -37,26 +39,26 @@
                     Grid.RowSpan="2"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
-            <Label Grid.Column="2" Grid.Row="3"
+            <Label x:Name="NotYou" Grid.Column="2" Grid.Row="3"
                     VerticalOptions="Start"
                     Text="Not you?" FontSize="Small"
                     TextColor="Red" FontAttributes="Bold">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SignOut_Clicked"/>
                 </Label.GestureRecognizers>
+                <!--
                 <Label.Margin>
                     <OnPlatform iOS="0,4,0,0" Android="0,3,0,0" />
                 </Label.Margin>
+                -->
             </Label>
-            <Label Grid.Column="2" Grid.Row="1"
+            <Label x:Name="UserLabel" Grid.Column="2" Grid.Row="1"
                    BackgroundColor="#006080"
                    Text="User" TextColor="Silver"
                    FontAttributes="Bold"
                    VerticalTextAlignment="End"
-                   HorizontalOptions="Start">
-                <Label.FontSize>
-                    <OnPlatform iOS="Medium" Android="Medium"/>
-                </Label.FontSize>
+                   HorizontalOptions="Start"
+                   FontSize="Medium">
             </Label>
             <Label x:Name="User" Grid.Column="2" Grid.Row="2"
                    Grid.ColumnSpan="2"
@@ -64,10 +66,8 @@
                    Text="UserIDHere" TextColor="White"
                    FontAttributes="None"
                    VerticalTextAlignment="Start"
-                   HorizontalOptions="Start">
-                <Label.FontSize>
-                    <OnPlatform iOS="Large" Android="Large"/>
-                </Label.FontSize>
+                   HorizontalOptions="Start"
+                   FontSize="Large">
             </Label>
         </Grid>
         
@@ -78,10 +78,8 @@
                     Text="Display instructions before starting the Speech task"
                     TextColor="#006080"
                     HorizontalOptions="StartAndExpand"
-                    VerticalOptions="Center">
-                <Label.FontSize>
-                    <OnPlatform iOS="Default" Android="Large"/>
-                </Label.FontSize>
+                    VerticalOptions="Center"
+                    FontSize="Default">
             </Label>
             <Switch x:Name="SpeechIntroSwitch"
                     VerticalOptions="Center"
@@ -115,9 +113,6 @@
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Tapped="BackButton_Clicked"/>
             </Label.GestureRecognizers>
-            <Label.FontSize>
-                    <OnPlatform iOS="Medium" Android="Large"/>
-            </Label.FontSize>
         </Label>
         </StackLayout>
         </ScrollView>           

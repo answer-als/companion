@@ -6,7 +6,9 @@
              BackgroundColor="#e6e6e6"
              Title="AALS Companion">
              
+                    
     <StackLayout Margin="0,0,0,0">
+
         <Grid Margin="0,0,0,0" x:Name="OuterGrid" 
               BackgroundColor="#006080">
             <Grid.RowDefinitions>
@@ -76,7 +78,7 @@
             </Frame>
         </StackLayout>
         <StackLayout Orientation="Vertical" Margin="20,10" BackgroundColor="Transparent">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,0" BackgroundColor="Transparent">
+<!--            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,0" BackgroundColor="Transparent">-->
                 <Label x:Name="SpeechTasksRemaining" Margin="0,0,0,0"
                        TextColor="#033333"
                        HorizontalTextAlignment="Center"
@@ -91,20 +93,22 @@
                        Text="0"
                        FontSize="Medium" FontAttributes="Bold" />
                 -->
-            </StackLayout>
+<!--            </StackLayout>-->
+            
             <Label x:Name="PressSpeechButtonPrompt" Margin="0,0,0,0"
                    TextColor="#033333"
                    HorizontalTextAlignment="Center"
                    Text="Press the 'Speech' button to continue."
-                   FontSize="Medium" FontAttributes="Bold" />
-        </StackLayout>
+                   FontSize="Small" FontAttributes="Bold" />
+            
         <Label x:Name="Speech_LastCompletedDate"
                HorizontalOptions="End"
                HorizontalTextAlignment="End"
-               Margin="20,0,20,10"
+               Margin="20,0,20,0"
                WidthRequest="300"
                Text=" " TextColor="Black"
                FontSize="Small" FontAttributes="Bold" />
+        </StackLayout>
             <!--
                 <Image x:Name="Logo"                
                 VerticalOptions="Center"
@@ -160,12 +164,13 @@
                Text="Last Completed: Never" TextColor="Black"
                FontSize="Micro" FontAttributes="Bold" />-->
         </StackLayout>
-        
         <local:PopUpMessage x:Name="MonthlyReminder"
                                       Margin="15,25"
                                       VerticalOptions="FillAndExpand"
                                       HorizontalOptions="FillAndExpand"
                                       BackgroundColor="#e6e6e6"
                                       IsVisible="false" />
+            
     </StackLayout>
+                       
 </ContentPage>

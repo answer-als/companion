@@ -37,7 +37,7 @@ namespace Companion
             Logo.Source = ImageSource.FromResource("Companion.aals_logo.png");
 
             App.CurrentPage = "Home";
-            Application.Current.MainPage = this;
+//            Application.Current.MainPage = this;
 
             _client = new HttpClient();
             CheckPermissions();
@@ -55,13 +55,17 @@ namespace Companion
         {
             try
             {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Microphone);
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync<MicrophonePermission>();
+                //var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Microphone);
                 if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                 {
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Plugin.Permissions.Abstractions.Permission.Microphone);
+                    var results = await CrossPermissions.Current.RequestPermissionAsync<MicrophonePermission>();
+                    //var results = await CrossPermissions.Current.RequestPermissionsAsync(Plugin.Permissions.Abstractions.Permission.Microphone);
                     //Best practice to always check that the key exists
-                    if (results.ContainsKey(Plugin.Permissions.Abstractions.Permission.Microphone))
-                        status = results[Plugin.Permissions.Abstractions.Permission.Microphone];
+                    if (results == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
+                        status = Plugin.Permissions.Abstractions.PermissionStatus.Granted;
+//                    if (results.ContainsKey(Plugin.Permissions.Abstractions.Permission.Microphone))
+//                        status = results[Plugin.Permissions.Abstractions.Permission.Microphone];
                 }
 
                 if (status == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
@@ -188,7 +192,8 @@ namespace Companion
                 if (App.SpeechTasksRemaining <= 0)
                 {
                     int nextTask = App.SpeechTaskLastCompleted.AddDays(7).DayOfYear;
-                    if (DateTime.Now.DayOfYear >= nextTask)
+//                    if (DateTime.Now.DayOfYear >= nextTask)
+                    if (DateTime.Now.CompareTo(App.SpeechTaskLastCompleted.AddDays(7)) >= 0)
                     {
                         SpeechButton.IsEnabled = true;
                         SpeechFrame.HasShadow = true;

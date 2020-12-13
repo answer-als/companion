@@ -7,17 +7,21 @@
         
     <Image x:Name="MainImage" Margin="60,20,60,0"
            HorizontalOptions="Center" 
-           VerticalOptions="Start">
+           VerticalOptions="Start"
+           HeightRequest="200">
+<!--
             <Image.HeightRequest>
+                "300"
                 <OnPlatform UWP="400" iOS="300" Android="300"/>
             </Image.HeightRequest>
+        -->
         </Image>
         
     <Label Margin="40,0,40,0" TextColor="Black"
            HorizontalTextAlignment="Center"
            HorizontalOptions="Center"
            VerticalOptions="EndAndExpand"
-           HeightRequest="120">
+           HeightRequest="300">
         <Label.FormattedText>
             <FormattedString>
                 <Span Text="Position your device " FontAttributes="None" FontSize="Medium"/>
