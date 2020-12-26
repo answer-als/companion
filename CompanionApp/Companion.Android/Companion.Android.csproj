@@ -21,7 +21,7 @@
     </NuGetPackageImportStamp>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
-    <ReleaseVersion>1.1.7</ReleaseVersion>
+    <ReleaseVersion>1.1.9</ReleaseVersion>
     <JavaMaximumHeapSize>5G</JavaMaximumHeapSize>
     <AndroidSupportedAbis>armeabi-v7a;arm64-v8a;x86;x86_64</AndroidSupportedAbis>
   </PropertyGroup>

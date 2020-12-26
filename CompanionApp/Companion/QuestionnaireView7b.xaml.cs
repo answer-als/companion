@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace Companion
 {
-    public partial class QuestionnaireView7 : ContentView
+    public partial class QuestionnaireView7b : ContentView
     {
-        public QuestionnaireView7()
+        public QuestionnaireView7b()
         {
             InitializeComponent();
 
@@ -20,7 +20,7 @@ namespace Companion
 
         public void SaveResponses()
         {
-            App.CuttingFood = groupView.SelectedItem.ToString();
+            App.CuttingFood_b = groupView.SelectedItem.ToString();
         }
 
         public bool Completed()

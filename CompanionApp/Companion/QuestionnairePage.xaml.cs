@@ -48,12 +48,12 @@ namespace Companion
 
             _client = new HttpClient();
             QuestionView1.Parent = this;
-            QuestionView2.Parent = this;
             QuestionView3.Parent = this;
             QuestionView4.Parent = this;
             QuestionView5.Parent = this;
             QuestionView6.Parent = this;
             QuestionView7.Parent = this;
+            QuestionView7b.Parent = this;
             QuestionView8.Parent = this;
             QuestionView9.Parent = this;
             QuestionView10.Parent = this;
@@ -75,12 +75,12 @@ namespace Companion
             {
                 case 1:
                     QuestionView1.IsVisible = true;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -89,17 +89,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question1.png");
                     PreviousButton.Text = " ";
                     break;
-                case 2:
+                case 1.5F:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = true;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -108,17 +107,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
                     PreviousButton.Text = "< Back";
                     break;
                 case 3:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = true;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -127,17 +125,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
                     PreviousButton.Text = "< Back";
                     break;
                 case 4:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = true;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -146,17 +143,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
                     PreviousButton.Text = "< Back";
                     break;
                 case 5:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = true;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -165,17 +161,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question5.png");
                     PreviousButton.Text = "< Back";
                     break;
                 case 6:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = true;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -184,19 +179,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     PreviousButton.Text = "< Back";
-//                    Next.IsVisible = false;
-//                    Submit.IsVisible = true;
                     break;
                 case 7:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = true;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -205,17 +197,34 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     PreviousButton.Text = "< Back";
                     break;
-                case 8:
+                case 7.5F:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = true;
+                    QuestionView8.IsVisible = false;
+                    QuestionView9.IsVisible = false;
+                    QuestionView10.IsVisible = false;
+                    QuestionView11.IsVisible = false;
+                    QuestionView12.IsVisible = false;
+                    QuestionView13.IsVisible = false;
+                    QuestionView14.IsVisible = false;
+                    QuestionView15.IsVisible = false;
+                    PreviousButton.Text = "< Back";
+                    break;
+                case 8:
+                    QuestionView1.IsVisible = false;
+                    QuestionView3.IsVisible = false;
+                    QuestionView4.IsVisible = false;
+                    QuestionView5.IsVisible = false;
+                    QuestionView6.IsVisible = false;
+                    QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = true;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -224,17 +233,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     PreviousButton.Text = "< Back";
                     break;
                 case 9:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = true;
                     QuestionView10.IsVisible = false;
@@ -243,17 +251,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     PreviousButton.Text = "< Back";
                     break;
                 case 10:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = true;
@@ -262,17 +269,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     PreviousButton.Text = "< Back";
                     break;
                 case 11:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -281,17 +287,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     PreviousButton.Text = "< Back";
                     break;
                 case 12:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -300,17 +305,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     PreviousButton.Text = "< Back";
                     break;
                 case 13:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -319,17 +323,16 @@ namespace Companion
                     QuestionView13.IsVisible = true;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     PreviousButton.Text = "< Back";
                     break;
                 case 14:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -338,19 +341,16 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = true;
                     QuestionView15.IsVisible = false;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     PreviousButton.Text = "< Back";
                     break;
-//                    Next.IsVisible = false;
-//                    Submit.IsVisible = true;
                 case 15:
                     QuestionView1.IsVisible = false;
-                    QuestionView2.IsVisible = false;
                     QuestionView3.IsVisible = false;
                     QuestionView4.IsVisible = false;
                     QuestionView5.IsVisible = false;
                     QuestionView6.IsVisible = false;
                     QuestionView7.IsVisible = false;
+                    QuestionView7b.IsVisible = false;
                     QuestionView8.IsVisible = false;
                     QuestionView9.IsVisible = false;
                     QuestionView10.IsVisible = false;
@@ -359,7 +359,6 @@ namespace Companion
                     QuestionView13.IsVisible = false;
                     QuestionView14.IsVisible = false;
                     QuestionView15.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     PreviousButton.Text = "< Back";
                     Next.IsVisible = false;
                     Submit.IsVisible = true;
@@ -395,7 +394,7 @@ namespace Companion
 
         void HTTPPutUploading()
         {
-            QuestionView10.IsVisible = false;
+            //QuestionView10.IsVisible = false;
             LoadingScreen.IsVisible = true;
             LoadingScreen.UploadingProfile();
         }
@@ -409,7 +408,7 @@ namespace Companion
         void HTTPPutFail()
         {
             LoadingScreen.IsVisible = false;
-            QuestionView6.IsVisible = true;
+            //QuestionView6.IsVisible = true;
             Submit.IsEnabled = true;
             Application.Current.MainPage.DisplayAlert("Error", "Your answers were saved, but could not be uploaded. Please make sure you are connected to the network, and try again.", "OK");
         }
@@ -418,29 +417,13 @@ namespace Companion
         {
             var data = new
             {
-                /*
-                EducationLevel = App.EducationLevel,
-                BirthYear = App.BirthYear,
-                Person = App.Person,
-                EnglishFirstLanguage = App.English1Lang,
-                EnglishLearningAge = App.EnglishLearnerAge,
-                Handedness = App.Handedness,
-                UserType = App.UserType,
-                OnsetSite = App.OnsetSite,
-                OnsetDate = App.OnsetDate,
-                Diagnosis = App.Diagnosis,
-                OtherDiagnosis = App.OtherDiagnosis,
-                LanguagesSpoken = App.LangsSpoken,
-                LanguagesExposed = App.LangsExposed,
-                */
-
-                Person = App.Person,
-
+                person = App.Person,
                 alsfrs_1 = App.Speech,
                 alsfrs_2 = App.Salivation,
                 alsfrs_3 = App.Swallowing,
                 alsfrs_4 = App.Handwriting,
-                alsfrs_5 = App.CuttingFood,
+                alsfrs_5a = App.CuttingFood,
+                alsfrs_5b = App.CuttingFood_b,
                 alsfrs_6 = App.Dressing,
                 alsfrs_7 = App.TurningInBed,
                 alsfrs_8 = App.Walking,
@@ -448,31 +431,6 @@ namespace Companion
                 alsfrs_R1 = App.Dyspnea,
                 alsfrs_R2 = App.Orthopnea,
                 alsfrs_R3 = App.RespiratoryInsufficiency,
-                /*
-                Speech = App.Speech,
-
-                Salivation = App.Salivation,
-
-                Swallowing = App.Swallowing,
-
-                Handwriting = App.Handwriting,
-
-                CuttingFood = App.CuttingFood,
-
-                Dressing = App.Dressing,
-
-                TurningInBed = App.TurningInBed,
-
-                Walking = App.Walking,
-
-                ClimbingStairs = App.ClimbingStairs,
-
-                Dyspnea = App.Dyspnea,
-
-                Orthopnea = App.Orthopnea,
-
-                RespiratoryInsufficiency = App.RespiratoryInsufficiency,
-                */
             };
             var result = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
             return result;
@@ -516,12 +474,12 @@ namespace Companion
         void SaveProfile()
         {
             QuestionView1.SaveResponses();
-            //QuestionView2.SaveResponses();
             QuestionView3.SaveResponses();
             QuestionView4.SaveResponses();
             QuestionView5.SaveResponses();
             QuestionView6.SaveResponses();
             QuestionView7.SaveResponses();
+            QuestionView7b.SaveResponses();
             QuestionView8.SaveResponses();
             QuestionView9.SaveResponses();
             QuestionView10.SaveResponses();
@@ -543,25 +501,7 @@ namespace Companion
                     {
                         QuestionView1.SaveResponses();
                         QuestionView1.IsVisible = false;
-                        // Skip over Q2 instead of renaming all the exisitng views
-                        //QuestionView2.IsVisible = true;
                         QuestionView3.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
-                        PreviousButton.Text = "< Back";
-                        App.CurrentQuestion = 3;
-                    }
-                    else
-                    {
-                        IncompleteWarning.Text = "Please answer each question.";
-                    }
-                    break;
-                case 2:
-                    if (QuestionView2.Completed())
-                    {
-                        QuestionView2.SaveResponses();
-                        QuestionView2.IsVisible = false;
-                        QuestionView3.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 3;
                     }
@@ -576,26 +516,8 @@ namespace Companion
                         QuestionView3.SaveResponses();
                         QuestionView3.IsVisible = false;
                         QuestionView4.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 4;
-                        /*
-                        // If Control User, then SKIP to Question 6, else go to next question
-                        if (App.UserType.Equals("Control"))
-                        {
-                            QuestionView6.IsVisible = true;
-                            //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
-                            Next.IsVisible = false;
-                            Submit.IsVisible = true;
-                            App.CurrentQuestion = 6;
-                        }
-                        else
-                        {
-                            QuestionView4.IsVisible = true;
-                            //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
-                            App.CurrentQuestion = 4;
-                        }
-                        */
                     }
                     else
                     {
@@ -608,7 +530,6 @@ namespace Companion
                         QuestionView4.SaveResponses();
                         QuestionView4.IsVisible = false;
                         QuestionView5.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question5.png");
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 5;
                     }
@@ -623,9 +544,6 @@ namespace Companion
                         QuestionView5.SaveResponses();
                         QuestionView5.IsVisible = false;
                         QuestionView6.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
-                        //Next.IsVisible = false;
-                        //Submit.IsVisible = true;
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 6;
                     }
@@ -640,22 +558,34 @@ namespace Companion
                         QuestionView6.SaveResponses();
                         QuestionView6.IsVisible = false;
                         QuestionView7.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         PreviousButton.Text = "< Back";
-                        App.CurrentQuestion = 7;
+                        App.CurrentQuestion = 7.0F;
                     }
                     else
                     {
                         IncompleteWarning.Text = "Please answer each question.";
                     }
                     break;
-                case 7:
+                case 7.0F:
                     if (QuestionView7.Completed())
                     {
                         QuestionView7.SaveResponses();
                         QuestionView7.IsVisible = false;
+                        QuestionView7b.IsVisible = true;
+                        PreviousButton.Text = "< Back";
+                        App.CurrentQuestion = 7.5F;
+                    }
+                    else
+                    {
+                        IncompleteWarning.Text = "Please answer each question.";
+                    }
+                    break;
+                case 7.5F:
+                    if (QuestionView7b.Completed())
+                    {
+                        QuestionView7b.SaveResponses();
+                        QuestionView7b.IsVisible = false;
                         QuestionView8.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 8;
                     }
@@ -670,7 +600,6 @@ namespace Companion
                         QuestionView8.SaveResponses();
                         QuestionView8.IsVisible = false;
                         QuestionView9.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 9;
                     }
@@ -685,7 +614,6 @@ namespace Companion
                         QuestionView9.SaveResponses();
                         QuestionView9.IsVisible = false;
                         QuestionView10.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 10;
                     }
@@ -700,7 +628,6 @@ namespace Companion
                         QuestionView10.SaveResponses();
                         QuestionView10.IsVisible = false;
                         QuestionView11.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 11;
                     }
@@ -715,7 +642,6 @@ namespace Companion
                         QuestionView11.SaveResponses();
                         QuestionView11.IsVisible = false;
                         QuestionView12.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 12;
                     }
@@ -730,7 +656,6 @@ namespace Companion
                         QuestionView12.SaveResponses();
                         QuestionView12.IsVisible = false;
                         QuestionView13.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 13;
                     }
@@ -745,7 +670,6 @@ namespace Companion
                         QuestionView13.SaveResponses();
                         QuestionView13.IsVisible = false;
                         QuestionView14.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         PreviousButton.Text = "< Back";
                         App.CurrentQuestion = 14;
                     }
@@ -760,7 +684,6 @@ namespace Companion
                         QuestionView14.SaveResponses();
                         QuestionView14.IsVisible = false;
                         QuestionView15.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         Next.IsVisible = false;
                         Submit.IsVisible = true;
                         PreviousButton.Text = "< Back";
@@ -772,7 +695,6 @@ namespace Companion
                     }
                     break;
                 case 15:
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                         Next.IsVisible = false;
                         Submit.IsVisible = true;
                         PreviousButton.Text = "< Back";
@@ -794,113 +716,77 @@ namespace Companion
 
             switch (App.CurrentQuestion)
             {
-                /*
-                case 6:
-                    QuestionView6.IsVisible = false;
-                    Next.IsVisible = true;
-                    Submit.IsVisible = false;
-
-                    // If Control User, then SKIP to Question 3, else go to previous question
-                    if (App.UserType.Equals("Control"))
-                    {
-                        QuestionView3.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
-                        App.CurrentQuestion = 3;
-                    }
-                    else
-                    {
-                        QuestionView5.IsVisible = true;
-                        //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question5.png");
-                        App.CurrentQuestion = 5;
-                    }
-                    break;
-                    */
                 case 15:
                     QuestionView15.IsVisible = false;
                     QuestionView14.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     App.CurrentQuestion = 14;
                     break;
                 case 14:
                     QuestionView14.IsVisible = false;
                     QuestionView13.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     App.CurrentQuestion = 13;
                     break;
                 case 13:
                     QuestionView13.IsVisible = false;
                     QuestionView12.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     App.CurrentQuestion = 12;
                     break;
                 case 12:
                     QuestionView12.IsVisible = false;
                     QuestionView11.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     App.CurrentQuestion = 11;
                     break;
                 case 11:
                     QuestionView11.IsVisible = false;
                     QuestionView10.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     App.CurrentQuestion = 10;
                     break;
                 case 10:
                     QuestionView10.IsVisible = false;
                     QuestionView9.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     App.CurrentQuestion = 9;
                     break;
                 case 9:
                     QuestionView9.IsVisible = false;
                     QuestionView8.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     App.CurrentQuestion = 8;
                     break;
                 case 8:
                     QuestionView8.IsVisible = false;
-                    QuestionView7.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
-                    App.CurrentQuestion = 7;
+                    QuestionView7b.IsVisible = true;
+                    App.CurrentQuestion = 7.5F;
                     break;
-                case 7:
+                case 7.5F:
+                    QuestionView7b.IsVisible = false;
+                    QuestionView7.IsVisible = true;
+                    App.CurrentQuestion = 7.0F;
+                    break;
+                case 7.0F:
                     QuestionView7.IsVisible = false;
                     QuestionView6.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question6.png");
                     App.CurrentQuestion = 6;
                     break;
                 case 6:
                     QuestionView6.IsVisible = false;
                     QuestionView5.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question5.png");
                     App.CurrentQuestion = 5;
                     break;
                 case 5:
                     QuestionView5.IsVisible = false;
                     QuestionView4.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question4.png");
                     App.CurrentQuestion = 4;
                     break;
                 case 4:
                     QuestionView4.IsVisible = false;
                     QuestionView3.IsVisible = true;
+                    // Dots were used in v1.0. There were fewer questions to display back then.
+                    // Now the app displays a numbered indicator at the bottom of each view.
                     //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question3.png");
                     App.CurrentQuestion = 3;
                     break;
                 case 3:
                     QuestionView3.IsVisible = false;
-                    // Skip over Q2 instead of renaming all the existing views
-                    //QuestionView2.IsVisible = true;
                     QuestionView1.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question2.png");
-                    PreviousButton.Text = " ";
-                    //PreviousButton.IsVisible = false;
-                    App.CurrentQuestion = 1;
-                    break;
-                case 2:
-                    QuestionView2.IsVisible = false;
-                    QuestionView1.IsVisible = true;
-                    //PositionDots.Source = ImageSource.FromResource("Companion.PositionDots.Questionnaire.question1.png");
                     PreviousButton.Text = " ";
                     //PreviousButton.IsVisible = false;
                     App.CurrentQuestion = 1;

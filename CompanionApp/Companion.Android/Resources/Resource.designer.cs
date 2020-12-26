@@ -15064,13 +15064,10 @@ namespace Companion.Droid
 			public const int path_password_strike_through = 2131624070;
 			
 			// aapt resource value: 0x7F0E0087
-			public const int project_id = 2131624071;
+			public const int search_menu_title = 2131624071;
 			
 			// aapt resource value: 0x7F0E0088
-			public const int search_menu_title = 2131624072;
-			
-			// aapt resource value: 0x7F0E0089
-			public const int status_bar_notification_info_overflow = 2131624073;
+			public const int status_bar_notification_info_overflow = 2131624072;
 			
 			static String()
 			{

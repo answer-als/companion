@@ -89,9 +89,9 @@ namespace Companion
             get => Preferences.Get("QuestionnaireCompleted", false);
             set => Preferences.Set("QuestionnaireCompleted", value);
         }
-        public static int CurrentQuestion
+        public static float CurrentQuestion
         {
-            get => Preferences.Get("CurrentQuestion", 1);
+            get => Preferences.Get("CurrentQuestion", 1.0F);
             set => Preferences.Set("CurrentQuestion", value);
         }
         public static int SpeechTasksRemaining
@@ -128,6 +128,11 @@ namespace Companion
         {
             get => Preferences.Get("CuttingFood", "DidNotAnswer");
             set => Preferences.Set("CuttingFood", value);
+        }
+        public static string CuttingFood_b
+        {
+            get => Preferences.Get("CuttingFood_b", "DidNotAnswer");
+            set => Preferences.Set("CuttingFood_b", value);
         }
         public static string Dressing
         {

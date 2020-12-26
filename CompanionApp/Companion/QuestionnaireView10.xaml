@@ -43,7 +43,7 @@
                     <BoxView HeightRequest="1" WidthRequest="300" Margin="10,10,10,0" Color="LightGray" />
                 </input:RadioButtonGroupView>  
 
-                 <Label Text="9/14"
+                 <Label Text="10/14"
                    TextColor="#006080" FontSize="Small"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"

@@ -48,11 +48,6 @@
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="true"/>
         
-        <local:QuestionnaireView2 x:Name="QuestionView2"
-                                  Padding="20,0,20,0"
-                                  VerticalOptions="FillAndExpand"
-                                  IsVisible="false"/>
-        
         <local:QuestionnaireView3 x:Name="QuestionView3"
                                   Padding="20,0,20,0"
                                   VerticalOptions="FillAndExpand"
@@ -74,6 +69,11 @@
                                   IsVisible="false"/>
         
         <local:QuestionnaireView7 x:Name="QuestionView7"
+                                  Padding="20,0,20,0"
+                                  VerticalOptions="FillAndExpand"
+                                  IsVisible="false"/>
+        
+        <local:QuestionnaireView7b x:Name="QuestionView7b"
                                   Padding="20,0,20,0"
                                   VerticalOptions="FillAndExpand"
                                   IsVisible="false"/>

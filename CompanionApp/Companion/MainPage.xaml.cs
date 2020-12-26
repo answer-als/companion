@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
 
 namespace Companion
 {
@@ -19,20 +20,45 @@ namespace Companion
 
             if (Device.RuntimePlatform == Device.Android)
             {
-                LogoLabel.FontSize = (double)NamedSize.Medium;
+                //                LogoLabel.FontSize = (double)NamedSize.Medium;
+                SupportUrl.CommandParameter = "https://support.google.com/accessibility/android/answer/6006972?hl=en";
             }
             else if (Device.RuntimePlatform == Device.iOS)
             {
-                LogoLabel.FontSize = (double)NamedSize.Large;
+//                LogoLabel.FontSize = (double)NamedSize.Large;
+                SupportUrl.CommandParameter = "https://support.apple.com/en-us/HT202828";
             }
             else if (Device.RuntimePlatform == Device.UWP)
             {
-                LogoLabel.FontSize = (double)NamedSize.Medium;
+//                LogoLabel.FontSize = (double)NamedSize.Medium;
             }
+
+            BindingContext = this;
 
             NavigationPage.SetHasNavigationBar(this, false);
             Logo.Source = ImageSource.FromResource("Companion.aals_logo.png");
             App.CurrentPage = "Login";
+        }
+
+        public ICommand ClickCommand => new Command<string>((url) =>
+        {
+            OpenUrl(url);
+        });
+
+        async void OpenUrl(string tempUrl)
+        {
+            string url = "";
+
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                url = "https://support.google.com/accessibility/android/answer/6006972?hl=en";
+            }
+            else if (Device.RuntimePlatform == Device.iOS)
+            {
+                url = "https://support.apple.com/en-us/HT202828";
+            }
+
+            await Launcher.TryOpenAsync(url);
         }
 
         protected override void OnAppearing() 
@@ -45,13 +71,13 @@ namespace Companion
             {
                 userIDEntry.Text = "";
                 userIDEntry.Placeholder = "Enter participant ID";
-                passwordEntry.Text = "";
-                passwordEntry.Placeholder = "Enter password";
+//                passwordEntry.Text = "";
+//                passwordEntry.Placeholder = "Enter password";
             }
             else
             {
                 userIDEntry.Text = previousUser;
-                passwordEntry.Text = App.Password;
+//                passwordEntry.Text = App.Password;
             }
         }
 
@@ -98,7 +124,7 @@ namespace Companion
             {
                 LoginErrorLabel.Text = " ";
                 Preferences.Set("UserID", userIDEntry.Text);
-                passwordEntry.Focus();
+                //passwordEntry.Focus();
             }
         }
 
@@ -137,8 +163,8 @@ namespace Companion
         {
             if ((textChanges == 1) && (App.LoginVisits == 1))
             {
-                passwordEntry.Text = "";
-                passwordEntry.Placeholder = "Enter password";
+//                passwordEntry.Text = "";
+//                passwordEntry.Placeholder = "Enter password";
             }
 
             textChanges += 1;

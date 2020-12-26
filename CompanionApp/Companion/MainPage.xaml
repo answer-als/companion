@@ -15,11 +15,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
-                <RowDefinition Height="30*" />
+                <RowDefinition Height="40*" />
+                <RowDefinition Height="20*" />
                 <RowDefinition Height="10*" />  
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="50*" />
 <!--
                 <RowDefinition Height="10" />
                 <RowDefinition Height="30*" />
@@ -28,25 +26,70 @@
                 <RowDefinition Height="50*" />
                 -->
             </Grid.RowDefinitions>
-            <Image x:Name="Logo"
-                   Grid.Row="1" Grid.Column="1" 
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand"/>
-            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+            <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                <Image x:Name="Logo"
+                   MinimumHeightRequest="20"
+                      Grid.Column="1"
+                   />
+            
+                                <Label 
                    x:Name="LogoLabel"
                    Text="AALS Companion"
+                   FontSize="Large"
                    FontAttributes="Bold"
                    TextColor="White"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Start"
-                   FontSize="Large"/>
-            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+                   HorizontalTextAlignment="Center"
+                    Grid.Column="1"
+                    MinimumHeightRequest="20"
+                   />
+                
+                <Label 
+                   x:Name="DarkModeWarning"
+                    Margin="0, 5, 0, 5"
+                   Text="Dark Mode is NOT supported. Please turn Dark Mode OFF."
+                   FontSize="Small" TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   WidthRequest="300"
+                   />
+                <Label 
+                   x:Name="LargeFontSizeWarning"
+                   Margin="0, 5, 0, 0"
+                   Text="This app supports large font sizes, but works better using your device’s default font size."
+                   FontSize="Small" TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   WidthRequest="300">
+                </Label>
+
+                <Label 
+                   Margin="0, 0, 0, 5"
+                   FontSize="Small" TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   WidthRequest="300">
+                   <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Click here for more information"
+                                  TextColor="LightGray"
+                                  TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="SupportUrl" Command="{Binding ClickCommand}" NumberOfTapsRequired="1"
+                                                          CommandParameter="https://support.apple.com/en-us/HT202828" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                   </Label.FormattedText>
+                </Label>
+
+            </StackLayout>
+            
+            <StackLayout Grid.Row="1" Grid.Column="1" >
+                <Label 
                    x:Name="LoginErrorLabel"
+                    Margin="0, 0, 0, 0"
                    Text=" "
-                   FontSize="Micro" TextColor="White"
-                   HorizontalOptions="Center"
-                   VerticalOptions="End"/>
-            <StackLayout Grid.Row="4" Grid.Column="1">
+                   FontSize="Small" TextColor="White"
+                   HorizontalTextAlignment="Center"
+                />
+
                 <Entry x:Name="userIDEntry"
                        IsPassword="false"
                        BackgroundColor="White"
@@ -57,26 +100,18 @@
                        PlaceholderColor="LightGray"
                        HeightRequest="44"
                        WidthRequest="150"/>
-                <Entry x:Name="passwordEntry"
-                       IsVisible="false"
-                       IsPassword="true"
-                       BackgroundColor="White"
-                       Placeholder="Enter password"
-                       Text=""
-                       Completed="OnLoginClick"
-                       PlaceholderColor="LightGray"
-                       HeightRequest="44"
-                       WidthRequest="150"/>
                 <Button x:Name="LoginButton"
                         BackgroundColor="#00955c"
                         Text="Login"
                         Clicked="OnLoginClick"
-                        TextColor="White"
-                        FontSize="Large"
+                        TextColor="White"                        
                         FontAttributes="Bold"
                         WidthRequest="150"/>
+
             </StackLayout>
+            
         </Grid>
         
     </ScrollView>
 </ContentPage>
+                   <!--Grid.Row="0" Grid.Column="1" -->

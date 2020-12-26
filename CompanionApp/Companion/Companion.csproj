@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <ReleaseVersion>1.1.7</ReleaseVersion>
+    <ReleaseVersion>1.1.9</ReleaseVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -85,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="QuestionnaireView6 %28copy%29.xaml.cs" />
-    <Compile Remove="QuestionnaireView7 %28copy%29.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="__SpeechIntro.xaml.cs">

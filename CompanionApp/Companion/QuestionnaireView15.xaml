@@ -28,14 +28,14 @@
                    HorizontalTextAlignment="Center"
                    FontAttributes="Bold"
                    Margin="0,0,0,5"/>
-
-            <Label Text="14/14"
+            <!--
+            <Label Text="15/15"
                    TextColor="#e6e6e6" FontSize="Small"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    VerticalOptions="End"
                    Margin="0,0,0,5"/>
-            <!--
+            
             <StackLayout Orientation="Vertical" BackgroundColor="White">
                 
              <BoxView Margin="0,10" HeightRequest="300" 
