@@ -43,14 +43,14 @@
                     MinimumHeightRequest="20"
                    />
                 
-                <Label 
+                <!--<Label 
                    x:Name="DarkModeWarning"
                     Margin="0, 5, 0, 5"
                    Text="Dark Mode is NOT supported. Please turn Dark Mode OFF."
                    FontSize="Small" TextColor="White"
                    HorizontalTextAlignment="Center"
                    WidthRequest="300"
-                   />
+                   />-->
                 <Label 
                    x:Name="LargeFontSizeWarning"
                    Margin="0, 5, 0, 0"
