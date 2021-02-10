@@ -15,7 +15,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40*" />
+                <RowDefinition Height="25*" />
                 <RowDefinition Height="20*" />
                 <RowDefinition Height="10*" />  
 <!--
@@ -43,42 +43,6 @@
                     MinimumHeightRequest="20"
                    />
                 
-                <!--<Label 
-                   x:Name="DarkModeWarning"
-                    Margin="0, 5, 0, 5"
-                   Text="Dark Mode is NOT supported. Please turn Dark Mode OFF."
-                   FontSize="Small" TextColor="White"
-                   HorizontalTextAlignment="Center"
-                   WidthRequest="300"
-                   />-->
-                <Label 
-                   x:Name="LargeFontSizeWarning"
-                   Margin="0, 5, 0, 0"
-                   Text="This app supports large font sizes, but works better using your device’s default font size."
-                   FontSize="Small" TextColor="White"
-                   HorizontalTextAlignment="Center"
-                   WidthRequest="300">
-                </Label>
-
-                <Label 
-                   Margin="0, 0, 0, 5"
-                   FontSize="Small" TextColor="White"
-                   HorizontalTextAlignment="Center"
-                   WidthRequest="300">
-                   <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="Click here for more information"
-                                  TextColor="LightGray"
-                                  TextDecorations="Underline">
-                                <Span.GestureRecognizers>
-                                    <TapGestureRecognizer x:Name="SupportUrl" Command="{Binding ClickCommand}" NumberOfTapsRequired="1"
-                                                          CommandParameter="https://support.apple.com/en-us/HT202828" />
-                                </Span.GestureRecognizers>
-                            </Span>
-                        </FormattedString>
-                   </Label.FormattedText>
-                </Label>
-
             </StackLayout>
             
             <StackLayout Grid.Row="1" Grid.Column="1" >
@@ -107,6 +71,32 @@
                         TextColor="White"                        
                         FontAttributes="Bold"
                         WidthRequest="150"/>
+
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" Grid.Column="1">
+
+                <Label 
+                   Margin="0, 15, 0, 0"
+                   FontSize="Small" TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   WidthRequest="300">
+                   <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="www.answerals.org"
+                                  TextColor="LightGray"
+                                  TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        x:Name="HomePage"
+                                        Command="{Binding ClickCommand}"
+                                        NumberOfTapsRequired="1"
+                                        CommandParameter="https://www.answerals.org" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                   </Label.FormattedText>
+                </Label>
 
             </StackLayout>
             

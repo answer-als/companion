@@ -21,12 +21,12 @@ namespace Companion
             if (Device.RuntimePlatform == Device.Android)
             {
                 //                LogoLabel.FontSize = (double)NamedSize.Medium;
-                SupportUrl.CommandParameter = "https://support.google.com/accessibility/android/answer/6006972?hl=en";
+                //SupportUrl.CommandParameter = "https://support.google.com/accessibility/android/answer/6006972?hl=en";
             }
             else if (Device.RuntimePlatform == Device.iOS)
             {
 //                LogoLabel.FontSize = (double)NamedSize.Large;
-                SupportUrl.CommandParameter = "https://support.apple.com/en-us/HT202828";
+                //SupportUrl.CommandParameter = "https://support.apple.com/en-us/HT202828";
             }
             else if (Device.RuntimePlatform == Device.UWP)
             {
@@ -47,16 +47,16 @@ namespace Companion
 
         async void OpenUrl(string tempUrl)
         {
-            string url = "";
+            string url = "https://www.answerals.org";
 
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                url = "https://support.google.com/accessibility/android/answer/6006972?hl=en";
-            }
-            else if (Device.RuntimePlatform == Device.iOS)
-            {
-                url = "https://support.apple.com/en-us/HT202828";
-            }
+            //if (Device.RuntimePlatform == Device.Android)
+            //{
+            //    url = "https://support.google.com/accessibility/android/answer/6006972?hl=en";
+            //}
+            //else if (Device.RuntimePlatform == Device.iOS)
+            //{
+            //    url = "https://support.apple.com/en-us/HT202828";
+            //}
 
             await Launcher.TryOpenAsync(url);
         }
