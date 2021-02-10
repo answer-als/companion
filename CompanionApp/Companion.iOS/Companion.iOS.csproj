@@ -78,8 +78,8 @@
     <MtouchUseLlvm>
     </MtouchUseLlvm>
     <MtouchVerbosity>2</MtouchVerbosity>
-    <CodesignProvision>VS: WildCard Development</CodesignProvision>
     <MtouchLink>SdkOnly</MtouchLink>
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
