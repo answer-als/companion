@@ -85,6 +85,17 @@
                     VerticalOptions="Center"
                     Toggled="SpeechIntro_Toggled"/>
         </StackLayout>
+
+        <Button x:Name="Support" Margin="20,10,20,10"
+            BackgroundColor="LightGray"
+            Text="Support"
+            TextColor="#006080"
+            FontAttributes="Bold"
+            HorizontalOptions="Fill"
+            WidthRequest="100"
+            HeightRequest="55"
+            Clicked="SupportButton_Clicked"/>
+
         <Button x:Name="SignOut" Margin="20,10,20,10"
                 BackgroundColor="LightGray"
                 Text="Sign Out"

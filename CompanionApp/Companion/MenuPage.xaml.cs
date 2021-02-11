@@ -50,6 +50,13 @@ namespace Companion
             await Navigation.PopToRootAsync();
         }
 
+        async void SupportButton_Clicked(object sender, EventArgs e)
+        {
+            string url = "https://www.answerals.org/companion-app/";
+
+            await Launcher.TryOpenAsync(url);
+        }        
+
         void SpeechIntro_Toggled(object sender, EventArgs e)
         {
             App.ShowSpeechInstructions = SpeechIntroSwitch.IsToggled;
