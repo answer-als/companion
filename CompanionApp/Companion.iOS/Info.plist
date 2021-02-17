@@ -41,10 +41,12 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location data is not used directly in the AALS Companion app but is referenced by external libraries.</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.11</string>
+	<string>1.1.12</string>
 	<key>CFBundleVersion</key>
-	<string>1.1.11</string>
+	<string>1.1.12</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
