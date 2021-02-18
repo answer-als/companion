@@ -23,7 +23,7 @@
                    FontAttributes="Bold"
                    Margin="0,0,0,5"/>
 
-            <Label Text="This is about how well you breathe during normal activities of daily living (ADL), such as eating, bathing, and dressing."
+            <Label Text="This is about if you experience shortness of breath during normal activities of daily living, such as walking, eating, bathing, and dressing (not tired, rather short of breath)."
                    TextColor="#e6e6e6" FontSize="Medium"
                    HorizontalTextAlignment="Center"
                    FontAttributes="Bold"

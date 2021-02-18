@@ -23,7 +23,7 @@
                    FontAttributes="Bold"
                    Margin="0,0,0,5"/>
 
-            <Label Text="This is about how well you can go up or down stairs."
+            <Label Text="This is about how well you can go up stairs."
                    TextColor="#e6e6e6" FontSize="Medium"
                    HorizontalTextAlignment="Center"
                    FontAttributes="Bold"
