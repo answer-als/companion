@@ -212,8 +212,8 @@ namespace Companion
                         int nextAvailable = nextTask - DateTime.Now.DayOfYear;
                         await Application.Current.MainPage.DisplayAlert("No Tasks Available Yet", "Please come back in " + nextAvailable + (nextAvailable > 1 ? " days." : " day."), "OK");
 
-                        await Task.Delay(1000);
-                        System.Diagnostics.Process.GetCurrentProcess().Kill();
+                        //await Task.Delay(1000);
+                        //System.Diagnostics.Process.GetCurrentProcess().Kill();
                     }
 
                 }
