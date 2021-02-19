@@ -176,7 +176,7 @@ namespace Companion
                         //App.SpeechTasksRemaining = 3;
                         await Application.Current.MainPage.DisplayAlert("Tasks Complete", "No more speech tasks for this week. Come back in 7 days.", "OK");
 
-                        System.Diagnostics.Process.GetCurrentProcess().Kill();
+                        // System.Diagnostics.Process.GetCurrentProcess().Kill();
                     }
                     
                     //// Remove this page and instruction pages. Should end up at speech task page.
