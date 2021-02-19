@@ -193,9 +193,12 @@ namespace Companion
 //                        Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
                     }
 
-//                    await Navigation.PopAsync();
-                    await Navigation.PopToRootAsync();
-                    
+                    //                    await Navigation.PopAsync();
+                    //await Navigation.PopToRootAsync();
+
+                    NavigationPage page = new NavigationPage(new TaskPage());
+                    Application.Current.MainPage = page;
+
                 }
                 else
                 {

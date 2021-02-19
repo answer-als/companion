@@ -47,7 +47,7 @@ namespace Companion
             Preferences.Set("UserID", "Sign Out");
             NavigationPage page = new NavigationPage(new MainPage());
             Application.Current.MainPage = page;
-            await Navigation.PopToRootAsync();
+            //await Navigation.PopToRootAsync();
         }
 
         async void SupportButton_Clicked(object sender, EventArgs e)

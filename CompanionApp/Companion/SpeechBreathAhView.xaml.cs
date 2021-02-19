@@ -189,7 +189,7 @@ namespace Companion
                     }
 
 //                    await Navigation.PopAsync();
-                    await Navigation.PopToRootAsync();
+                    //await Navigation.PopToRootAsync();
                     
                 }
                 else

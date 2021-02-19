@@ -804,14 +804,14 @@ namespace Companion
                 {
                     NavigationPage page = new NavigationPage(new TaskPage());
                     Application.Current.MainPage = page;
-                    await Navigation.PopToRootAsync();
+                    //await Navigation.PopToRootAsync();
                 }
             } 
             else
             {
                 NavigationPage page = new NavigationPage(new TaskPage());
                 Application.Current.MainPage = page;
-                await Navigation.PopToRootAsync();
+                //await Navigation.PopToRootAsync();
             }
         }
     }
