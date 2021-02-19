@@ -31,8 +31,16 @@
                    VerticalOptions="Start"
                    TextColor="Black" FontSize="Medium"
                    FontAttributes="Italic"
-                   HorizontalTextAlignment="Center"
-                   Text="Record yourself reading this sentence out loud. You may retry the task one time by tapping the Retry button." />
+                   HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Record yourself reading this sentence out loud for at least " FontAttributes="Italic" FontSize="Medium"/>
+                        <Span Text="30 seconds" FontAttributes="Bold" FontSize="Medium" TextColor="#006080" />
+                        <Span Text=". You may retry the task one time by tapping the 'Retry' button." FontAttributes="None" FontSize="Medium"/>
+                    </FormattedString>
+                </Label.FormattedText>
+
+            </Label>
             
 
             <local:Sentence x:Name="SentenceView" Padding="15,0,15,10"
